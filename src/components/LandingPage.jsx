@@ -24,7 +24,6 @@ function Landing() {
       {/* <img src={pattern} alt="Pattern" className="pattern" /> */}
 
       <div className='template-container'>
-      <div className='template'>
         <div className="Annotation">
           <h1 onClick={ToggleEvent}>Annotation</h1>         
         </div>
@@ -35,7 +34,6 @@ function Landing() {
           <h1 onClick={ToggleEvent}>Web360</h1>
         </div>
       </div>
-</div>
       <div className='bottom-container'> 
         <div className='box'>
           {/* <div className='Bdl-split'>

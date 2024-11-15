@@ -6,7 +6,7 @@ body {
     background-color: #252424;
 }
 
-.template {
+.template-container {
     padding: 20px;
     max-width: 150px;
     margin: 0 auto;
