@@ -2,38 +2,66 @@ body {
     font-family: "Raleway", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
-    /* background: linear-gradient(to right, #103549, #326178); */
-    background-color: #252424;
+    background-color: #1A323E;
+}
+
+.top-container {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 300px;
+    width: 80%;
+    background-color: rgb(1, 23, 29);
+    color: white;
+    padding: 5px;
 }
 
 .template-container {
-    padding: 20px;
-    max-width: 150px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  position: fixed;
+  left: 550px;
+  padding: 10px;
+}
+
+.template-container .Annotation,
+.template-container .Cirrus,
+.template-container .Web360 {
+  width: 300px; 
+  height: 100px; 
+  text-align: center;
+  padding: 10px;
+  margin: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: rgb(1, 23, 29);
+  color: white;
+  transition: transform 0.3s ease;
+}
+
+.template-container .Annotation:hover,
+.template-container .Cirrus:hover,
+.template-container .Web360:hover {
+  transform: scale(1.05);
+  cursor: pointer;
 }
 
 .sidebar-session {
-    width: 200px; 
-    padding: 60px;
+    width: 20vh; 
+    padding: 40px;
     position: fixed; 
-    /* background-color: #242525; */
     background-color: rgb(1, 23, 29);
     top: 0;
     left: 0;
     height: 100%; 
     overflow-y: auto; 
-    border-radius: 30px;
   }
 
 .sidebar-session h1 {
-    padding: 10px 15px;
+    padding: 60px 5px;
     text-decoration: none;
-    font-size: 25px;
+    font-size: 45px;
     display: block;
-    color: #525151;
+    color: white;
 }
 
 .Annotation{
@@ -54,43 +82,56 @@ body {
     margin-left: 10px;
   }
 
-  .Annotation :hover{
-    color: #198B74;
-  }
-  .Cirrus :hover{
-    color: #198B74;
-  }
-  .Web360 :hover{
-    color: #198B74;
-  }
-
 .logo {
     position: fixed;
-    top: 15px;
-    left: 30px;
-    width: 175px;
+    top: 0px;
+    left: 55px;
+    width: 150px;
     height: auto;
     z-index: 1000; 
   }
 
   .pattern {
     position: fixed;
-    width: 50em;
+    width: 40em;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    bottom: 10px;
+  }
+
+  .box {
+    position: fixed;
+    top: 200px;
+    left: 380px;
+    width: 90rem;
+    height: 40rem;
+    z-index: 1000;
+    background-color: rgb(3, 30, 37);
+    color: white;
+    display: flex;
+    flex-direction: row;
+  }
+
+.box h2{
+    margin-left: 20px;
+    margin-top: 20px;
+    font-size: 30px;
+}
+
+.pattern {
+    position: fixed;
+    width: 70em;
     height: auto;
     right: 5em;
     bottom: 10px;
   }
 
-  .box{
-    position: fixed;
-    top: 200px;
-    left: 460px;
-    width: 60rem;
-    height: 25rem;
-    z-index: 1000; 
-    background-color: #34383a75;
-  }
-
+.menu {
+    width: 4rem;
+    height: 4rem;   
+}
+  
   .Bdl-split {
     display: flex;
     flex-direction: column;
@@ -139,6 +180,34 @@ body {
   }
 
   .dashboard {
-    width: 32px;
-    height: auto;
+    width: 62px;
+    height: 62px;
+  }
+
+  .annotation-info {
+    color: white;
+    font-size: 20px;
+    margin-left: 10px;
+  }
+
+  .cirrus-info{
+    color: white;
+    font-size: 20px;
+    margin-left: 30px;
+  }
+
+  .web-info{
+    color: white;
+    font-size: 20px;
+    margin-left: 70px;
+  }
+
+  .save-button {
+    width: 80px;
+    height: 50px;
+    background-color: #424242;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
   }
