@@ -15,32 +15,32 @@ function Landing() {
   const [isVissa, setIsVissa] = useState(false);
 
   const [annotationInfo, setAnnotationInfo] = useState('');
-  const [cirrusInfo, setCirrusInfo] = useState('');
   const [webInfo, setWebInfo] = useState('');
+  const [cirrusInfo, setCirrusInfo] = useState('');
+  
 
   const [annotationInputs, setAnnotationInputs] = useState([
-    { value: '', placeholder: 'Track (401)' },
-    { value: '', placeholder: 'Place_from' },
-    { value: '', placeholder: 'Place_to' },
-    { value: '', placeholder: 'Time_ranges_from:' },
-    { value: '', placeholder: 'Time_ranges_to:' }
-
+    { value: '', key:'', placeholder: 'Track (401)' },
+    { value: '', key:'', placeholder: 'Place_from' },
+    { value: '', key:'', placeholder: 'Place_to' },
+    { value: '', key:'', placeholder: 'Time_ranges_from:' },
+    { value: '', key:'', placeholder: 'Time_ranges_to:' }
   ]);
-  const [cirrusInputs, setCirrusInputs] = useState([
-    { value: '', placeholder: 'Track (401)' },
-    { value: '', placeholder: 'Place_from' },
-    { value: '', placeholder: 'Place_to' },
-    { value: '', placeholder: 'Time_ranges_from:' },
-    { value: '', placeholder: 'Time_ranges_to:' }
 
-  ]);
   const [webInputs, setWebInputs] = useState([
-    { value: '', placeholder: 'Track (401)' },
-    { value: '', placeholder: 'Place_from' },
-    { value: '', placeholder: 'Place_to' },
-    { value: '', placeholder: 'Time_ranges_from:' },
-    { value: '', placeholder: 'Time_ranges_to:' }
+    { value: '', key:'', placeholder: 'Track (401)' },
+    { value: '', key:'', placeholder: 'Place_from' },
+    { value: '', key:'', placeholder: 'Place_to' },
+    { value: '', key:'', placeholder: 'Time_ranges_from:' },
+    { value: '', key:'', placeholder: 'Time_ranges_to:' }
+  ]);
 
+  const [cirrusInputs, setCirrusInputs] = useState([
+    { value: '', key:'', placeholder: 'Track (401)' },
+    { value: '', key:'', placeholder: 'Place_from' },
+    { value: '', key:'', placeholder: 'Place_to' },
+    { value: '', key:'', placeholder: 'Time_ranges_from:' },
+    { value: '', key:'', placeholder: 'Time_ranges_to:' }
   ]);
 
   const toggleSectionsVisibility = () => {
@@ -49,6 +49,15 @@ function Landing() {
       setAnnotationInfo('Annotation Form');
     } else {
       setAnnotationInfo('');
+    }
+  };
+
+const toggleSectionsVissa = () => {
+    setIsVissa(!isVissa);
+    if (!isVissa) {
+      setWebInfo('Web360 Form');
+    } else {
+      setWebInfo('');
     }
   };
 
@@ -61,32 +70,23 @@ function Landing() {
     }
   };
 
-  const toggleSectionsVissa = () => {
-    setIsVissa(!isVissa);
-    if (!isVissa) {
-      setWebInfo('Web360 Form');
-    } else {
-      setWebInfo('');
-    }
-  };
-
   const addInput = (section) => {
     if (section === 'annotation') {
       setAnnotationInputs([...annotationInputs, { value: '', placeholder: '' }]);
+    }else if (section === 'web') {
+      setWebInputs([...webInputs, { value: '', placeholder: '' }]);
     } else if (section === 'cirrus') {
       setCirrusInputs([...cirrusInputs, { value: '', placeholder: '' }]);
-    } else if (section === 'web') {
-      setWebInputs([...webInputs, { value: '', placeholder: '' }]);
-    }
+    } 
   };
 
   const removeInput = (section) => {
     if (section === 'annotation' && annotationInputs.length > 1) {
       setAnnotationInputs(annotationInputs.slice(0, annotationInputs.length - 1));
-    } else if (section === 'cirrus' && cirrusInputs.length > 1) {
-      setCirrusInputs(cirrusInputs.slice(0, cirrusInputs.length - 1));
     } else if (section === 'web' && webInputs.length > 1) {
       setWebInputs(webInputs.slice(0, webInputs.length - 1));
+    } else if (section === 'cirrus' && cirrusInputs.length > 1) {
+      setCirrusInputs(cirrusInputs.slice(0, cirrusInputs.length - 1));
     }
   };
 
@@ -106,14 +106,9 @@ function Landing() {
     <>
     {/* <img src={pattern} alt="Pattern" className="pattern" /> */}
       <div className="template-container">
-      <div className="Annotation">
+        <div className="Annotation">
           <h1 onClick={toggleSectionsVisibility}>
             {isVisible ? 'Annotation' : 'Annotation'}
-          </h1>
-        </div>
-        <div className="Cirrus">
-          <h1 onClick={toggleSectionsSynlig}>
-            {isSynlig ? 'Cirrus' : 'Cirrus'}
           </h1>
         </div>
         <div className="Web360">
@@ -121,6 +116,12 @@ function Landing() {
             {isVissa ? 'Web360' : 'Web360'}
           </h1>
         </div>
+        <div className="Cirrus">
+          <h1 onClick={toggleSectionsSynlig}>
+            {isSynlig ? 'Cirrus' : 'Cirrus'}
+          </h1>
+        </div>
+        
       </div>
 
       <div className="bottom-container">
@@ -147,6 +148,31 @@ function Landing() {
                 <div className="button-group">
                   <button className="button-add" onClick={() => addInput('annotation')}>+</button>
                   <button className="button-remove" onClick={() => removeInput('annotation')}>-</button>
+                </div>
+                <button className="save-button" onClick={saveToJson}> Save </button>
+              </div>
+            </div>
+          )}
+              {webInfo && (
+            <div className="web-info">
+              <h2>{webInfo}</h2>
+              <div className="Bdl-split">
+                {webInputs.map((input, index) => (
+                  <input
+                    key={index}
+                    type="text"
+                    value={input.value}
+                    placeholder={input.placeholder}
+                    onChange={(e) => {
+                      const newInputs = [...webInputs];
+                      newInputs[index].value = e.target.value;
+                      setWebInputs(newInputs);
+                    }}
+                  />
+                ))}
+                <div className="button-group">
+                  <button className="button-add" onClick={() => addInput('web')}>+</button>
+                  <button className="button-remove" onClick={() => removeInput('web')}>-</button>
                 </div>
                 <button className="save-button" onClick={saveToJson}> Save </button>
               </div>
@@ -179,45 +205,39 @@ function Landing() {
             </div>
           )}
 
-          {webInfo && (
-            <div className="web-info">
-              <h2>{webInfo}</h2>
-              <div className="Bdl-split">
-                {webInputs.map((input, index) => (
-                  <input
-                    key={index}
-                    type="text"
-                    value={input.value}
-                    placeholder={input.placeholder}
-                    onChange={(e) => {
-                      const newInputs = [...webInputs];
-                      newInputs[index].value = e.target.value;
-                      setWebInputs(newInputs);
-                    }}
-                  />
-                ))}
-                <div className="button-group">
-                  <button className="button-add" onClick={() => addInput('web')}>+</button>
-                  <button className="button-remove" onClick={() => removeInput('web')}>-</button>
-                </div>
-                <button className="save-button" onClick={saveToJson}> Save </button>
-              </div>
-            </div>
-          )}
-
           {/* hur ska jag koppla dessa? */}
           <div className="sidebar-session">
-            
+            <div className="session-class">
+          <div className="Annotation">
+          <h1 onClick={toggleSectionsVisibility}>
+            {isVisible ? 'Annotation' : 'Annotation'}
+          </h1>
+        </div>
+        <div className="Web360">
+          <h1 onClick={toggleSectionsVissa}>
+            {isVissa ? 'Web360' : 'Web360'}
+          </h1>
+        </div>
+        <div className="Cirrus">
+          <h1 onClick={toggleSectionsSynlig}>
+            {isSynlig ? 'Cirrus' : 'Cirrus'}
+          </h1>
+        </div>
+        
+        </div>
+          <div className="session">
             <h1>Session</h1>
             <h3>Session 1</h3>
             <h3>Session 2</h3>
             <h3>Session 3</h3>
             <h3>Session 4</h3>
             <button className="advance">Advance Info</button>
+            </div>
           </div>
         </div>
-
-        <img src={loggaover} alt="Logo" className="logo" />
+        {/* <img src={pattern} alt="Pattern" className="pattern" /> */}
+        <img src={loggavit} alt="vitlogga" className="vitlogga" />
+        {/* <img src={loggaover} alt="Logo" className="logo" /> */}
       </div>
     </>
   );

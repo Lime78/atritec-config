@@ -5,10 +5,19 @@
     display: flex;
     justify-content: flex-start; 
     align-items: center;
-    height: 95vh;
+    height: 100vh;
     margin: 0; 
-    background-color: #142C36;
-    padding-left: 470px; 
+    /* background: linear-gradient(to right, #103549, #326178); */
+    background-color: #222c31;
+    padding-left: 550px; 
+}
+
+.pattern {
+  position: fixed;
+  width: 50em;
+  height: auto;
+  right: 5em;
+  bottom: 10px;
 }
 
 .template-container {
@@ -17,6 +26,7 @@ flex-wrap: wrap;
 justify-content: center;
 margin: 0 auto;
 padding: 10px;
+gap: 20px;
 }
 
 .template-container .Annotation,
@@ -53,12 +63,39 @@ cursor: pointer;
     overflow-y: auto; 
   }
 
-.sidebar-session h1 {
-    padding: 60px 5px;
+  .session-class{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 60px 0;
+  }
+
+  .session-class h1{
     text-decoration: none;
-    font-size: 40px;
+    font-size: 35px;
     display: block;
-    color: white;
+    color: #424242;
+  }
+
+  .session-class h1:hover{
+    transform: scale(1.15);
+    color:#198B74;
+    cursor: pointer;
+  }
+
+.session h1 {
+    padding: 10px 5px;
+    gap: 10px;
+    text-decoration: none;
+    font-size: 35px;
+    display: block;
+    color: #424242;
+}
+
+.session h1:hover{
+  transform: scale(1.15);
+  color:#198B74;
+  cursor: pointer;
 }
 
 .sidebar-session h3{
@@ -66,11 +103,12 @@ cursor: pointer;
     text-decoration: none;
     font-size: 20px;
     display: block;
-    color: white;
+    color: #424242;
 }
 
 .sidebar-session h3:hover{
   transform: scale(1.15);
+  color:#198B74;
   cursor: pointer;
 }
 
@@ -92,6 +130,15 @@ cursor: pointer;
     margin-left: 10px;
   }
 
+  .vitlogga{
+    position: fixed;
+    top: 30px;
+    left: 45px;
+    width: 200px;
+    height: auto;
+    z-index: 1000; 
+  }
+  
 .logo {
     position: fixed;
     top: 0px;
@@ -99,14 +146,6 @@ cursor: pointer;
     width: 150px;
     height: auto;
     z-index: 1000; 
-  }
-
-  .pattern {
-    position: fixed;
-    width: 50em;
-    height: auto;
-    right: 5em;
-    bottom: 10px;
   }
 
   .box {
@@ -122,16 +161,8 @@ cursor: pointer;
 .box h2{
     margin-left: 20px;
     margin-top: 20px;
-    font-size: 30px;
+    font-size: 35px;
 }
-
-.pattern {
-    position: fixed;
-    width: 70em;
-    height: auto;
-    right: 5em;
-    bottom: 10px;
-  }
 
 .menu {
     width: 4rem;
@@ -146,8 +177,8 @@ cursor: pointer;
   }
   
   .Bdl-split input[type="text"] {
-    width: 10em; 
-    padding: 10px; 
+    width: 12em; 
+    padding:10px; 
     background-color: rgb(0, 0, 0);
     color: white;
     box-shadow: 0 2px 4px rgba(48, 45, 45, 0.1); 
@@ -225,10 +256,11 @@ cursor: pointer;
     color: white;
     border: none;
     position: relative;
-    top: 25em;
+    top: 8em;
   }
 
   .advance:hover{
     cursor: pointer;
-    transform: scale(1.10);
+    transform: scale(1.05);
   }
+  
