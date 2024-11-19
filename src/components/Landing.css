@@ -1,52 +1,49 @@
-body {
+  body {
     font-family: "Raleway", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
-    background-color: #1A323E;
-}
-
-.top-container {
     display: flex;
-    position: fixed;
-    top: 0;
-    left: 300px;
-    width: 80%;
-    background-color: rgb(1, 23, 29);
-    color: white;
-    padding: 5px;
+    justify-content: flex-start; 
+    align-items: center;
+    height: 95vh;
+    margin: 0; 
+    background-color: #142C36;
+    padding-left: 470px; 
 }
 
 .template-container {
-  display: flex;
-  position: fixed;
-  left: 550px;
-  padding: 10px;
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+margin: 0 auto;
+padding: 10px;
 }
 
 .template-container .Annotation,
 .template-container .Cirrus,
 .template-container .Web360 {
-  width: 300px; 
-  height: 100px; 
-  text-align: center;
-  padding: 10px;
-  margin: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: rgb(1, 23, 29);
-  color: white;
-  transition: transform 0.3s ease;
+width: 300px;
+height: 100px;
+text-align: center;
+padding: 10px;
+margin: 20px;
+border: 1px solid #ccc;
+border-radius: 5px;
+background-color: rgb(1, 23, 29);
+color: white;
+transition: transform 0.3s ease;
 }
 
 .template-container .Annotation:hover,
 .template-container .Cirrus:hover,
 .template-container .Web360:hover {
-  transform: scale(1.05);
-  cursor: pointer;
+transform: scale(1.10);
+background-color: #198B74;
+cursor: pointer;
 }
 
 .sidebar-session {
-    width: 20vh; 
+    width: 25vh; 
     padding: 40px;
     position: fixed; 
     background-color: rgb(1, 23, 29);
@@ -59,9 +56,22 @@ body {
 .sidebar-session h1 {
     padding: 60px 5px;
     text-decoration: none;
-    font-size: 45px;
+    font-size: 40px;
     display: block;
     color: white;
+}
+
+.sidebar-session h3{
+    padding: 10px 5px;
+    text-decoration: none;
+    font-size: 20px;
+    display: block;
+    color: white;
+}
+
+.sidebar-session h3:hover{
+  transform: scale(1.15);
+  cursor: pointer;
 }
 
 .Annotation{
@@ -93,21 +103,17 @@ body {
 
   .pattern {
     position: fixed;
-    width: 40em;
+    width: 50em;
     height: auto;
-    justify-content: center;
-    align-items: center;
+    right: 5em;
     bottom: 10px;
   }
 
   .box {
-    position: fixed;
-    top: 200px;
-    left: 380px;
-    width: 90rem;
-    height: 40rem;
+    width: 70rem;
+    height: 45rem;
     z-index: 1000;
-    background-color: rgb(3, 30, 37);
+    background-color: rgb(1, 23, 29);
     color: white;
     display: flex;
     flex-direction: row;
@@ -210,4 +216,19 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+  }
+
+  .advance{
+    width: 100px;
+    height: 50px;
+    background-color: rgb(149, 30, 30);
+    color: white;
+    border: none;
+    position: relative;
+    top: 25em;
+  }
+
+  .advance:hover{
+    cursor: pointer;
+    transform: scale(1.10);
   }

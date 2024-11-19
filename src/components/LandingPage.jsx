@@ -14,15 +14,34 @@ function Landing() {
   const [isSynlig, setIsSynlig] = useState(false);
   const [isVissa, setIsVissa] = useState(false);
 
-
   const [annotationInfo, setAnnotationInfo] = useState('');
   const [cirrusInfo, setCirrusInfo] = useState('');
   const [webInfo, setWebInfo] = useState('');
 
-  const [annotationInputs, setAnnotationInputs] = useState(['']);
-  const [cirrusInputs, setCirrusInputs] = useState(['']);
-  const [webInputs, setWebInputs] = useState(['']);
+  const [annotationInputs, setAnnotationInputs] = useState([
+    { value: '', placeholder: 'Track (401)' },
+    { value: '', placeholder: 'Place_from' },
+    { value: '', placeholder: 'Place_to' },
+    { value: '', placeholder: 'Time_ranges_from:' },
+    { value: '', placeholder: 'Time_ranges_to:' }
 
+  ]);
+  const [cirrusInputs, setCirrusInputs] = useState([
+    { value: '', placeholder: 'Track (401)' },
+    { value: '', placeholder: 'Place_from' },
+    { value: '', placeholder: 'Place_to' },
+    { value: '', placeholder: 'Time_ranges_from:' },
+    { value: '', placeholder: 'Time_ranges_to:' }
+
+  ]);
+  const [webInputs, setWebInputs] = useState([
+    { value: '', placeholder: 'Track (401)' },
+    { value: '', placeholder: 'Place_from' },
+    { value: '', placeholder: 'Place_to' },
+    { value: '', placeholder: 'Time_ranges_from:' },
+    { value: '', placeholder: 'Time_ranges_to:' }
+
+  ]);
 
   const toggleSectionsVisibility = () => {
     setIsVisible(!isVisible);
@@ -53,11 +72,11 @@ function Landing() {
 
   const addInput = (section) => {
     if (section === 'annotation') {
-      setAnnotationInputs([...annotationInputs, '']);
+      setAnnotationInputs([...annotationInputs, { value: '', placeholder: '' }]);
     } else if (section === 'cirrus') {
-      setCirrusInputs([...cirrusInputs, '']);
+      setCirrusInputs([...cirrusInputs, { value: '', placeholder: '' }]);
     } else if (section === 'web') {
-      setWebInputs([...webInputs, '']);
+      setWebInputs([...webInputs, { value: '', placeholder: '' }]);
     }
   };
 
@@ -73,9 +92,6 @@ function Landing() {
 
   const saveToJson = () => {
     const data = {
-      annotationInfo,
-      cirrusInfo,
-      webInfo,
       annotationInputs,
       cirrusInputs,
       webInputs
@@ -88,16 +104,9 @@ function Landing() {
 
   return (
     <>
-      {/* <img src={loggagreen} alt="Logo" className="logo" /> */}
-      {/* <img src={pattern} alt="Pattern" className="pattern" /> */}
-
-      {/* <div className="top-container">
-        <img src={dashboard} alt="Dashboard" className="dashboard" />
-        <h1>Dashboard</h1>
-      </div> */}
-
+    {/* <img src={pattern} alt="Pattern" className="pattern" /> */}
       <div className="template-container">
-        <div className="Annotation">
+      <div className="Annotation">
           <h1 onClick={toggleSectionsVisibility}>
             {isVisible ? 'Annotation' : 'Annotation'}
           </h1>
@@ -117,13 +126,23 @@ function Landing() {
       <div className="bottom-container">
         <div className="box">
           <h2>Activity:</h2>
+
           {annotationInfo && (
             <div className="annotation-info">
               <h2>{annotationInfo}</h2>
-              <p>Info Annotation</p>
               <div className="Bdl-split">
                 {annotationInputs.map((input, index) => (
-                  <input key={index} type="text" placeholder="Bandel" />
+                  <input
+                    key={index}
+                    type="text"
+                    value={input.value}
+                    placeholder={input.placeholder}
+                    onChange={(e) => {
+                      const newInputs = [...annotationInputs];
+                      newInputs[index].value = e.target.value;
+                      setAnnotationInputs(newInputs);
+                    }}
+                  />
                 ))}
                 <div className="button-group">
                   <button className="button-add" onClick={() => addInput('annotation')}>+</button>
@@ -137,10 +156,19 @@ function Landing() {
           {cirrusInfo && (
             <div className="cirrus-info">
               <h2>{cirrusInfo}</h2>
-              <p>Info Cirrus</p>
               <div className="Bdl-split">
                 {cirrusInputs.map((input, index) => (
-                  <input key={index} type="text" placeholder="Bdl Spår Tid" />
+                  <input
+                    key={index}
+                    type="text"
+                    value={input.value}
+                    placeholder={input.placeholder}
+                    onChange={(e) => {
+                      const newInputs = [...cirrusInputs];
+                      newInputs[index].value = e.target.value;
+                      setCirrusInputs(newInputs);
+                    }}
+                  />
                 ))}
                 <div className="button-group">
                   <button className="button-add" onClick={() => addInput('cirrus')}>+</button>
@@ -150,14 +178,23 @@ function Landing() {
               </div>
             </div>
           )}
-        
+
           {webInfo && (
             <div className="web-info">
               <h2>{webInfo}</h2>
-              <p>Info Web</p>
               <div className="Bdl-split">
                 {webInputs.map((input, index) => (
-                  <input key={index} type="text" placeholder="Bdl Spår Tid" />
+                  <input
+                    key={index}
+                    type="text"
+                    value={input.value}
+                    placeholder={input.placeholder}
+                    onChange={(e) => {
+                      const newInputs = [...webInputs];
+                      newInputs[index].value = e.target.value;
+                      setWebInputs(newInputs);
+                    }}
+                  />
                 ))}
                 <div className="button-group">
                   <button className="button-add" onClick={() => addInput('web')}>+</button>
@@ -167,17 +204,19 @@ function Landing() {
               </div>
             </div>
           )}
-          
 
+          {/* hur ska jag koppla dessa? */}
           <div className="sidebar-session">
+            
             <h1>Session</h1>
             <h3>Session 1</h3>
             <h3>Session 2</h3>
             <h3>Session 3</h3>
             <h3>Session 4</h3>
+            <button className="advance">Advance Info</button>
           </div>
         </div>
-        
+
         <img src={loggaover} alt="Logo" className="logo" />
       </div>
     </>

@@ -1,0 +1,278 @@
+body {
+    background: linear-gradient(to right, #103549, #326178);
+  }
+  
+  .Bdl-split {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 15px 0;
+  }
+  
+  .Bdl-split input[type="text"] {
+    width: 15em; 
+    padding: 10px; 
+    background-color: rgb(0, 0, 0);
+    color: white;
+    box-shadow: 0 2px 4px rgba(29, 29, 29, 0.1); 
+  
+  }
+  
+  .button-group{
+    display: flex;
+    gap: 20px;
+  }
+  
+  .button-add, .button-remove {
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+    background-color: #424242;
+    color: white;
+  }
+  
+  .button-add:hover, .button-remove:hover {
+    background-color: #198B74;
+  }
+  
+  .section-search {
+    position: absolute;
+    top: 5px; 
+    left: 370px; 
+    z-index: 1000; 
+  }
+  
+  .section-search input[type="text"] {
+    width: 30em; 
+    padding: 10px; 
+    background-color: rgb(0, 0, 0);
+    color: white;
+    box-shadow: 0 2px 40px rgba(29, 29, 29, 0.1); 
+  }
+  
+  .App {
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    padding: 20px;
+    max-width: 1600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  .sidebar {
+    width: 225px; 
+    padding: 60px;
+    position: fixed; 
+    background-color: rgb(1, 14, 29);
+    top: 0;
+    left: 0;
+    height: 100%; 
+    overflow-y: auto; 
+  }
+  
+  .section-cirrus, .section-web360, .section-annalering {
+    margin: 10px 0;
+  }
+  
+  .section-cirrus div, .section-web360 div, .section-annalering div {
+    margin-bottom: 10px;
+  }
+  
+  .annalering-info, .cirrus-info, .web-info {
+    background-color: rgb(42, 41, 41);
+    padding: 10px;
+    border-radius: 20px;
+  }
+  
+  .pattern {
+    position: fixed;
+    width: 50em;
+    height: auto;
+    right: 5em;
+    bottom: 10px;
+  }
+  
+  /* logga grön */
+  .logo {
+    position: fixed;
+    top: 15px;
+    left: 30px;
+    width: 150px;
+    height: auto;
+    z-index: 1000; 
+  }
+  
+  /* .symbol {
+    position: fixed;
+    top: 10px;
+    left: 5px;
+    width: 3em;
+    height: auto;
+    z-index: 1000; 
+  } */
+  
+  /* .button {
+    padding: 8px 16px;
+    background-color: #424242;
+    color: #ffffff;
+    border: none;
+    border-radius: 80px;
+    font-size: 1em;
+    cursor: pointer;
+  } */
+  
+  /* .button:hover {
+    background-color: #198B74;
+  } */
+  
+  h1 {
+    font-size: 3em;
+    font-weight: 700;
+    margin-bottom: 5px;
+    text-align: center;
+    color: #198B74;
+  }
+  
+  h2 {
+    font-size: 2em;
+    margin-top: 50px;
+    color: #525151;
+  }
+  
+  h2:hover {
+    color: #198B74;
+    cursor: pointer;
+  }
+  
+  h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #1CB797;
+  }
+  
+  .section {
+    margin-bottom: 40px;
+  }
+  
+  .radio-group {
+    margin: 15px 0;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .radio-group p {
+    margin-right: 10px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    color: #ffffff;
+  }
+  .radio-group label {
+    margin-right: 10px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    font-size: 1,5em;
+  }
+  
+  input[type="radio"] {
+    margin-right: 8px;
+    accent-color: #4CAF50; 
+  }
+  
+  input[type="text"] {
+    margin-top: 10px;
+    padding: 5px;
+    width: 100%;
+    max-width: 300px;
+    font-size: 1em;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+  }
+  
+  input[type="text"]:focus {
+    outline: none;
+    border-color: #4CAF50;
+  }
+  
+  .checkbox-group {
+    margin: 15px 0;
+  }
+  
+  .checkbox-group label {
+    margin-right: 10px;
+    font-size: 1em;
+  }
+  
+  .checkbox-group input[type="checkbox"] {
+    margin-right: 8px;
+  }
+  
+  .checkbox-group input[type="checkbox"]:focus {
+    outline: none;
+  }
+  
+  input[type="radio"], input[type="checkbox"] {
+    margin-right: 10px;
+  }
+  
+  label {
+    font-size: 1.1em;
+    color: #ffffff;
+    gap: 15px;
+  }
+  
+  input[type="radio"]:checked, input[type="checkbox"]:checked {
+    background-color: #4CAF50;
+  }
+  
+  input[type="radio"]:not(:checked), input[type="checkbox"]:not(:checked) {
+    background-color: #fff;
+  }
+  
+  label {
+    cursor: pointer;
+  }
+  
+  .radio-group input[type="radio"] {
+    cursor: pointer;
+  }
+  
+  input[type="radio"]:focus, input[type="checkbox"]:focus {
+    outline: 2px solid #4CAF50;
+  }
+  
+  section {
+    margin-bottom: 20px;
+  }
+  
+  @media (max-width: 600px) {
+    .App {
+      padding: 10px;
+    }
+  
+    h1 {
+      font-size: 1.8em;
+    }
+  
+    h2 {
+      font-size: 1.3em;
+    }
+  
+    .radio-group {
+      padding-left: 20px;
+    }
+  
+    input[type="text"] {
+      width: 100%;
+    }
+  
+    .logo {
+      width: 3em;
+    }
+  }
+  
