@@ -2,9 +2,8 @@ import { useState } from 'react';
 import loggavit from '../assets/loggavit.png';
 import loggagreen from '../assets/loggagreen.png';
 import pattern from '../assets/pattern.png';
-import dashboard from '../assets/dashboard.png';
-import menu from '../assets/menu.png';
 import loggaover from '../assets/loggaover.png';
+// import App from './advance.jsx';
 import './Landing.css';
 import { saveAs } from 'file-saver';
 
@@ -17,7 +16,6 @@ function Landing() {
   const [annotationInfo, setAnnotationInfo] = useState('');
   const [webInfo, setWebInfo] = useState('');
   const [cirrusInfo, setCirrusInfo] = useState('');
-  
 
   const [annotationInputs, setAnnotationInputs] = useState([
     { value: '', key:'', placeholder: 'Track (401)' },
@@ -227,10 +225,10 @@ const toggleSectionsVissa = () => {
         </div>
           <div className="session">
             <h1>Session</h1>
-            <h3>Session 1</h3>
-            <h3>Session 2</h3>
-            <h3>Session 3</h3>
-            <h3>Session 4</h3>
+            <h3>Rawdata</h3>
+            <h3>Rawdata</h3>
+            <h3>Rawdata</h3>
+            <h3>Rawdata</h3>
             <button className="advance">Advance Info</button>
             </div>
           </div>

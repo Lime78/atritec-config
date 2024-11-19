@@ -44,11 +44,11 @@ color: white;
 transition: transform 0.3s ease;
 }
 
-.template-container .Annotation:hover,
-.template-container .Cirrus:hover,
-.template-container .Web360:hover {
-transform: scale(1.10);
-background-color: #198B74;
+.Annotation:hover,
+.Cirrus:hover,
+.Web360:hover {
+transform: rotate(15deg);
+color: #198B74;
 cursor: pointer;
 }
 
@@ -78,7 +78,7 @@ cursor: pointer;
   }
 
   .session-class h1:hover{
-    transform: scale(1.15);
+    transform: rotate(5deg);
     color:#198B74;
     cursor: pointer;
   }
@@ -93,7 +93,7 @@ cursor: pointer;
 }
 
 .session h1:hover{
-  transform: scale(1.15);
+  transform: rotate(5deg);
   color:#198B74;
   cursor: pointer;
 }
@@ -107,7 +107,7 @@ cursor: pointer;
 }
 
 .sidebar-session h3:hover{
-  transform: scale(1.15);
+  transform:rotate(5deg);
   color:#198B74;
   cursor: pointer;
 }
@@ -149,7 +149,7 @@ cursor: pointer;
   }
 
   .box {
-    width: 70rem;
+    width: 75rem;
     height: 45rem;
     z-index: 1000;
     background-color: rgb(1, 23, 29);
@@ -252,7 +252,7 @@ cursor: pointer;
   .advance{
     width: 100px;
     height: 50px;
-    background-color: rgb(149, 30, 30);
+    background-color: #424242;
     color: white;
     border: none;
     position: relative;
@@ -261,6 +261,6 @@ cursor: pointer;
 
   .advance:hover{
     cursor: pointer;
-    transform: scale(1.05);
+    transform: scale(1.1);
+    background-color: rgb(188, 4, 4);
   }
-  

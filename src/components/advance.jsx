@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import symbol from '../assets/symbol.png'
-import loggavit from '../assets/loggavit.png'
-import loggagreen from '../assets/loggagreen.png' 
-import pattern from '../assets/pattern.png' 
-import greenwhite from '../assets/greenwhite.png'
+// import symbol from '../assets/symbol.png'
+// import loggavit from '../assets/loggavit.png'
+// import loggagreen from '../assets/loggagreen.png' 
+// import pattern from '../assets/pattern.png' 
+// import greenwhite from '../assets/greenwhite.png'
 import './Landing.css';
 
 const App = () => {
@@ -97,9 +97,7 @@ const App = () => {
               <label>
                 Configurable parameters for processing
               </label>
-              <p>Common:
-                1 project = 1 Configuration = List Time Range of Multiple = 1 Output folder 
-              </p>
+              <p>Common: 1 project = 1 Configuration = List Time Range of Multiple = 1 Output folder </p>
               <input type="text" placeholder="Configurable parameters for processing" />
             </div>
 
@@ -129,8 +127,7 @@ const App = () => {
 
             <div className="radio-group">
               <h3>Stitching radius</h3>
-              <label>
-                2
+              <label> 2
                 <input
                   type="radio"
                   name="stitchingRadius"
