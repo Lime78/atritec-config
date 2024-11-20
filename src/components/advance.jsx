@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
-// import symbol from '../assets/symbol.png'
-// import loggavit from '../assets/loggavit.png'
-// import loggagreen from '../assets/loggagreen.png' 
-// import pattern from '../assets/pattern.png' 
-// import greenwhite from '../assets/greenwhite.png'
-import './Landing.css';
+import pattern from '../assets/pattern.png';
+
+import './advance.css';
 
 const App = () => {
   const [checkboxes, setCheckboxes] = useState({
@@ -54,11 +51,11 @@ const App = () => {
 
   return (
     <div className="App">
-      <div className="section-search">
+      {/* <div className="section-search">
         <input type="text" placeholder="Search" />
-      </div>
-      <img src={loggagreen} alt="Logo" className="logo" />
-      <img src={pattern} alt="Pattern" className="pattern" />
+      </div> */}
+     {/* <img src={loggagreen} alt="Logo" className="logo" /> */}
+      <img src={pattern} alt="Pattern" className="pattern" /> 
 
       <div className='sidebar'> 
 
@@ -123,6 +120,7 @@ const App = () => {
               </label>
               <input type="text" placeholder="Car, People" />
               <input type="text" placeholder="TBD" />
+          
             </div>
 
             <div className="radio-group">
@@ -503,6 +501,7 @@ const App = () => {
         <h3>Potree Converter </h3>
         <input type="text" placeholder="Potree Converter " />
       </div>
+      <NavLink to="/" className="Back-button">Back</NavLink>
       </div>
       )}
       </div>

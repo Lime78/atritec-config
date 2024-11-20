@@ -7,8 +7,10 @@
     align-items: center;
     height: 100vh;
     margin: 0; 
+    /* background: linear-gradient(to right, #222c31,#103549); */
     /* background: linear-gradient(to right, #103549, #326178); */
-    background-color: #222c31;
+    background-color: #103549;
+    /* background-color: #222c31; */
     padding-left: 550px; 
 }
 
@@ -47,7 +49,7 @@ transition: transform 0.3s ease;
 .Annotation:hover,
 .Cirrus:hover,
 .Web360:hover {
-transform: rotate(15deg);
+transform: scale(1.1);
 color: #198B74;
 cursor: pointer;
 }
@@ -78,7 +80,7 @@ cursor: pointer;
   }
 
   .session-class h1:hover{
-    transform: rotate(5deg);
+    transform: scale(1.1);
     color:#198B74;
     cursor: pointer;
   }
@@ -93,7 +95,7 @@ cursor: pointer;
 }
 
 .session h1:hover{
-  transform: rotate(5deg);
+  transform: scale(1.1);
   color:#198B74;
   cursor: pointer;
 }
@@ -107,12 +109,12 @@ cursor: pointer;
 }
 
 .sidebar-session h3:hover{
-  transform:rotate(5deg);
+  transform: scale(1.1);
   color:#198B74;
   cursor: pointer;
 }
 
-.Annotation{
+/* .Annotation{
     font-size: 20px;
     font-weight: 500;
     margin-left: 10px;
@@ -128,7 +130,7 @@ cursor: pointer;
     font-size: 20px;
     font-weight: 500;
     margin-left: 10px;
-  }
+  } */
 
   .vitlogga{
     position: fixed;
@@ -249,18 +251,40 @@ cursor: pointer;
     cursor: pointer;
   }
 
-  .advance{
-    width: 100px;
-    height: 50px;
+  .Advance-button {
+    position: fixed;    
+    bottom: 20px;       
+    left: 20px;         
     background-color: #424242;
     color: white;
-    border: none;
-    position: relative;
-    top: 8em;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    z-index: 9999;
   }
-
-  .advance:hover{
+  
+  .Advance-button:hover {
     cursor: pointer;
     transform: scale(1.1);
     background-color: rgb(188, 4, 4);
   }
+
+  /* .Back-button {
+    position: fixed;    
+    bottom: 20px;       
+    left: 200px;         
+    background-color: #424242;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    z-index: 9999;
+  }
+  
+  .Back-button:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    background-color: rgb(188, 4, 4);
+  } */

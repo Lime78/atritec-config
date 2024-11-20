@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+
 import loggavit from '../assets/loggavit.png';
 import loggagreen from '../assets/loggagreen.png';
 import pattern from '../assets/pattern.png';
@@ -104,7 +106,7 @@ const toggleSectionsVissa = () => {
     <>
     {/* <img src={pattern} alt="Pattern" className="pattern" /> */}
       <div className="template-container">
-        <div className="Annotation">
+        {/* <div className="Annotation">
           <h1 onClick={toggleSectionsVisibility}>
             {isVisible ? 'Annotation' : 'Annotation'}
           </h1>
@@ -118,7 +120,7 @@ const toggleSectionsVissa = () => {
           <h1 onClick={toggleSectionsSynlig}>
             {isSynlig ? 'Cirrus' : 'Cirrus'}
           </h1>
-        </div>
+        </div> */}
         
       </div>
 
@@ -203,10 +205,9 @@ const toggleSectionsVissa = () => {
             </div>
           )}
 
-          {/* hur ska jag koppla dessa? */}
-          <div className="sidebar-session">
-            <div className="session-class">
-          <div className="Annotation">
+              <div className="sidebar-session">
+      <div className="session-class">
+        <div className="Annotation">
           <h1 onClick={toggleSectionsVisibility}>
             {isVisible ? 'Annotation' : 'Annotation'}
           </h1>
@@ -221,18 +222,18 @@ const toggleSectionsVissa = () => {
             {isSynlig ? 'Cirrus' : 'Cirrus'}
           </h1>
         </div>
-        
-        </div>
-          <div className="session">
-            <h1>Session</h1>
-            <h3>Rawdata</h3>
-            <h3>Rawdata</h3>
-            <h3>Rawdata</h3>
-            <h3>Rawdata</h3>
-            <button className="advance">Advance Info</button>
-            </div>
-          </div>
-        </div>
+      </div>
+      <div className="session">
+        <h1>Session</h1>
+        <h3>Rawdata</h3>
+        <h3>Rawdata</h3>
+        <h3>Rawdata</h3>
+        <h3>Rawdata</h3>
+      </div>
+    </div>
+      <NavLink to="/advance" className="Advance-button">Advance Info</NavLink>
+    </div>
+
         {/* <img src={pattern} alt="Pattern" className="pattern" /> */}
         <img src={loggavit} alt="vitlogga" className="vitlogga" />
         {/* <img src={loggaover} alt="Logo" className="logo" /> */}
