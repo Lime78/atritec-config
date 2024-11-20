@@ -114,25 +114,7 @@ cursor: pointer;
   cursor: pointer;
 }
 
-/* .Annotation{
-    font-size: 20px;
-    font-weight: 500;
-    margin-left: 10px;
-  }
-
-  .Cirrus{
-    font-size: 20px;
-    font-weight: 500;
-    margin-left: 10px;
-  }
-
-  .Web360{
-    font-size: 20px;
-    font-weight: 500;
-    margin-left: 10px;
-  } */
-
-  .vitlogga{
+.vitlogga{
     position: fixed;
     top: 30px;
     left: 45px;
@@ -141,7 +123,7 @@ cursor: pointer;
     z-index: 1000; 
   }
   
-.logo {
+  .logo {
     position: fixed;
     top: 0px;
     left: 55px;
@@ -150,7 +132,7 @@ cursor: pointer;
     z-index: 1000; 
   }
 
-  .box {
+.box {
     width: 75rem;
     height: 45rem;
     z-index: 1000;
@@ -171,14 +153,14 @@ cursor: pointer;
     height: 4rem;   
 }
   
-  .Bdl-split {
+.Bdl-split {
     display: flex;
     flex-direction: column;
     gap: 10px;
     margin: 15px 0;
   }
   
-  .Bdl-split input[type="text"] {
+.Bdl-split input[type="text"] {
     width: 12em; 
     padding:10px; 
     background-color: rgb(0, 0, 0);
@@ -251,6 +233,10 @@ cursor: pointer;
     cursor: pointer;
   }
 
+  .save-button:hover {
+    background-color: #198B74;
+    transform: scale(1.1);
+  }
   .Advance-button {
     position: fixed;    
     bottom: 20px;       
@@ -264,27 +250,8 @@ cursor: pointer;
     z-index: 9999;
   }
   
-  .Advance-button:hover {
-    cursor: pointer;
+  .Advance-button:hover{
+    background-color: red;
     transform: scale(1.1);
-    background-color: rgb(188, 4, 4);
-  }
-
-  /* .Back-button {
-    position: fixed;    
-    bottom: 20px;       
-    left: 200px;         
-    background-color: #424242;
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 16px;
-    z-index: 9999;
-  }
-  
-  .Back-button:hover {
     cursor: pointer;
-    transform: scale(1.1);
-    background-color: rgb(188, 4, 4);
-  } */
+  }

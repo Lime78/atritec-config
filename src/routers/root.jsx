@@ -5,9 +5,9 @@ import './router.jsx'
 function Root() {
     return (
         <>
-            <section className="mainContent" aria-hidden></section>
-            <NavLink to="/advance" className="Advance-button">Advance</NavLink>
-            <NavLink to="/" className="Back-button">Back</NavLink>
+ <section className="mainContent" aria-hidden></section>
+     <NavLink to="/advance" className="Advance-button"></NavLink>
+         <NavLink to="/" className="Back-button">Back</NavLink>
             <Outlet />
             </>
     );

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import pattern from '../assets/pattern.png';
-
 import './advance.css';
 
 const App = () => {
@@ -14,40 +13,40 @@ const App = () => {
     colorize: null, 
   });
 
-  const [inputs, setInputs] = useState(['']);
+    const [inputs, setInputs] = useState(['']);
 
-  const addInput = () => {
-    setInputs([...inputs, '']);
-  };
+    const addInput = () => {
+      setInputs([...inputs, '']);
+    };
 
-  const removeInput = () => {
-    setInputs(inputs.slice(0, inputs.length - 1));
-  };
+    const removeInput = () => {
+      setInputs(inputs.slice(0, inputs.length - 1));
+    };
 
-  const [isSynlig, setIssynlig] = useState(false);
+    const [isSynlig, setIssynlig] = useState(false);
 
-  const toggleCirrusVisibility = () => {
-    setIssynlig(!isSynlig);    
-  };
+    const toggleCirrusVisibility = () => {
+      setIssynlig(!isSynlig);    
+    };
 
-  const [isVisa, setIsVisa] = useState(false);
+    const [isVisa, setIsVisa] = useState(false);
 
-  const toggleWebVisibility = () => {
-    setIsVisa(!isVisa);    
-  };
+    const toggleWebVisibility = () => {
+      setIsVisa(!isVisa);    
+    };
 
-  const [isVisible, setIsVisible] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
 
-  const toggleSectionsVisibility = () => {
-    setIsVisible(!isVisible);
-  };
+    const toggleSectionsVisibility = () => {
+      setIsVisible(!isVisible);
+    };
 
-  const handleRadioChange = (section, value) => {
-    setCheckboxes(prevState => ({
-      ...prevState,
-      [section]: value,
-    }));
-  };
+    const handleRadioChange = (section, value) => {
+      setCheckboxes(prevState => ({
+        ...prevState,
+        [section]: value,
+      }));
+    };
 
   return (
     <div className="App">
@@ -55,7 +54,7 @@ const App = () => {
         <input type="text" placeholder="Search" />
       </div> */}
      {/* <img src={loggagreen} alt="Logo" className="logo" /> */}
-      <img src={pattern} alt="Pattern" className="pattern" /> 
+      {/* <img src={pattern} alt="Pattern" className="pattern" /> 
 
       <div className='sidebar'> 
 
@@ -213,7 +212,7 @@ const App = () => {
         )}
       {/* </div> */}
 
-      <div className="section-cirrus">
+      {/* <div className="section-cirrus">
       <h2 onClick={toggleCirrusVisibility}>
       {isSynlig ? 'Cirrus' : 'Cirrus'} </h2>
 
@@ -487,7 +486,7 @@ const App = () => {
         <label>
           Use Km Grid</label>
         <input type="text" placeholder="KM" />
-      
+
       <label>
       Timestamps file from user </label>
         <input type="text" placeholder="Timestamps" />
@@ -500,12 +499,200 @@ const App = () => {
       <div className="radio-group">
         <h3>Potree Converter </h3>
         <input type="text" placeholder="Potree Converter " />
-      </div>
-      <NavLink to="/" className="Back-button">Back</NavLink>
-      </div>
-      )}
-      </div>
-      </div>
+      </div> */} 
+      <h1>Definitions</h1> 
+
+Session / Scan Session: raw data 
+
+Pipeline / templates: Web360, cirrus, road scan, optio / annotation 
+
+Delivery Folders: what ever it means for every pipeline 
+
+Input Data Verification 
+
+TBD 
+Configurable parameters for processing 
+
+Common: 
+
+1 project = 1 Configuration = List Time Range of Multiple = 1 Output folder 
+
+Image level: 
+
+Trigger distance between images for output 
+
+5 or 10 meter 
+
+Image resolution for output  
+
+Width x Height 
+
+Blurring Objects 
+
+Yes / No 
+
+List Car, People  
+
+TBD 
+
+Stitching radius 
+
+Static Radius = 2,5,20,100 meters 
+
+Which cameras to stitch 
+
+Front: Yes/No 
+
+Back: Yes/No 
+
+Both cameras: Yes/No (automatically yes for front and back) 
+
+Export 360 images/panoramas 
+
+Yes / no 
+
+Export camera-level images for fomul-annotation 
+
+Camera ID: 0..5 
+
+Rotation for the image of the camera 
+
+Which camera: back / front / both cameras 
+
+Output Directory 
+
+Project- output directory mapping  
+
+Move to NAS 
+
+CRS Output image list  
+
+Format of image list 
+
+Export forward-facing camera 
+
+Image frequency 
+
+Image dimensions 
+
+Rotation for the images 
+
+Image list 
+
+Output folder 
+
+Naming  
+
+Image Projection 
+
+Equirectangular / 360 panorama / 3d camera 
+
+Rectilinear / flat / 2d camera 
+
+cube maps / 360 panorama / 3d camera 
+
+Pointclouds 
+
+Colorize 
+
+Yes / no 
+
+CRS output 
+
+List of outputs 
+
+Output attributes 
+
+Intensity 
+
+Speed filtering 
+
+Default yes 
+
+Classification 
+
+Yes /no 
+
+Merging of left and right scanners 
+
+Default yes 
+
+Density computation (default: generate kml) 
+
+Downsampling 
+
+Splitting Configuration 
+
+Use Km grid 
+
+Timestamps file from user 
+
+Clip to certain distance from track 
+
+Potree Converter 
+
+Leadger generation 
+
+If the split is based on km grid 
+
+Polygon of the real lidar data 
+
+Distance to cut PC from track center 
+ 
+
+Example 
+
+Gothenburg to Stockholm  
+
+Web360: 
+
+0 to 50% - 1 Delivery folder 
+
+Cirrus: 
+
+51 to 60% + 63 to 70% - Delivery Folder Bandel 551 + E Track 
+
+72 to 80% + 85 to 87% - Delivery Folder Bandel 551 + N Track 
+Annotation: 
+
+51% to 90%: Potree annotation 
+
+Annotation folder 
+
+We have 3 templates: Web360, Cirrus, Annotation 
+
+But we have 4 projects: every delivery folder is project 
+
+ 
+
+Superset: 0 to 90% 
+
+ 
+
+1 Month later: 
+
+Req: Export 1 track, 50 meters could be 5 mins of 8 hours of data. 
+
+Re-Process the scan session for just those 5 mins. 
+ 
+
+Input-Data configuration 
+
+User has to be provide as timestamps 
+
+Common-processing parameters / base processing 
+
+After you diverge for every template / pipeline 
+
+Project-level processing parameters 
+
+List of templates then with an optimized version 
+ 
+
+Write a Workflow for every template and dependency graph for  
+
+Write out a common workflow IF possible. 
+
     </div>
   
 );
