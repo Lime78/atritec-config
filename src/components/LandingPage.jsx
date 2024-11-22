@@ -54,6 +54,26 @@ import { saveAs } from 'file-saver';
     setCirrusInputs(generateInputs(trackData));
   }, [trackData]);
 
+  const addInput = (section) => {
+    if (section === 'annotation') {
+      setAnnotationInputs([...annotationInputs, { value: '', placeholder: '' }]);
+    } else if (section === 'web') {
+      setWebInputs([...webInputs, { value: '', placeholder: '' }]);
+    } else if (section === 'cirrus') {
+      setCirrusInputs([...cirrusInputs, { value: '', placeholder: '' }]);
+    } 
+  };
+
+  const removeInput = (section) => {
+    if (section === 'annotation' && annotationInputs.length > 1) {
+      setAnnotationInputs(annotationInputs.slice(0, annotationInputs.length - 1));
+    } else if (section === 'web' && webInputs.length > 1) {
+      setWebInputs(webInputs.slice(0, webInputs.length - 1));
+    } else if (section === 'cirrus' && cirrusInputs.length > 1) {
+      setCirrusInputs(cirrusInputs.slice(0, cirrusInputs.length - 1));
+    }
+  };
+
   const toggleSectionsVisibility = () => {
     setIsVisible(!isVisible);
     if (!isVisible) {
@@ -81,25 +101,7 @@ import { saveAs } from 'file-saver';
     }
   };
 
-  const addInput = (section) => {
-    if (section === 'annotation') {
-      setAnnotationInputs([...annotationInputs, { value: '', placeholder: '' }]);
-    } else if (section === 'web') {
-      setWebInputs([...webInputs, { value: '', placeholder: '' }]);
-    } else if (section === 'cirrus') {
-      setCirrusInputs([...cirrusInputs, { value: '', placeholder: '' }]);
-    } 
-  };
 
-  const removeInput = (section) => {
-    if (section === 'annotation' && annotationInputs.length > 1) {
-      setAnnotationInputs(annotationInputs.slice(0, annotationInputs.length - 1));
-    } else if (section === 'web' && webInputs.length > 1) {
-      setWebInputs(webInputs.slice(0, webInputs.length - 1));
-    } else if (section === 'cirrus' && cirrusInputs.length > 1) {
-      setCirrusInputs(cirrusInputs.slice(0, cirrusInputs.length - 1));
-    }
-  };
 
   const saveToAnnotation = () => {
     const data = {
@@ -153,10 +155,10 @@ import { saveAs } from 'file-saver';
             />
           ))}
           <div className="button-group">
-            <button className="button-add" onClick={() => addInput('annotation')}>+</button>
+              <button className="button-add" onClick={() => addInput('annotation')}>+</button>
             <button className="button-remove" onClick={() => removeInput('annotation')}>-</button>
           </div>
-          <button className="save-button" onClick={saveToAnnotation}> Save </button>
+            <button className="save-button" onClick={saveToAnnotation}> Save </button>
           <NavLink to="/advance" className="Advance-button"> Advance </NavLink>
         </div>
       </div>
@@ -182,7 +184,7 @@ import { saveAs } from 'file-saver';
           <NavLink to="/advanceWeb" className="AdvanceWeb-button">Advance</NavLink>
         </div>
       </div>
-    )}
+     )}
 
     {cirrusInfo && (
       <div className="cirrus-info">
@@ -202,10 +204,10 @@ import { saveAs } from 'file-saver';
           </div>
           <button className="save-button" onClick={saveToCirrus}> Save </button>
           <NavLink to="/advanceCirrus" className="AdvanceCirrus-button"> Advance </NavLink>
+          </div>
         </div>
-      </div>
-    )}
-  </div>
+      )}
+    </div>
 
     <div className="sidebar-session">
       <div className="session-class">
@@ -226,13 +228,13 @@ import { saveAs } from 'file-saver';
             {isSynlig ? 'Cirrus' : 'Cirrus'}
           </h2>
         </div>
+               
       </div>
     </div>
     
-    
-      <img src={loggagreen} alt="logga" className="logga" />
+      {/* <img src={loggagreen} alt="logga" className="logga" /> */}
       {/* <img src={loggaover} alt="logga" className="logo" /> */}
-    {/* <img src={loggavit} alt="vitlogga" className="vitlogga" /> */}
+    <img src={loggavit} alt="vitlogga" className="vitlogga" />
   </div>
 
     </>
