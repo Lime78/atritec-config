@@ -6,24 +6,25 @@ import loggagreen from '../assets/loggagreen.png';
 import './Landing.css';
 import { saveAs } from 'file-saver';
 
-const Landing = ({ trackData }) => {
-  const [annotationInputs, setAnnotationInputs] = useState([]);
-  const [webInputs, setWebInputs] = useState([]);
-  const [cirrusInputs, setCirrusInputs] = useState([]);
 
-  const [isVisible, setIsVisible] = useState(false);
-  const [isSynlig, setIsSynlig] = useState(false);
-  const [isVissa, setIsVissa] = useState(false);
+  const Landing = ({ trackData }) => {
+    const [annotationInputs, setAnnotationInputs] = useState([]);
+    const [webInputs, setWebInputs] = useState([]);
+    const [cirrusInputs, setCirrusInputs] = useState([]);
 
-  const [annotationInfo, setAnnotationInfo] = useState('');
-  const [webInfo, setWebInfo] = useState('');
-  const [cirrusInfo, setCirrusInfo] = useState('');
+    const [isVisible, setIsVisible] = useState(false);
+    const [isSynlig, setIsSynlig] = useState(false);
+    const [isVissa, setIsVissa] = useState(false);
 
-  
+    const [annotationInfo, setAnnotationInfo] = useState('');
+    const [webInfo, setWebInfo] = useState('');
+    const [cirrusInfo, setCirrusInfo] = useState('');
+
+
   useEffect(() => {
-    if (!trackData) {
-      return; 
-    }
+      if (!trackData) {
+        return; 
+      }
 
     const generateInputs = (trackData) => {
       const inputs = [];
@@ -31,7 +32,7 @@ const Landing = ({ trackData }) => {
       Object.keys(trackData).forEach((track) => {
         Object.keys(trackData[track]).forEach((segment) => {
           const segmentData = trackData[track][segment];
-          const timeRanges = segmentData.time_ranges;
+            const timeRanges = segmentData.time_ranges;
 
           timeRanges.forEach(([from, to], index) => {
             inputs.push(
@@ -87,7 +88,7 @@ const Landing = ({ trackData }) => {
       setWebInputs([...webInputs, { value: '', placeholder: '' }]);
     } else if (section === 'cirrus') {
       setCirrusInputs([...cirrusInputs, { value: '', placeholder: '' }]);
-    }
+    } 
   };
 
   const removeInput = (section) => {
@@ -113,7 +114,7 @@ const Landing = ({ trackData }) => {
   const saveToCirrus = () => {
     const data = {
       cirrusInputs
-      
+
     };
 
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
@@ -136,23 +137,18 @@ const Landing = ({ trackData }) => {
       <div className="template-container"></div>
 
       <div className="bottom-container">
-  <div className="box">
-    <h2>Activity:</h2>
+    <div className="box">
+      <h2>Activity:</h2>
 
     {annotationInfo && (
       <div className="annotation-info">
         <h2>{annotationInfo}</h2>
         <div className="Bdl-split">
           {annotationInputs.map((input, index) => (
-            <input
-              key={index}
-              type="text"
-              value={input.value}
-              placeholder={input.placeholder}
-              onChange={(e) => {
-                const newInputs = [...annotationInputs];
+            <input  key={index}  type="text"  value={input.value}  placeholder={input.placeholder}  onChange={(e) => {
+              const newInputs = [...annotationInputs];
                 newInputs[index].value = e.target.value;
-                setAnnotationInputs(newInputs);
+                  setAnnotationInputs(newInputs);
               }}
             />
           ))}
@@ -171,12 +167,7 @@ const Landing = ({ trackData }) => {
         <h2>{webInfo}</h2>
         <div className="Bdl-split">
           {webInputs.map((input, index) => (
-            <input
-              key={index}
-              type="text"
-              value={input.value}
-              placeholder={input.placeholder}
-              onChange={(e) => {
+            <input  key={index}  type="text"  value={input.value}  placeholder={input.placeholder}  onChange={(e) => {
                 const newInputs = [...webInputs];
                 newInputs[index].value = e.target.value;
                 setWebInputs(newInputs);
@@ -198,12 +189,7 @@ const Landing = ({ trackData }) => {
         <h2>{cirrusInfo}</h2>
         <div className="Bdl-split">
           {cirrusInputs.map((input, index) => (
-            <input
-              key={index}
-              type="text"
-              value={input.value}
-              placeholder={input.placeholder}
-              onChange={(e) => {
+            <input  key={index}  type="text"  value={input.value}  placeholder={input.placeholder}  onChange={(e) => {
                 const newInputs = [...cirrusInputs];
                 newInputs[index].value = e.target.value;
                 setCirrusInputs(newInputs);
@@ -220,10 +206,11 @@ const Landing = ({ trackData }) => {
       </div>
     )}
   </div>
-   
+
     <div className="sidebar-session">
       <div className="session-class">
         <h1>Session</h1>
+        {/* <input type="text" placeholder="Session" /> */}
         <div className="Annotation">
           <h2 onClick={toggleSectionsVisibility}>
             {isVisible ? 'Annotation' : 'Annotation'}
@@ -243,10 +230,10 @@ const Landing = ({ trackData }) => {
     </div>
     
     
-    <img src={loggagreen} alt="logga" className="logga" />
-    {/* <img src={loggaover} alt="logga" className="logo" /> */}
-  {/* <img src={loggavit} alt="vitlogga" className="vitlogga" /> */}
-</div>
+      <img src={loggagreen} alt="logga" className="logga" />
+      {/* <img src={loggaover} alt="logga" className="logo" /> */}
+    {/* <img src={loggavit} alt="vitlogga" className="vitlogga" /> */}
+  </div>
 
     </>
   );

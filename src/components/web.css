@@ -1,0 +1,89 @@
+  .web {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    left: 550px;
+  }
+  
+  .header-web {
+    text-align: center;
+    background-color: #06aa32;
+    color: white;
+    padding: 15px 0;
+    margin-bottom: 20px;
+  }
+  
+  .header-web h1 {
+    font-size: 36px;
+    margin: 0;
+  }
+  
+  .second-section {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .second-section h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .second-section p {
+    font-size: 16px;
+    margin: 10px 0;
+  }
+  
+  .second-section strong {
+    font-weight: bold;
+  }
+  
+  ul {
+    padding-left: 20px;
+  }
+  
+  ul li {
+    font-size: 16px;
+    margin: 8px 0;
+  }
+  
+  ul li ul {
+    margin-top: 10px;
+  }
+  
+  ul li ul li {
+    font-size: 14px;
+    list-style-type: square;
+  }
+
+  .Back-button{
+    background-color:rgb(255, 0, 0);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    position: absolute;
+    top: 100px;
+    left: 100px;
+  }
+  
+  @media (max-width: 768px) {
+    .web {
+      padding: 10px;
+    }
+  
+    .header h1 {
+      font-size: 28px;
+    }
+  
+    .second-section {
+      padding: 15px;
+    }
+  
+    .second-section h2 {
+      font-size: 20px;
+    }
+  }
+  

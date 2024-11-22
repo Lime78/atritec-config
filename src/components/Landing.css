@@ -10,9 +10,6 @@
     /* background: linear-gradient(to right, #222c31,#103549); */
     /* background: linear-gradient(to right, #103549, #326178); */
     background-color: #103549;
-    /* background-color: rgb(30, 21, 21); */
-    /* background-color: #222c31; */
-    /* padding-left: 550px;  */
 }
 
 .pattern {
@@ -23,36 +20,35 @@
   bottom: 10px;
 }
 
-.template-container {
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
-margin: 0 auto;
-padding: 10px;
-gap: 20px;
-}
+  .template-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 10px;
+  gap: 20px;
+  }
 
-.template-container .Annotation,
-.template-container .Cirrus,
-.template-container .Web360 {
-width: 300px;
-height: 100px;
-text-align: center;
-padding: 10px;
-margin: 20px;
-border: 1px solid #ccc;
-border-radius: 5px;
-background-color: rgb(1, 23, 29);
-color: white;
-transition: transform 0.3s ease;
-}
+  .template-container .Annotation,
+  .template-container .Cirrus,
+  .template-container .Web360 {
+  width: 300px;
+  height: 100px;
+  text-align: center;
+  padding: 10px;
+  margin: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: rgb(1, 23, 29);
+  color: white;
+  transition: transform 0.3s ease;
+  }
 
-.sidebar-session {
+  .sidebar-session {
     width: 25vh; 
     padding: 40px;
     position: fixed; 
     background-color: rgb(1, 23, 29);
-    /* background-color: white; */
     top: 0;
     left: 0;
     height: 100%; 
@@ -154,6 +150,14 @@ transition: transform 0.3s ease;
     margin-top: 20px;
 }
   
+.session-class input[type="text"] {
+    width: 12em; 
+    padding:10px; 
+    background-color: rgb(0, 0, 0);
+    color: white;
+    box-shadow: 0 2px 4px rgba(48, 45, 45, 0.1); 
+  }
+
 .Bdl-split {
     display: flex;
     flex-direction: column;
@@ -239,6 +243,9 @@ transition: transform 0.3s ease;
     transform: scale(1.1);
   }
   .Advance-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 80px;
     height: 50px;
     background-color: #424242;
@@ -256,6 +263,9 @@ transition: transform 0.3s ease;
   }
 
   .AdvanceWeb-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 80px;
     height: 50px;
     background-color: #424242;
@@ -273,6 +283,9 @@ transition: transform 0.3s ease;
   }
 
   .AdvanceCirrus-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 80px;
     height: 50px;
     background-color: #424242;

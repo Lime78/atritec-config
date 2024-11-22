@@ -1,109 +1,66 @@
 import React, { useState } from 'react';
+import './cirrus.css'; 
 
 const Cirrus = () => {
-    const [checkboxes, setCheckboxes] = useState({
-      
-    });
-  
-    return (
-        <>
+  const [checkboxes, setCheckboxes] = useState({
+ 
+  });
 
-<header>
-    <h1>Cirrus</h1>
-</header>
-    CRS output 
+  return (
+    <div className="cirrus">
+      <header className="header-cirrus">
+        <h1>Cirrus</h1>
+      </header>
 
-    List of outputs 
+      <div className="third-section">
+        <h2>CRS Output</h2>
+        <p><strong>List of Outputs:</strong></p>
+        <ul>
+          <li><strong>Intensity</strong></li>
+          <li><strong>Speed Filtering:</strong> Default yes</li>
+          <li><strong>Classification:</strong> Yes / No</li>
+          <li><strong>Merging of Left and Right Scanners:</strong> Default yes</li>
+          <li><strong>Density Computation:</strong> Default: generate KML</li>
+          <li><strong>Downsampling</strong></li>
+          <li><strong>Splitting Configuration</strong></li>
+          <li><strong>Use Km Grid</strong></li>
+          <li><strong>Timestamps File from User</strong></li>
+        </ul>
+        
+        <h3>Example</h3>
+        <p><strong>Gothenburg to Stockholm</strong></p>
+        
+        <h3>Web360</h3>
+        <ul>
+          <li>0 to 50% - 1 Delivery Folder</li>
+        </ul>
 
-    Output attributes 
+        <h3>Cirrus</h3>
+        <ul>
+          <li>51 to 60% + 63 to 70% - Delivery Folder Bandel 551 + E Track</li>
+          <li>72 to 80% + 85 to 87% - Delivery Folder Bandel 551 + N Track</li>
+        </ul>
 
-    Intensity 
+        <h3>Annotation</h3>
+        <ul>
+          <li>51% to 90%: Potree Annotation</li>
+        </ul>
 
-    Speed filtering 
+        <p><strong>Annotation Folder:</strong> We have 3 templates: Web360, Cirrus, Annotation</p>
+        <p>But we have 4 projects: every delivery folder is a project</p>
 
-    Default yes 
+        <h3>1 Month Later:</h3>
+        <p><strong>Req:</strong> Export 1 track, 50 meters could be 5 mins of 8 hours of data.</p>
+        <p><strong>Re-Process:</strong> The scan session for just those 5 mins.</p>
 
-    Classification 
+        <h3>Input-Data Configuration</h3>
+        <p>User has to provide as timestamps.</p>
 
-    Yes /no 
-
-    Merging of left and right scanners 
-
-    Default yes 
-
-    Density computation default: generate kml
-
-    Downsampling 
-
-    Splitting Configuration 
-
-    Use Km grid 
-
-    Timestamps file from user 
-
-    Clip to certain distance from track 
-
-    Potree Converter 
-
-    Leadger generation 
-
-    If the split is based on km grid 
-
-    Polygon of the real lidar data 
-
-    Distance to cut PC from track center 
-    
-
-    Example 
-
-    Gothenburg to Stockholm  
-
-    Web360: 
-
-    0 to 50% - 1 Delivery folder 
-
-    Cirrus: 
-
-    51 to 60% + 63 to 70% - Delivery Folder Bandel 551 + E Track 
-
-    72 to 80% + 85 to 87% - Delivery Folder Bandel 551 + N Track 
-    Annotation: 
-
-    51% to 90%: Potree annotation 
-
-    Annotation folder 
-
-    We have 3 templates: Web360, Cirrus, Annotation 
-
-    But we have 4 projects: every delivery folder is project 
-
-    Superset: 0 to 90% 
-
-    1 Month later: 
-
-    Req: Export 1 track, 50 meters could be 5 mins of 8 hours of data. 
-
-    Re-Process the scan session for just those 5 mins. 
-    
-
-    Input-Data configuration 
-
-    User has to be provide as timestamps 
-
-    Common-processing parameters / base processing 
-
-    After you diverge for every template / pipeline 
-
-    Project-level processing parameters 
-
-    List of templates then with an optimized version 
-    
-
-    Write a Workflow for every template and dependency graph for  
-
-    Write out a common workflow IF possible. 
-
-    </>
-    )
+        <h3>Write a Workflow</h3>
+        <p>Write out a common workflow if possible. Create a dependency graph for each template.</p>
+      </div>
+    </div>
+  );
 }
+
 export default Cirrus;

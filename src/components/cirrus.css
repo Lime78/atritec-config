@@ -1,42 +1,43 @@
-.text-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  position: relative;
-  left: 550px;
+  .cirrus {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    left: 550px;
   }
   
-  .header-annotation {
+  .header-cirrus {
     text-align: center;
-    background-color: #ae1818;
+    background-color: #169237;
     color: white;
     padding: 15px 0;
-    margin-bottom: 20px;
+    margin-top: 100px;
+    margin-bottom: 30px;
   }
   
-  .header-annotations h1 {
+  .header-cirrus h1 {
     font-size: 36px;
     margin: 0;
   }
   
-  .section {
+  .third-section {
     background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
   
-  .section h2 {
+  .third-section h2, .second-section h3 {
     font-size: 24px;
     margin-bottom: 10px;
   }
   
-  .section p {
+  .third-section p, .second-section ul {
     font-size: 16px;
     margin: 10px 0;
   }
   
-  .section strong {
+  .third-section strong {
     font-weight: bold;
   }
   
@@ -56,10 +57,4 @@
   ul li ul li {
     font-size: 14px;
     list-style-type: square;
-  }
-  
-  p {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #555;
-  }
+  }  

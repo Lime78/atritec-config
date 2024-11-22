@@ -3,11 +3,12 @@ import './annotation.css';
 
 const AdvanceAnnotation = () => {
   return (
+            
     <div className="text-container">
-      <header>
-        <h1>Definitions</h1>
+      <header className="header-annotation">
+        <h1>Annotation</h1>
       </header>
-
+      
       <section className="section">
         <h2>Session / Scan Session</h2>
         <p><strong>Raw Data</strong></p>
@@ -43,6 +44,7 @@ const AdvanceAnnotation = () => {
           </ul>
           <li><strong>Export 360 Images/Panoramas:</strong> Yes / No</li>
         </ul>
+        
       </section>
     </div>
   );
