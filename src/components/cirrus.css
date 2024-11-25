@@ -58,3 +58,11 @@
     font-size: 14px;
     list-style-type: square;
   }  
+
+  @media (max-width: 768px) {
+    .cirrus {
+      padding: 100px;
+      position: relative;
+      left: 0;
+    }
+  }

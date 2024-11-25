@@ -29,11 +29,6 @@ const Cirrus = () => {
         
         <h3>Example</h3>
         <p><strong>Gothenburg to Stockholm</strong></p>
-        
-        <h3>Web360</h3>
-        <ul>
-          <li>0 to 50% - 1 Delivery Folder</li>
-        </ul>
 
         <h3>Cirrus</h3>
         <ul>

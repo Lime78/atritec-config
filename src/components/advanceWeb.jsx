@@ -43,6 +43,10 @@ const Web = () => {
             <p>After you diverge for every template/pipeline</p>
              <h3>Project-Level Processing Parameters</h3>
             <p>List of templates then with an optimized version.</p>
+            <h3>Web360</h3>
+           <ul>
+           <li>0 to 50% - 1 Delivery Folder</li>
+          </ul>
            </ul>
           </li>
         </ul>
