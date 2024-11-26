@@ -154,7 +154,7 @@
 
   .box {
     width: 85rem;
-    height: 65rem;
+    height: 145rem;
     z-index: 1000;
     background-color: rgb(1, 23, 29);
     color: white;
@@ -255,7 +255,7 @@
   }
 
   .save-button:hover {
-    background-color: #198B74;
+    /* background-color: #198B74; */
     transform: scale(1.1);
   }
   .Advance-button {

@@ -1,4 +1,5 @@
-{
+ export const Api = [
+    {
     "annotation": {
         "params": {
             "ins_freq": {
@@ -322,3 +323,4 @@
         }
     }
 }
+ ]
