@@ -22,7 +22,6 @@
 
   .template-container {
   display: flex;
-  justify-content: center;
   margin: 0 auto;
   padding: 450px;
   margin-bottom: 95vh;
@@ -154,7 +153,7 @@
 
   .box {
     width: 85rem;
-    height: 145rem;
+    height: 155rem;
     z-index: 1000;
     background-color: rgb(1, 23, 29);
     color: white;
@@ -179,19 +178,28 @@
     box-shadow: 0 2px 4px rgba(48, 45, 45, 0.1); 
   }
 
-.Bdl-split {
+  .Bdl-split {
     display: flex;
     flex-direction: column;
     gap: 10px;
     margin: 15px 0;
   }
   
-.Bdl-split input[type="text"] {
+  .Bdl-split input[type="text"] {
     width: 12em; 
     padding:10px; 
     background-color: rgb(0, 0, 0);
     color: white;
     box-shadow: 0 2px 4px rgba(48, 45, 45, 0.1); 
+  }
+
+  .Bdl-split input[type="checkbox"] {
+    width: 12em; 
+    height: 20px;
+    padding: 10px; 
+    background-color: rgb(0, 0, 0);
+    color: white;
+    box-shadow: 0 2px 4px rgba(248, 0, 0, 0.1); 
   }
 
   input[type="text"] {
