@@ -30,7 +30,7 @@
         
         
             "generate": {
-                "desc": "Riegl project Generation options",
+                "desc": "Riegl project Generation options"},
                 "colorize_scan": {
                     "type": "bool",
                     "default": false,
@@ -40,18 +40,16 @@
                     "type": "bool",
                     "default": false,
                     "desc": "Colorize Scan Data"
-                }
-            },
+                },
             "basic": {
-                "desc": "Basic operations for all projects",
+                "desc": "Basic operations for all projects"},
                 "merge_scanners": {
                     "type": "bool",
                     "default": true,
                     "desc": "Merge left and right scanner"
-                }
-            },
+                },
             "slow_speed_filter": {
-                "desc": "Slow Speed filtering",
+                "desc": "Slow Speed filtering"},
                 "slow_vsz": {
                     "type": "float",
                     "default": 0.01,
@@ -68,10 +66,9 @@
                     "default": 15,
                     "package": "slow_speed_filter",
                     "desc": "Threshold for selecting time ranges. 15.0 means only select ranges more than equal to 15 seconds."
-                }
-            },
+                },
             "point_density": {
-                "desc": "Density Requirements",
+                "desc": "Density Requirements"},
                 "step_len_gen_polygons": {
                     "type": "float",
                     "default": 2,
@@ -101,10 +98,9 @@
                     "type": "float",
                     "default": false,
                     "desc": "Compute the density after downsampling."
-                }
-            },
+                },
             "delivery": {
-                "desc": "Setup Delivery Folders",
+                "desc": "Setup Delivery Folders"},
                 "grid_size": {
                     "type": "int",
                     "default": 1000,
@@ -134,8 +130,7 @@
                     "type": "float",
                     "default": 5845,
                     "desc": "EPSG Code for delivering pointcloud data"
-                }
-            },
+                },
             
                 "sample_laz_grid_step": {
                     "type": "int",
