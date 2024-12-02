@@ -1,5 +1,6 @@
 export const annotationApi = [
-    {
+
+{
     "annotation": {
         "params": {
             "ins_freq": {
@@ -26,23 +27,24 @@ export const annotationApi = [
                 "type": "list",
                 "desc": "Information for clipping input data. List of [start_time, endtime].",
                 "default": []
-            },
-         
+            }
+        },
+        "packages": {
             "generate": {
-                "desc": "Riegl project Generation options"},
+                "desc": "Riegl project Generation options",
                 "colorize_scan": {
                     "type": "bool",
                     "default": false,
-                    "desc": "Colorize Scan Data"
+                    "desc": "Colorize Scan Data, Riegl project Generation options"
                 },
                 "export_fast_annotation": {
                     "type": "bool",
                     "default": false,
-                    "desc": "Colorize Scan Data"
-                },
-            
+                    "desc": "Colorize Scan Data, Export_fast_annotation"
+                }
+            },
             "slow_speed_filter": {
-                "desc": "Slow Speed filtering"}, 
+                "desc": "Slow Speed filtering",
                 "slow_vsz": {
                     "type": "float",
                     "default": 0.01,
@@ -59,9 +61,10 @@ export const annotationApi = [
                     "default": 15,
                     "package": "slow_speed_filter",
                     "desc": "Threshold for selecting time ranges. 15.0 means only select ranges more than equal to 15 seconds."
-                } ,
+                }
+            },
             "delivery": {
-                "desc": "Setup Delivery Folders"},
+                "desc": "Setup Delivery Folders",
                 "op_time_format": {
                     "type": "string",
                     "default": "weeksecs",
@@ -77,8 +80,8 @@ export const annotationApi = [
                     "default": 5845,
                     "desc": "EPSG Code for delivering pointcloud data"
                 }
-            
+            }
         }
     }
-    }
-    ]
+}
+]

@@ -1,13 +1,13 @@
- export const Api = [
+export const cirrusApi = [
     {
     "cirrus": {
-        "packages": {
+        "params": {
             "ins_freq": {
                 "type": "float",
                 "default": 200,
                 "desc": "A7 INS Frequency"
             },
-            "path_nas": {
+            "path_nas":  {
                 "type": "string",
                 "default": "//192.168.1.6/Mobile_mapping",
                 "desc": "Path to NAS / Mobile_mapping drive"
@@ -26,30 +26,32 @@
                 "type": "list",
                 "desc": "Information for clipping input data. List of [start_time, endtime].",
                 "default": []
-            },
-        
-        
+            }
+        },
+        "packages": {
             "generate": {
-                "desc": "Riegl project Generation options"},
+                "desc": "Riegl project Generation options",
                 "colorize_scan": {
                     "type": "bool",
                     "default": false,
-                    "desc": "Colorize Scan Data"
+                    "desc": "Riegl project Generation options, Colorize Scan Data"
                 },
                 "export_fast_annotation": {
                     "type": "bool",
                     "default": false,
-                    "desc": "Colorize Scan Data"
-                },
+                    "desc": "export_fast_annotation, Colorize Scan Data"
+                }
+            },
             "basic": {
-                "desc": "Basic operations for all projects"},
+                "desc": "Basic operations for all projects",
                 "merge_scanners": {
                     "type": "bool",
                     "default": true,
                     "desc": "Merge left and right scanner"
-                },
+                }
+            },
             "slow_speed_filter": {
-                "desc": "Slow Speed filtering"},
+                "desc": "Slow Speed filtering",
                 "slow_vsz": {
                     "type": "float",
                     "default": 0.01,
@@ -66,9 +68,10 @@
                     "default": 15,
                     "package": "slow_speed_filter",
                     "desc": "Threshold for selecting time ranges. 15.0 means only select ranges more than equal to 15 seconds."
-                },
+                }
+            },
             "point_density": {
-                "desc": "Density Requirements"},
+                "desc": "Density Requirements",
                 "step_len_gen_polygons": {
                     "type": "float",
                     "default": 2,
@@ -98,9 +101,10 @@
                     "type": "float",
                     "default": false,
                     "desc": "Compute the density after downsampling."
-                },
+                }
+            },
             "delivery": {
-                "desc": "Setup Delivery Folders"},
+                "desc": "Setup Delivery Folders",
                 "grid_size": {
                     "type": "int",
                     "default": 1000,
@@ -130,8 +134,9 @@
                     "type": "float",
                     "default": 5845,
                     "desc": "EPSG Code for delivering pointcloud data"
-                },
-            
+                }
+            },
+            "quality_control": {
                 "sample_laz_grid_step": {
                     "type": "int",
                     "default": 10000,
@@ -141,8 +146,9 @@
                     "type": "float",
                     "default": 0.1,
                     "desc": "Maximum allowed threshold for a NH-Data height control."
-                }  
-     }
+                }
+            }
+        }
     }
-   }   
- ]
+}
+]

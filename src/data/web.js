@@ -1,7 +1,7 @@
 export const webApi = [
     {
     "web360": {
-        "info": {
+        "params": {
             "ins_freq": {
                 "type": "float",
                 "default": 200,
@@ -26,27 +26,30 @@ export const webApi = [
                 "type": "list",
                 "desc": "Information for clipping input data. List of [start_time, endtime].",
                 "default": []
-            },
-       
+            }
+        },
+        "packages": {
             "generate": {
-                "desc": "Riegl project Generation options"},
+                "desc": "Riegl project Generation options",
                 "colorize_scan": {
                     "type": "bool",
                     "default": false,
-                    "desc": "Colorize Scan Data"
+                    "desc": "Riegl project Generation options, Colorize Scan Data"
                 },
                 "export_fast_annotation": {
                     "type": "bool",
                     "default": false,
-                    "desc": "Colorize Scan Data"
-                },
+                    "desc": "Export_fast_annotation, Colorize Scan Data"
+                }
+            },
             "basic": {
-                "desc": "Basic operations for all projects"},
+                "desc": "Basic operations for all projects",
                 "merge_scanners": {
                     "type": "bool",
                     "default": true,
                     "desc": "Merge left and right scanner"
-                },
+                }
+            },
             "slow_speed_filter": {
                 "desc": "Slow Speed filtering",
                 "slow_vsz": {

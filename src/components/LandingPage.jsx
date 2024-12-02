@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Api } from '../data/api.js';
+import { cirrusApi } from '../data/cirrusapi.js';
 import { annotationApi } from '../data/annotation.js';
 import { webApi } from '../data/web.js';
-// import { sessionInputs } from '../data/session.js';
+import { sessionInputs } from '../data/session.js';
 import loggavit from '../assets/loggavit.png';
 import loggaover from '../assets/loggaover.png';
 import loggagreen from '../assets/loggagreen.png';
@@ -17,93 +17,80 @@ const Landing = ({ trackData }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isSynlig, setIsSynlig] = useState(false);
   const [isVissa, setIsVissa] = useState(false);
-
-
-  const [session, setSession] = useState([false]);
-  const [sessionData, setSessionData] = useState(null);
   const [showSessionDetails, setShowSessionDetails] = useState(false);
-
 
   const [annotationInfo, setAnnotationInfo] = useState('');
   const [webInfo, setWebInfo] = useState('');
   const [cirrusInfo, setCirrusInfo] = useState('');
 
-
   useEffect(() => {
     if (!trackData) {
-      const annotationData = Object.entries(annotationApi[0].annotation.params).map(([key, params]) => ({
+      const annotationParamsData = Object.entries(annotationApi[0].annotation.params).map(([key, params]) => ({
         name: key,
         text: params.desc,
         type: params.type,
         value: params.default || "",
       }));
+  
+      const annotationPackagesData = Object.entries(annotationApi[0].annotation.packages).flatMap(([packageKey, packageValue]) => 
+        Object.entries(packageValue).map(([key, params]) => ({
+          name: `${packageKey}.${key}`,
+          text: params.desc,
+          type: params.type,
+          value: params.default || "",
+        }))
+      );
+  
+      const annotationData = [...annotationParamsData, ...annotationPackagesData];
       setAnnotationInputs(annotationData);
     }
   }, [trackData]);
 
   useEffect(() => {
     if (!trackData) {
-      const webData = Object.entries(webApi[0].web360.info).map(([key, info]) => ({
+      const webParamsData = Object.entries(webApi[0].web360.params).map(([key, params]) => ({
         name: key,
-        text: info.desc,
-        type: info.type,
-        value: info.default || "",
+        text: params.desc,
+        type: params.type,
+        value: params.default || "",
       }));
+  
+      const webPackagesData = Object.entries(webApi[0].web360.packages).flatMap(([packageKey, packageValue]) => 
+        Object.entries(packageValue).map(([key, params]) => ({
+          name: `${packageKey}.${key}`,
+          text: params.desc,
+          type: params.type,
+          value: params.default || "",
+        }))
+      );
+
+      const webData = [...webParamsData, ...webPackagesData];
       setWebInputs(webData);
     }
   }, [trackData]);
 
   useEffect(() => {
     if (!trackData) {
-      const cirrusData = Object.entries(Api[0].cirrus.packages).map(([key, packages]) => ({
+      const cirrusParamsData = Object.entries(cirrusApi[0].cirrus.params).map(([key, params]) => ({
         name: key,
-        text: packages.desc,
-        type: packages.type,
-        value: packages.default || "",  
+        text: params.desc,
+        type: params.type,
+        value: params.default || "",
       }));
+  
+      const cirrusPackagesData = Object.entries(cirrusApi[0].cirrus.packages).flatMap(([packageKey, packageValue]) => 
+        Object.entries(packageValue).map(([key, params]) => ({
+          name: `${packageKey}.${key}`,
+          text: params.desc,
+          type: params.type,
+          value: params.default || "",
+        }))
+      );
+  
+      const cirrusData = [...cirrusParamsData, ...cirrusPackagesData];
       setCirrusInputs(cirrusData);
     }
   }, [trackData]);
-
-  // useEffect(() => {
-  //   const fetchSessionData = () => {
-  //     const sessionInputs = {
-  //       "2024-06-22_07-35-24": {
-  //         sessionName: "2024-06-22_07-35-24",
-  //         session: {
-  //           operator: "Johnny",
-  //           session_version: 1,
-  //           softwareVersion: "2.2.0",
-  //           vehicle: {
-  //             name: "Y1",
-  //             vehicle_model: "Y1",
-  //             vehicle_type: "Rail",
-  //             date_str: "2024-04-23",
-  //             odometerPulsesPerMeter: 2643.9171832249967,
-  //           },
-  //           lidarNames: [
-  //             "Riegl VUX 1HA Left",
-  //             "Riegl VUX 1HA Right",
-  //             "Profiler 9012 Left",
-  //           ],
-  //           positioningName: "Atlans A7",
-  //           cameraNames: [],
-  //         },
-  //         session_start: 1719033784.0149665,
-  //         session_stop: 1719046873.7969127,
-  //         duration: 13089.781946182251,
-  //       },
-  //     };
-
-  //     setSessionData(sessionInputs["2024-06-22_07-35-24"]);
-  //   };
-
-  //   fetchSessionData();
-  // }, []); 
-
-  const toggleSectionsSession = () => {
-    setShowSessionDetails(!showSessionDetails);
-  };
 
   const addInput = (section) => {
     if (section === 'annotation') {
@@ -152,31 +139,65 @@ const Landing = ({ trackData }) => {
     }
   };
 
-  // const toggelSectionsSession = () => {
-  //   setSession(!session);
-  //   if (!session) {
-  //     setSession('Session');
-  //   } else {
-  //     setSession('');
-  //   }
-  // };
+  const toggleSectionsSession = () => {
+    setShowSessionDetails(!showSessionDetails);
+  };
 
   const saveToAnnotation = () => {
-    const data = { annotationInputs };
+    const annotationData = annotationInputs.reduce((acc, input) => {
+      const [category, key] = input.name.split('.');
+      if (key) {
+        if (!acc.packages[category]) {
+          acc.packages[category] = {};
+        }
+        acc.packages[category][key] = input.value;
+      } else {
+        acc.params[input.name] = input.value;
+      }
+      return acc;
+    }, { params: {}, packages: {} });
+  
+    const data = { annotation: annotationData };
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     saveAs(blob, 'AnnotationForm.json');
   };
-
+  
   const saveToWeb = () => {
-    const data = { webInputs };
+    const webData = webInputs.reduce((acc, input) => {
+      const [category, key] = input.name.split('.');
+      if (key) {
+        if (!acc.packages[category]) {
+          acc.packages[category] = {};
+        }
+        acc.packages[category][key] = input.value;
+      } else {
+        acc.params[input.name] = input.value;
+      }
+      return acc;
+    }, { params: {}, packages: {} });
+  
+    const data = { web360: webData };
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     saveAs(blob, 'WebForm.json');
   };
 
   const saveToCirrus = () => {
-    const data = { cirrusInputs };
+    const cirrusData = cirrusInputs.reduce((acc, input) => {
+      const [category, key] = input.name.split('.');
+      if (key) {
+        if (!acc.packages[category]) {
+          acc.packages[category] = {};
+        }
+        acc.packages[category][key] = input.value;
+      } else {
+        acc.params[input.name] = input.value;
+      }
+      return acc;
+    }, { params: {}, packages: {} });
+  
+    const data = { cirrus: cirrusData };
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-    saveAs(blob, 'CirrusForm.json');    
+    saveAs(blob, 'CirrusForm.json');
   };
 
   return (
@@ -192,11 +213,11 @@ const Landing = ({ trackData }) => {
           <h2 onClick={toggleSectionsSynlig}>{isSynlig ? 'Cirrus' : 'Cirrus'}</h2>
         </div>
       </div>
-
+            
       <div className="bottom-container">
         <div className="box">
-          <h2>Activity:</h2>
-          
+          <h2>Activity</h2>
+
           {annotationInfo && (
             <div className="annotation-info">
               <h2>{annotationInfo}</h2>
@@ -208,7 +229,7 @@ const Landing = ({ trackData }) => {
                        type={input.type === 'bool' ? 'checkbox' : 'text'}
                        value={input.type === 'bool' ? undefined : input.value || ""}
                        checked={input.type === 'bool' ? Boolean(input.value) : undefined}
-                      onChange={(e) => {
+                       onChange={(e) => {
                         const newInputs = [...annotationInputs];
                         if (input.type === 'bool') {
                           newInputs[index].value = e.target.checked;
@@ -229,7 +250,7 @@ const Landing = ({ trackData }) => {
               </div>
             </div>
           )}
-
+           
           {webInfo && (
             <div className="web-info">
               <h2>{webInfo}</h2>
@@ -273,7 +294,7 @@ const Landing = ({ trackData }) => {
                     <input
                       type={input.type === 'bool' ? 'checkbox' : 'text'}
                       value={input.type === 'bool' ? undefined : input.value || ""}
-                      checked={input.type === 'bool' ? Boolean(input.value) : undefined}
+                      checked={input.type === 'bool' ? Boolean(input.value) : undefined} 
                       onChange={(e) => {
                         const newInputs = [...cirrusInputs];
                         if (input.type === 'bool') {
@@ -282,6 +303,7 @@ const Landing = ({ trackData }) => {
                           newInputs[index].value = e.target.value;
                         }
                         setCirrusInputs(newInputs);
+                        console.log("cirrus");
                       }}
                     />
                   </div>
@@ -301,9 +323,9 @@ const Landing = ({ trackData }) => {
       <div className="sidebar-session">
       <div className="session-class">
         <h1 onClick={toggleSectionsSession}>
-          {showSessionDetails ? "Session" : "Session1"}
+          {showSessionDetails ? "Session" : "Session"}
         </h1>
-       </div>
+      </div>
       {/* <div className="session-info">
         {showSessionDetails ? (
           <>
@@ -329,9 +351,9 @@ const Landing = ({ trackData }) => {
         )}
       </div> */}
     </div>
-
+    
       <img src={loggagreen} alt="logga" className="logga" />
-      {/* <img src={loggaover} alt="logga" className="logga" /> */}
+      {/* <img src={loggaover} alt="logga" className="logo" /> */}
       {/* <img src={loggavit} alt="logga" className="logga" /> */}
   </>
   );
