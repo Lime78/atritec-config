@@ -1,5 +1,4 @@
 export const annotationApi = [
-
 {
     "annotation": {
         "params": {

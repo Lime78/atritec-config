@@ -39,7 +39,7 @@ export const cirrusApi = [
                 "export_fast_annotation": {
                     "type": "bool",
                     "default": false,
-                    "desc": "export_fast_annotation, Colorize Scan Data"
+                    "desc": "Export_fast_annotation, Colorize Scan Data"
                 }
             },
             "basic": {

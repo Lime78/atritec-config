@@ -3,7 +3,9 @@ import { NavLink } from 'react-router-dom';
 import { cirrusApi } from '../data/cirrusapi.js';
 import { annotationApi } from '../data/annotation.js';
 import { webApi } from '../data/web.js';
-import { sessionInputs } from '../data/session.js';
+import { sessionInputs } from '../data/2024-05-22_07-35-24.js';
+import {session} from '../data/2024-06-22_07-35-24.js';
+import {session2024} from '../data/2024-07-22_07-35-24.js';
 import loggavit from '../assets/loggavit.png';
 import loggaover from '../assets/loggaover.png';
 import loggagreen from '../assets/loggagreen.png';
@@ -31,7 +33,7 @@ const Landing = ({ trackData }) => {
         type: params.type,
         value: params.default || "",
       }));
-  
+
       const annotationPackagesData = Object.entries(annotationApi[0].annotation.packages).flatMap(([packageKey, packageValue]) => 
         Object.entries(packageValue).map(([key, params]) => ({
           name: `${packageKey}.${key}`,
@@ -40,13 +42,13 @@ const Landing = ({ trackData }) => {
           value: params.default || "",
         }))
       );
-  
+
       const annotationData = [...annotationParamsData, ...annotationPackagesData];
       setAnnotationInputs(annotationData);
     }
   }, [trackData]);
 
-  useEffect(() => {
+  useEffect(() => { 
     if (!trackData) {
       const webParamsData = Object.entries(webApi[0].web360.params).map(([key, params]) => ({
         name: key,
@@ -71,22 +73,22 @@ const Landing = ({ trackData }) => {
 
   useEffect(() => {
     if (!trackData) {
-      const cirrusParamsData = Object.entries(cirrusApi[0].cirrus.params).map(([key, params]) => ({
+      const cirrusParamsData = Object.entries(cirrusApi[0].cirrus.params).map(([key,params]) => ({
         name: key,
         text: params.desc,
         type: params.type,
         value: params.default || "",
       }));
-  
+
       const cirrusPackagesData = Object.entries(cirrusApi[0].cirrus.packages).flatMap(([packageKey, packageValue]) => 
-        Object.entries(packageValue).map(([key, params]) => ({
-          name: `${packageKey}.${key}`,
-          text: params.desc,
-          type: params.type,
-          value: params.default || "",
-        }))
-      );
-  
+      Object.entries(packageValue).map(([key, params]) => ({
+        name: `${packageKey}.${key}`,
+        text: params.desc,
+        type: params.type,
+        value: params.default || "",
+      }))
+    );
+
       const cirrusData = [...cirrusParamsData, ...cirrusPackagesData];
       setCirrusInputs(cirrusData);
     }
@@ -137,10 +139,6 @@ const Landing = ({ trackData }) => {
     } else {
       setCirrusInfo('');
     }
-  };
-
-  const toggleSectionsSession = () => {
-    setShowSessionDetails(!showSessionDetails);
   };
 
   const saveToAnnotation = () => {
@@ -200,6 +198,17 @@ const Landing = ({ trackData }) => {
     saveAs(blob, 'CirrusForm.json');
   };
 
+
+  const toggleSectionsSession = () => {
+  setShowSessionDetails(!showSessionDetails);
+  if (!showSessionDetails) {
+    // Assuming you want the first session
+    const sessionInfo = sessionInputs[0].session;
+    // Log the session info, not the string 'sessionInfo'
+    console.log(sessionInfo);
+  }
+};
+
   return (
     <>
       <div className="template-container">
@@ -215,61 +224,59 @@ const Landing = ({ trackData }) => {
       </div>
             
       <div className="bottom-container">
-        <div className="box">
+      <div className="box">
           <h2>Activity</h2>
-
-          {annotationInfo && (
-            <div className="annotation-info">
-              <h2>{annotationInfo}</h2>
-              <div className="Bdl-split">
-              {annotationInputs.map((input, index) => (
-                  <div key={index} className="input-container">
-                    {input.text && <div className="input-description">{input.text}</div>}
-                    <input
-                       type={input.type === 'bool' ? 'checkbox' : 'text'}
-                       value={input.type === 'bool' ? undefined : input.value || ""}
-                       checked={input.type === 'bool' ? Boolean(input.value) : undefined}
-                       onChange={(e) => {
-                        const newInputs = [...annotationInputs];
-                        if (input.type === 'bool') {
-                          newInputs[index].value = e.target.checked;
-                        } else {
-                          newInputs[index].value = e.target.value;
-                        }
-                        setAnnotationInputs(newInputs);
-                      }}
-                    />
-                  </div>
-                ))}
-                <div className="button-group">
-                  <button className="button-add" onClick={() => addInput('annotation')}>+</button>
-                  <button className="button-remove" onClick={() => removeInput('annotation')}>-</button>
+        {annotationInfo && (
+          <div className="annotation-info">
+            <h2>{annotationInfo}</h2>
+            <div className="Bdl-split">
+            {annotationInputs.map((input, index) => (
+                <div key={index} className="input-container">
+                  {input.text && <div className="input-description">{input.text}</div>}
+                  <input type={input.type === 'bool' ? 'checkbox' : 'text'}
+                      value={input.type === 'bool' ? undefined : input.value || ""}
+                      checked={input.type === 'bool' ? Boolean(input.value) : undefined}
+                      onChange={(e) => {
+                      const newInputs = [...annotationInputs];
+                      if (input.type === 'bool') {
+                        newInputs[index].value = e.target.checked;
+                      } else {
+                        newInputs[index].value = e.target.value;
+                      }
+                      setAnnotationInputs(newInputs);
+                    }}
+                  />
                 </div>
-                <button className="save-button" onClick={saveToAnnotation}>Save Annotation</button>
-                <NavLink to="/advance" className="Advance-button">Advance</NavLink>
+              ))}
+              <div className="button-group">
+                <button className="button-add" onClick={() => addInput('annotation')}> + </button>
+                <button className="button-remove" onClick={() => removeInput('annotation')} > - </button>
+                <button className="save-button" onClick={saveToAnnotation}> Save </button>
+                <NavLink to="/advance" className="Advance-button"> Advance </NavLink>
               </div>
             </div>
-          )}
-           
-          {webInfo && (
+          </div>
+        )}
+
+        {webInfo && (
             <div className="web-info">
               <h2>{webInfo}</h2>
               <div className="Bdl-split">
-              {webInputs.map((input, index) => (
+                {webInputs.map((input, index) => (
                   <div key={index} className="input-container">
                     {input.text && <div className="input-description">{input.text}</div>}
                     <input
-                       type={input.type === 'bool' ? 'checkbox' : 'text'}
-                       value={input.type === 'bool' ? undefined : input.value || ""}
-                       checked={input.type === 'bool' ? Boolean(input.value) : undefined}
+                      type={input.type === 'bool' ? 'checkbox' : 'text'}
+                      value={input.type === 'bool' ? undefined : input.value || ""}
+                      checked={input.type === 'bool' ? Boolean(input.value) : undefined}
                       onChange={(e) => {
-                        const newInputs = [...webInputs];
+                        const updatedInputs = [...webInputs];
                         if (input.type === 'bool') {
-                          newInputs[index].value = e.target.checked;
+                          updatedInputs[index].value = e.target.checked;
                         } else {
-                          newInputs[index].value = e.target.value;
+                          updatedInputs[index].value = e.target.value;
                         }
-                        setWebInputs(newInputs);
+                          setWebInputs(updatedInputs);
                       }}
                     />
                   </div>
@@ -277,81 +284,86 @@ const Landing = ({ trackData }) => {
                 <div className="button-group">
                   <button className="button-add" onClick={() => addInput('web')}>+</button>
                   <button className="button-remove" onClick={() => removeInput('web')}>-</button>
+                  <button className="save-button" onClick={saveToWeb}>Save</button> {/* Save button triggers saveToWeb */}
+                  <NavLink to="advanceWeb" className="AdvanceWeb-button">Advance</NavLink>
                 </div>
-                <button className="save-button" onClick={saveToWeb}>Save Web</button>
-                <NavLink to="/advanceWeb" className="AdvanceWeb-button">Advance</NavLink>
               </div>
             </div>
-          )}
+              )}
           
-          {cirrusInfo && (
-            <div className="cirrus-info">
-              <h2>{cirrusInfo}</h2>
-              <div className="Bdl-split">
-                {cirrusInputs.map((input, index) => (
+        {cirrusInfo && (
+          <div className="cirrus-info">
+            <h2>{cirrusInfo}</h2>
+            <div className="Bdl-split">
+              {cirrusInputs.map((input, index) => (
+                <div key={index} className="input-container">
+                  {input.text && <div className="input-description">{input.text}</div>}
+                  <input
+                    type={input.type === 'bool' ? 'checkbox' : 'text'}
+                    value={input.type === 'bool' ? undefined : input.value || ""}
+                    checked={input.type === 'bool' ? Boolean(input.value) : undefined} 
+                    onChange={(e) => {
+                      const newInputs = [...cirrusInputs];
+                      if (input.type === 'bool') {
+                        newInputs[index].value = e.target.checked;
+                      } else {
+                        newInputs[index].value = e.target.value;
+                      }
+                      setCirrusInputs(newInputs);
+                    }}
+                  />
+                </div>
+              ))}
+              <div className="button-group">
+                <button className="button-add" onClick={() => addInput('cirrus')}>+</button>
+                <button className="button-remove" onClick={() => removeInput('cirrus')}>-</button>
+                <button className="save-button" onClick={saveToCirrus}>Save</button>
+                <NavLink to="/advanceCirrus" className="AdvanceCirrus-button">Advance</NavLink>
+              </div>
+            </div>
+          </div>
+        )}
+        </div>
+      </div>
+
+          <div className="sidebar-session">
+        <div className="session-class">
+        <h1 onClick={toggleSectionsSession}>
+          {showSessionDetails ? "Session" : "Session"}
+        </h1>
+        {showSessionDetails && (
+          <div className="session-details">
+            <div className="session-info">
+              <h3>2024-06-22_07-35-24</h3>
+              <h3>2024-07-22_07-35-24</h3>
+              <h3>2024-08-22_07-35-24</h3>
+              <div className="session-data">
+                {sessionInputs.map((input, index) => (
                   <div key={index} className="input-container">
-                    {input.text && <div className="input-description">{input.text}</div>}
+                    <div className="input-description">{input.text}</div>
                     <input
                       type={input.type === 'bool' ? 'checkbox' : 'text'}
                       value={input.type === 'bool' ? undefined : input.value || ""}
-                      checked={input.type === 'bool' ? Boolean(input.value) : undefined} 
+                      checked={input.type === 'bool' ? Boolean(input.value) : undefined}
                       onChange={(e) => {
-                        const newInputs = [...cirrusInputs];
-                        if (input.type === 'bool') {
-                          newInputs[index].value = e.target.checked;
-                        } else {
-                          newInputs[index].value = e.target.value;
-                        }
-                        setCirrusInputs(newInputs);
-                        console.log("cirrus");
+                      const newInputs = [...sessionInputs];
+                      if (input.type === 'bool') {
+                        newInputs[index].value = e.target.checked;
+                      } else {
+                        newInputs[index].value = e.target.value;
+                      }
+                      sessionInputs(newInputs);
                       }}
                     />
                   </div>
                 ))}
-                <div className="button-group">
-                  <button className="button-add" onClick={() => addInput('cirrus')}>+</button>
-                  <button className="button-remove" onClick={() => removeInput('cirrus')}>-</button>
-                </div>
-                <button className="save-button" onClick={saveToCirrus}>Save Cirrus</button>
-                <NavLink to="/advanceCirrus" className="AdvanceCirrus-button">Advance</NavLink>
               </div>
             </div>
-          )}
-        </div>
-      </div>
-
-      <div className="sidebar-session">
-      <div className="session-class">
-        <h1 onClick={toggleSectionsSession}>
-          {showSessionDetails ? "Session" : "Session"}
-        </h1>
-      </div>
-      {/* <div className="session-info">
-        {showSessionDetails ? (
-          <>
-            <h3>Session Name: {sessionData.sessionName}</h3>
-            <p>Operator: {sessionData.session.operator}</p>
-            <p>Software Version: {sessionData.session.softwareVersion}</p>
-            <p>Vehicle: {sessionData.session.vehicle.name}</p>
-            <p>Vehicle Model: {sessionData.session.vehicle.vehicle_model}</p>
-            <p>Vehicle Type: {sessionData.session.vehicle.vehicle_type}</p>
-            <p>Session Duration: {Math.round(sessionData.duration)} seconds</p>
-            <p>Lidar Sensors:</p>
-            <ul>
-              {sessionData.session.lidarNames.map((lidar, index) => (
-                <li key={index}>{lidar}</li>
-              ))}
-            </ul>
-            <p>Positioning System: {sessionData.session.positioningName}</p>
-            <p>Start Time: {new Date(sessionData.session_start * 1000).toLocaleString()}</p>
-            <p>End Time: {new Date(sessionData.session_stop * 1000).toLocaleString()}</p>
-          </>
-        ) : (
-          <p>Click above to show session details</p>
+          </div>
         )}
-      </div> */}
+      </div>
     </div>
-    
+
       <img src={loggagreen} alt="logga" className="logga" />
       {/* <img src={loggaover} alt="logga" className="logo" /> */}
       {/* <img src={loggavit} alt="logga" className="logga" /> */}
