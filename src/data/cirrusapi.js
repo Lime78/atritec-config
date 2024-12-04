@@ -152,3 +152,108 @@ export const cirrusApi = [
     }
 }
 ]
+
+// export const cirrusApi = [
+//     {
+//         "project_name": "user_enters | defaults to sessionName from session.json i.e. 2024-07-10_10-10-11",
+//         "vehicle": "Y1",
+//         "session_name": "2024-07-10_10-10-11",
+//         "path_nas": "//192.168.1.6/Mobile_mapping",
+//         "comment": "user enters some comment here | optional",
+//         "template": "cirrus",
+//         "params": {
+//             "ins_freq": 200,
+//             "epsg_process": 5845,
+//             "move_to_nas": true,
+//             "clip_input_data": [
+//                 [
+//                     100,
+//                     200
+//                 ],
+//                 [
+//                     300,
+//                     400
+//                 ],
+//                 [
+//                     500,
+//                     600
+//                 ]
+//             ]
+//         },
+//         "split_information": {
+//             "load_from_nas": true,
+//             "splits": {
+//                 "220": {
+//                     "E": {
+//                         "place_from": "Place1",
+//                         "place_to": "Place2",
+//                         "time_ranges": [
+//                             [
+//                                 150,
+//                                 175
+//                             ]
+//                         ]
+//                     },
+//                     "N": {
+//                         "place_from": "Place2",
+//                         "place_to": "Place3",
+//                         "time_ranges": [
+//                             [
+//                                 250,
+//                                 275
+//                             ]
+//                         ]
+//                     }
+//                 },
+//                 "221": {
+//                     "E": {
+//                         "place_from": "Place3",
+//                         "place_to": "Place1",
+//                         "time_ranges": [
+//                             [
+//                                 445,
+//                                 465
+//                             ]
+//                         ]
+//                     }
+//                 }
+//             }
+//         },
+//         "pointclouds": {
+//             "generate": {
+//                 "colorize_scan": false,
+//                 "export_fast_annotation": false
+//             },
+//             "basic": {
+//                 "merge_scanners": true
+//             },
+//             "slow_speed_filter": {
+//                 "slow_vsz": 0.01,
+//                 "slow_thres_speed": 5,
+//                 "slow_thres_time": 15
+//             },
+//             "point_density": {
+//                 "step_len_gen_polygons": 2,
+//                 "step_len_gen_frames": 0.1,
+//                 "min_density": 3000,
+//                 "max_density": 5000,
+//                 "downsample_vsz": 0.01,
+//                 "compute_density_post": false
+//             },
+//             "delivery": {
+//                 "grid_size": 1000,
+//                 "group": 0,
+//                 "lop": 1,
+//                 "op_time_format": "stdtime_adjust",
+//                 "epsg_output": 5845
+//             },
+//             "quality_control": {
+//                 "sample_laz_grid_step": 10000,
+//                 "nhdata_height_threshold": 0.1
+//             }
+//         },
+//         "images_360": {
+//             "not_sure_what_happens_here": true
+//         }
+//     }
+// ]

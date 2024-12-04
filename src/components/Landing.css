@@ -32,7 +32,7 @@ body {
     border-radius: 5px;
     background-color: rgb(1, 23, 29);
     color: white;
-    transition: transform 5s ease;
+    transition: transform 0.5s ease;
   }
 
   .template-container h2 {
@@ -51,7 +51,7 @@ body {
   .annotation-info,
   .cirrus-info,
   .web-info {
-    color: white;
+    color: #ffffff;
     padding: 20px;
   }
 
@@ -151,7 +151,7 @@ body {
 
   .box {
     width: 85rem;
-    height: 250rem;
+    height: 150em;
     z-index: 1000;
     background-color: rgb(1, 23, 29);
     color: rgb(255, 255, 255);
@@ -250,6 +250,7 @@ body {
   .save-button:hover {
     transform: scale(1.1);
   }
+
   .Advance-button {
     display: flex;
     justify-content: center;
@@ -305,7 +306,7 @@ body {
   }
 
   .AdvanceCirrus-button:hover{
-    background-color: red;
+    background-color: rgb(223, 7, 7);
     transform: scale(1.1);
     cursor: pointer;
   }
@@ -320,6 +321,18 @@ body {
     margin-bottom: 5px;
   }
 
+  .styled-checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #2cbe31;
+  }
+
+  /* .styled-checkbox:hover {
+    transform: rotate(360deg);
+    transition: transform 1s ease;
+  } */
+  
   @media (max-width: 1200px) {
     .template-container {
       gap: 15px;

@@ -4,8 +4,8 @@ import { cirrusApi } from '../data/cirrusapi.js';
 import { annotationApi } from '../data/annotation.js';
 import { webApi } from '../data/web.js';
 import { sessionInputs } from '../data/2024-05-22_07-35-24.js';
-import {session} from '../data/2024-06-22_07-35-24.js';
-import {session2024} from '../data/2024-07-22_07-35-24.js';
+import { session as sessionData } from '../data/2024-06-22_07-35-24.js';
+import { session2024 } from '../data/2024-07-22_07-35-24.js';
 import loggavit from '../assets/loggavit.png';
 import loggaover from '../assets/loggaover.png';
 import loggagreen from '../assets/loggagreen.png';
@@ -19,11 +19,39 @@ const Landing = ({ trackData }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isSynlig, setIsSynlig] = useState(false);
   const [isVissa, setIsVissa] = useState(false);
+
   const [showSessionDetails, setShowSessionDetails] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+  const [isCheckedSession, setIsCheckedSession] = useState(false);
+  const [isCheckedSession2024, setIsCheckedSession2024] = useState(false);
 
   const [annotationInfo, setAnnotationInfo] = useState('');
   const [webInfo, setWebInfo] = useState('');
   const [cirrusInfo, setCirrusInfo] = useState('');
+
+// updaterat med nytt api
+  // useEffect(() => {
+  //   if (!trackData) {
+  //     const annotationParamsData = Object.entries(annotationApi[0].params).map(([key, value]) => ({
+  //       name: key,
+  //       text: key, 
+  //       type: typeof value,
+  //       value: value || "",
+  //     }));
+    
+  //     const pointcloudsData = Object.entries(annotationApi[0].pointclouds).flatMap(([packageKey, packageValue]) => 
+  //       Object.entries(packageValue).map(([key, value]) => ({
+  //         name: `${packageKey}.${key}`,
+  //         text: key, 
+  //         type: typeof value,
+  //         value: value || "",
+  //       }))
+  //     );
+    
+  //     const annotationData = [...annotationParamsData, ...pointcloudsData];
+  //     setAnnotationInputs(annotationData);
+  //   }
+  // }, [trackData]);
 
   useEffect(() => {
     if (!trackData) {
@@ -48,7 +76,7 @@ const Landing = ({ trackData }) => {
     }
   }, [trackData]);
 
-  useEffect(() => { 
+  useEffect(() => {
     if (!trackData) {
       const webParamsData = Object.entries(webApi[0].web360.params).map(([key, params]) => ({
         name: key,
@@ -93,6 +121,29 @@ const Landing = ({ trackData }) => {
       setCirrusInputs(cirrusData);
     }
   }, [trackData]);
+
+  // useEffect(() => {
+  //   if (!trackData) {
+  //     const cirrusParamsData = Object.entries(cirrusApi[0].params).map(([key, value]) => ({
+  //       name: key,
+  //       text: key, // Assuming the key itself is the description
+  //       type: typeof value,
+  //       value: value || "",
+  //     }));
+  
+  //     const pointcloudsData = Object.entries(cirrusApi[0].pointclouds).flatMap(([packageKey, packageValue]) => 
+  //       Object.entries(packageValue).map(([key, value]) => ({
+  //         name: `${packageKey}.${key}`,
+  //         text: key, // Assuming the key itself is the description
+  //         type: typeof value,
+  //         value: value || "",
+  //       }))
+  //     );
+  
+  //     const cirrusData = [...cirrusParamsData, ...pointcloudsData];
+  //     setCirrusInputs(cirrusData);
+  //   }
+  // }, [trackData]);
 
   const addInput = (section) => {
     if (section === 'annotation') {
@@ -154,12 +205,22 @@ const Landing = ({ trackData }) => {
       }
       return acc;
     }, { params: {}, packages: {} });
-  
+
+    if (isChecked) {
+      annotationData.session = sessionInputs;
+    }
+    if (isCheckedSession) {
+      annotationData.session = sessionData;
+    }
+    if (isCheckedSession2024) {
+      annotationData.session = session2024;
+    }
+
     const data = { annotation: annotationData };
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     saveAs(blob, 'AnnotationForm.json');
   };
-  
+
   const saveToWeb = () => {
     const webData = webInputs.reduce((acc, input) => {
       const [category, key] = input.name.split('.');
@@ -173,7 +234,17 @@ const Landing = ({ trackData }) => {
       }
       return acc;
     }, { params: {}, packages: {} });
-  
+
+    if (isChecked) {
+      webData.session = sessionInputs;
+    }
+    if (isCheckedSession) {
+      webData.session = sessionData;
+    }
+    if (isCheckedSession2024) {
+      webData.session = session2024;
+    }
+
     const data = { web360: webData };
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     saveAs(blob, 'WebForm.json');
@@ -192,22 +263,43 @@ const Landing = ({ trackData }) => {
       }
       return acc;
     }, { params: {}, packages: {} });
-  
+
+    if (isChecked) {
+      cirrusData.session = sessionInputs;
+    }
+    if (isCheckedSession) {
+      cirrusData.session = sessionData;
+    }
+    if (isCheckedSession2024) {
+      cirrusData.session = session2024;
+    }
     const data = { cirrus: cirrusData };
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-    saveAs(blob, 'CirrusForm.json');
+    saveAs(blob, 'CirrusForm.json');console.log('annotaiton')
   };
 
-
   const toggleSectionsSession = () => {
-  setShowSessionDetails(!showSessionDetails);
-  if (!showSessionDetails) {
-    // Assuming you want the first session
-    const sessionInfo = sessionInputs[0].session;
-    // Log the session info, not the string 'sessionInfo'
-    console.log(sessionInfo);
-  }
-};
+    setShowSessionDetails(!showSessionDetails);
+    if (!showSessionDetails) {
+      const sessionInfo = sessionInputs[0].session;
+      console.log(sessionInfo);
+    }
+  };
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+    console.log(sessionInputs);
+  };
+
+  const handleSessionCheckboxChange = () => {
+    setIsCheckedSession(!isCheckedSession);
+    console.log(sessionData);
+  };
+
+  const handleSession2024CheckboxChange = () => {
+    setIsCheckedSession2024(!isCheckedSession2024);
+    console.log(session2024);
+  };
 
   return (
     <>
@@ -284,7 +376,7 @@ const Landing = ({ trackData }) => {
                 <div className="button-group">
                   <button className="button-add" onClick={() => addInput('web')}>+</button>
                   <button className="button-remove" onClick={() => removeInput('web')}>-</button>
-                  <button className="save-button" onClick={saveToWeb}>Save</button> {/* Save button triggers saveToWeb */}
+                  <button className="save-button" onClick={saveToWeb}>Save</button>
                   <NavLink to="advanceWeb" className="AdvanceWeb-button">Advance</NavLink>
                 </div>
               </div>
@@ -325,45 +417,47 @@ const Landing = ({ trackData }) => {
         )}
         </div>
       </div>
-
           <div className="sidebar-session">
-        <div className="session-class">
-        <h1 onClick={toggleSectionsSession}>
-          {showSessionDetails ? "Session" : "Session"}
-        </h1>
-        {showSessionDetails && (
-          <div className="session-details">
-            <div className="session-info">
-              <h3>2024-06-22_07-35-24</h3>
-              <h3>2024-07-22_07-35-24</h3>
-              <h3>2024-08-22_07-35-24</h3>
-              <div className="session-data">
-                {sessionInputs.map((input, index) => (
-                  <div key={index} className="input-container">
-                    <div className="input-description">{input.text}</div>
-                    <input
-                      type={input.type === 'bool' ? 'checkbox' : 'text'}
-                      value={input.type === 'bool' ? undefined : input.value || ""}
-                      checked={input.type === 'bool' ? Boolean(input.value) : undefined}
-                      onChange={(e) => {
-                      const newInputs = [...sessionInputs];
-                      if (input.type === 'bool') {
-                        newInputs[index].value = e.target.checked;
-                      } else {
-                        newInputs[index].value = e.target.value;
-                      }
-                      sessionInputs(newInputs);
-                      }}
-                    />
+            <div className="session-class">
+              <h1 onClick={toggleSectionsSession}>
+                {showSessionDetails ? "Session" : "Session"}
+            </h1>
+            {showSessionDetails && (
+              <div className="session-details">
+                <div className="session-info">
+                  <h3 onClick={() => console.log(sessionInputs)}>2024-05-22_07-35-24</h3>
+                  <input
+                    type="checkbox"
+                    className="styled-checkbox"
+                    checked={isChecked}
+                    onChange={handleCheckboxChange}
+                  />
+                  <h3 onClick={() => console.log(sessionData)}>2024-06-22_07-35-24</h3>
+                  <input
+                    type="checkbox"
+                    className="styled-checkbox"
+                    checked={isCheckedSession}
+                    onChange={handleSessionCheckboxChange}
+                  />
+                  <h3 onClick={() => console.log(session2024)}>2024-07-22_07-35-24</h3>
+                  <input
+                    type="checkbox"
+                    className="styled-checkbox"
+                    checked={isCheckedSession2024}
+                    onChange={handleSession2024CheckboxChange}
+                  />
+                  <div className="session-data">
+                    {sessionInputs.map((input, index) => (
+                      <div key={index} className="input-container">
+                      </div>
+                    ))}
+                    </div>
                   </div>
-                ))}
-              </div>
+                </div>
+              )}
             </div>
           </div>
-        )}
-      </div>
-    </div>
-
+          
       <img src={loggagreen} alt="logga" className="logga" />
       {/* <img src={loggaover} alt="logga" className="logo" /> */}
       {/* <img src={loggavit} alt="logga" className="logga" /> */}

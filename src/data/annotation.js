@@ -84,3 +84,123 @@ export const annotationApi = [
     }
 }
 ]
+// export const annotationApi = [
+// {
+//     "project_name": "user_enters | defaults to sessionName from session.json i.e. 2024-07-10_10-10-11",
+//     "vehicle": "Y1",
+//     "session_name": "2024-07-10_10-10-11",
+//     "path_nas": "//192.168.1.6/Mobile_mapping",
+//     "comment": "user enters some comment here | optional | dont develop this now",
+//     "template": "annotation",
+//     "params": {
+//         "ins_freq": 200,
+//         "epsg_process": 5845,
+//         "move_to_nas": true,
+//         "clip_input_data": null
+//     },
+//     "split_information": {
+//         "load_from_nas": false,
+//         "splits": {
+//             "220": {
+//                 "E": {
+//                     "place_from": "Place1",
+//                     "place_to": "Place2",
+//                     "time_ranges": [
+//                         [
+//                             150,
+//                             175
+//                         ]
+//                     ]
+//                 },
+//                 "N": {
+//                     "place_from": "Place2",
+//                     "place_to": "Place3",
+//                     "time_ranges": [
+//                         [
+//                             250,
+//                             275
+//                         ]
+//                     ]
+//                 }
+//             },
+//             "221": {
+//                 "E": {
+//                     "place_from": "Place3",
+//                     "place_to": "Place1",
+//                     "time_ranges": [
+//                         [
+//                             445,
+//                             465
+//                         ]
+//                     ]
+//                 }
+//             }
+//         }
+//     },
+//     "pointclouds": {
+//         "generate": {
+//             "colorize_scan": false,
+//             "export_fast_annotation": false
+//         },
+//         "basic": {
+//             "merge_scanners": true
+//         },
+//         "slow_speed_filter": {
+//             "slow_vsz": 0.01,
+//             "slow_thres_speed": 5,
+//             "slow_thres_time": 15
+//         },
+//         "delivery": {
+//             "grid_size": 1000,
+//             "op_time_format": "weeksecs",
+//             "epsg_output": 5845
+//         }
+//     },
+//     "images_360": {
+//         "basic": {
+//             "Trigger distance between images for output": 5,
+//         },
+//     }
+// }
+// ]
+
+
+//might work
+// export const annotationApi = [
+//     {
+//       "project_name": "user_enters | defaults to sessionName from session.json i.e. 2024-07-10_10-10-11",
+//       "vehicle": "Y1",
+//       "session_name": "2024-07-10_10-10-11",
+//       "path_nas": "//192.168.1.6/Mobile_mapping",
+//       "comment": "user enters some comment here | optional | dont develop this now",
+//       "template": "annotation",
+//       "params": {
+//         "ins_freq": 200,
+//         "epsg_process": 5845,
+//         "move_to_nas": true,
+//         "clip_input_data": []
+//       },
+//       "split_information": {
+//         "load_from_nas": false,
+//         "splits": {}
+//       },
+//       "pointclouds": {
+//         "generate": {
+//           "colorize_scan": false,
+//           "export_fast_annotation": false
+//         },
+//         "basic": {
+//           "merge_scanners": true
+//         },
+//         "slow_speed_filter": {
+//           "slow_vsz": 0.01,
+//           "slow_thres_speed": 5,
+//           "slow_thres_time": 15
+//         },
+//         "delivery": {
+//           "op_time_format": "weeksecs",
+//           "epsg_output": 5845
+//         }
+//       }
+//     }
+//   ];

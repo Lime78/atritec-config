@@ -1,6 +1,6 @@
 export const session = [
     {
-      "sessionName": "2024-07-22_07-35-24",
+      "sessionName": "2024-06-22_07-35-24",
       "session": {
         "operator": "Johnny",
         "session_version": 1,
