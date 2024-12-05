@@ -151,7 +151,7 @@ body {
 
   .box {
     width: 85rem;
-    height: 150em;
+    height: 215em;
     z-index: 1000;
     background-color: rgb(1, 23, 29);
     color: rgb(255, 255, 255);
@@ -248,7 +248,7 @@ body {
   }
 
   .save-button:hover {
-    transform: scale(1.1);
+    transform: scale(1.2);
   }
 
   .Advance-button {
