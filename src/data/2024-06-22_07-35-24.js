@@ -11,8 +11,7 @@ export const session = [
           "vehicle_type": "Rail",
           "date_str": "2024-04-23",
           "odometerPulsesPerMeter": 2643.9171832249967
-        },
+      },
     }
   }
-      
-    ]
+]

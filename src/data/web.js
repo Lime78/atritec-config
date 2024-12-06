@@ -1,93 +1,95 @@
 export const webApi = [
     {
-      "project_name": "user_enters | defaults to sessionName from session.json i.e. 2024-07-10_10-10-11",
-      "vehicle": "Y1",
-      "session_name": "2024-07-10_10-10-11",
-      "path_nas": "//192.168.1.6/Mobile_mapping",
-      "comment": "user enters some comment here | optional | dont develop this now",
-      "template": "web360",
+    "webInfo": {
+    "Project_name": "User_enters | defaults to sessionName from session.json i.e. 2024-07-10_10-10-11",
+    "Vehicle": "Y1",
+    "Session_name": "2024-07-10_10-10-11",
+    "Path_nas": "//192.168.1.6/Mobile_mapping",
+    "Comment": "User enters some comment here | optional | dont develop this now",
+    "Template": "Web360",
+  },
       "params": {
-        "ins_freq": 200,
-        "epsg_process": 5845,
-        "move_to_nas": {
+        "Ins_freq": 200,
+        "Epsg_process": 5845,
+        "Move_to_nas": {
             "type": "bool",
             "default": true,
           },
-        "clip_input_data": []
+        "Clip_input_data": []
       },
       "split_information": {
-        "load_from_nas": {
+        "Load_from_nas": {
             "type": "bool",
             "default": false,
           },
-        "splits": {}
+        "Splits": {}
       },
       "pointclouds": {
-        "generate": {
-          "colorize_scan": {
+        "Generate": {
+          "Colorize_scan": {
             "type": "bool",
             "default": false,
           },
-          "export_fast_annotation": {
+          "Export_fast_annotation": {
             "type": "bool",
             "default": false,
           },
         },
-        "basic": {
-          "merge_scanners": {
+        "Basic": {
+          "Merge_scanners": {
             "type": "bool",
             "default": true,
           },
         },
-        "slow_speed_filter": {
-          "slow_vsz": 0.01,
-          "slow_thres_speed": 5,
-          "slow_thres_time": 15
+        "Slow_speed_filter": {
+          "Slow_vsz": 0.01,
+          "Slow_thres_speed": 5,
+          "Slow_thres_time": 15
         },
-        "delivery": {
-          "op_time_format": "weeksecs",
-          "epsg_output": 5845
+        "Delivery": {
+          "Op_time_format": "weeksecs",
+          "Epsg_output": 5845
         }
       },
       "image_360": {
         "params": {
-          "trigger_distance": 5,
-          "image_resolution": "Width x Height",
-          "blurring_objects": false,
-          "objects_to_blur": ["Car", "People"],
-          "stitching_radius": 2,
-          "cameras_to_stitch": {
+          "Trigger_distance": 5,
+          "Image_resolution": "Width x Height",
+          "Blurring_objects": false,
+          "Objects_to_blur": ["Car", "People"],
+          "Stitching_radius": 2,
+          "Cameras_to_stitch": {
             "front": true,
             "back": true,
             "both": true
           },
-          "export_360_images": true,
-          "export_camera_level_images": false,
-          "camera_ids_for_export": [0, 1, 2, 3, 4, 5],
-          "rotation_for_image": "both",
-          "output_directory": "/project/output",
-          "move_to_nas": true,
-          "image_list_format": "json",
-          "export_forward_facing_camera": true,
-          "image_frequency": 1.0,
-          "image_dimensions": "1920x1080",
-          "rotation_for_images": "none"
+          "Export_360_images": true,
+          "Export_camera_level_images": false,
+          "Camera_ids_for_export": [0, 1, 2, 3, 4, 5],
+          "Rotation_for_image": "both",
+          "Output_directory": "/project/output",
+          "Move_to_nas": true,
+          "Image_list_format": "json",
+          "Export_forward_facing_camera": true,
+          "Image_frequency": 1.0,
+          "Image_dimensions": "1920x1080",
+          "Rotation_for_images": "none"
         },
         "packages": {
           "image_projection": {
             "desc": "Setup for image projections",
             "choices": {
-              "equirectangular": {
+              "Equirectangular": {
                 "type": "bool",
                 "default": false,
                 "desc": "Enable equirectangular projection (360 panorama / 3D camera)"
               },
-              "rectilinear": {
+              "Rectilinear": {
                 "type": "bool",
                 "default": false,
                 "desc": "Enable rectilinear (flat / 2D) projection"
               },
-              "cube_maps": {
+              "Cube_maps": {
                 "type": "bool",
                 "default": false,
                 "desc": "Enable cube maps projection (360 panorama / 3D camera)"

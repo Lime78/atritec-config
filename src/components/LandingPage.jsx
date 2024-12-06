@@ -6,8 +6,6 @@ import { webApi } from '../data/web.js';
 import { sessionInputs } from '../data/2024-05-22_07-35-24.js';
 import { session as sessionData } from '../data/2024-06-22_07-35-24.js';
 import { session2024 } from '../data/2024-07-22_07-35-24.js';
-import loggavit from '../assets/loggavit.png';
-import loggaover from '../assets/loggaover.png';
 import loggagreen from '../assets/loggagreen.png';
 import './Landing.css';
 import { saveAs } from 'file-saver';
@@ -31,6 +29,14 @@ const Landing = ({ trackData }) => {
 
   useEffect(() => {
     if (!trackData) {
+
+      const annotationInfo = Object.entries(annotationApi[0].annotationInfo).map(([key, value]) => ({
+        name: `annotationInfo.${key}`,
+        text: key,
+        type: typeof value,
+        value: value,
+      }));
+
       const annotationParamsData = Object.entries(annotationApi[0].params).map(([key, value]) => ({
         name: `params.${key}`,
         text: key,
@@ -68,13 +74,20 @@ const Landing = ({ trackData }) => {
         value: value.default,
       }));
   
-      const annotationData = [...annotationParamsData, ...splitInformationData,...image360ParamsData,...imageProjectionData, ...pointcloudsData  ];
+      const annotationData = [...annotationInfo, ...annotationParamsData, ...splitInformationData,...image360ParamsData,...imageProjectionData, ...pointcloudsData  ];
       setAnnotationInputs(annotationData);
     }
   }, [trackData]);
-  
+
   useEffect(() => {
   if (!trackData) {
+    const webInfo = Object.entries(webApi[0].webInfo).map(([key, value]) => ({
+      name: `webInfo.${key}`,
+      text: key,
+      type: typeof value,
+      value: value,
+    }));
+
     const webParamsData = Object.entries(webApi[0].params).map(([key, value]) => ({
       name: `params.${key}`,
       text: key,
@@ -112,13 +125,20 @@ const Landing = ({ trackData }) => {
       value: value.default,
     }));
 
-    const webData = [...webParamsData, ...pointcloudPackagesData, ...imageProjectionData, ...splitInformationData, ...image360ParamsData ];
+    const webData = [...webInfo, ...webParamsData, ...pointcloudPackagesData, ...imageProjectionData, ...splitInformationData, ...image360ParamsData ];
     setWebInputs(webData);
   }
-}, [trackData]);
+  }, [trackData]);
 
   useEffect(() => {
     if (!trackData) {
+      const cirrusInfo = Object.entries(cirrusApi[0].cirrusInfo).map(([key, value]) => ({
+        name: `webInfo.${key}`,
+        text: key,
+        type: typeof value,
+        value: value,
+      }));
+
       const paramsData = Object.entries(cirrusApi[0].params).map(([key, value]) => ({
         name: `params.${key}`,
         text: key,
@@ -155,7 +175,7 @@ const Landing = ({ trackData }) => {
         value: value,
       }));
 
-      const cirrusData = [ ...paramsData, ...splitInformationData, ...pointcloudsData, ...image360ParamsData, ...imageProjectionData ];
+      const cirrusData = [ ...cirrusInfo, ...paramsData, ...splitInformationData, ...pointcloudsData, ...image360ParamsData, ...imageProjectionData ];
         setCirrusInputs(cirrusData);
     }
   }, [trackData]);
@@ -222,7 +242,7 @@ const Landing = ({ trackData }) => {
           current = current[key];
         }
       });
-  
+
       return acc;
     }, {});
   
@@ -244,7 +264,7 @@ const Landing = ({ trackData }) => {
       comment: annotationApi[0].comment,
       template: annotationApi[0].template,
     };
-  
+
     const data = { annotation: { ...annotationInfo, ...annotationData } };
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     saveAs(blob, 'AnnotationForm.json');
@@ -279,7 +299,7 @@ const Landing = ({ trackData }) => {
       webData.session = session2024;
     }
   
-    const web360Info = {
+    const web360Info = {   
       project_name: webApi[0].project_name,
       vehicle: webApi[0].vehicle,
       session_name: webApi[0].session_name,
@@ -343,19 +363,31 @@ const Landing = ({ trackData }) => {
       console.log(sessionInfo);
     }
   };
-
+  
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
+    if (!isChecked) {
+      setIsCheckedSession(false);
+      setIsCheckedSession2024(false);
+    }
     console.log(sessionInputs);
   };
-
+  
   const handleSessionCheckboxChange = () => {
     setIsCheckedSession(!isCheckedSession);
+    if (!isCheckedSession) {
+      setIsChecked(false);
+      setIsCheckedSession2024(false);
+    }
     console.log(sessionData);
   };
-
+  
   const handleSession2024CheckboxChange = () => {
     setIsCheckedSession2024(!isCheckedSession2024);
+    if (!isCheckedSession2024) {
+      setIsChecked(false);
+      setIsCheckedSession(false);
+    }
     console.log(session2024);
   };
 
@@ -372,10 +404,10 @@ const Landing = ({ trackData }) => {
           <h2 onClick={toggleSectionsSynlig}>{isSynlig ? 'Cirrus' : 'Cirrus'}</h2>
         </div>
       </div>
-            
+      
       <div className="bottom-container">
       <div className="box">
-          <h2>Activity</h2>
+      <h2>Activity</h2>
         {annotationInfo && (
           <div className="annotation-info">
             <h2>{annotationInfo}</h2>
@@ -439,7 +471,7 @@ const Landing = ({ trackData }) => {
                 </div>
               </div>
             </div>
-              )}
+        )}
           
         {cirrusInfo && (
           <div className="cirrus-info">
@@ -475,52 +507,38 @@ const Landing = ({ trackData }) => {
         )}
         </div>
       </div>
-          <div className="sidebar-session">
-            <div className="session-class">
-              <h1 onClick={toggleSectionsSession}>
-                {showSessionDetails ? "Session" : "Session"}
+
+        <div className="sidebar-session">
+          <div className="session-class">
+            <h1 onClick={toggleSectionsSession}>
+              {showSessionDetails ? "Session" : "Session"}
             </h1>
             {showSessionDetails && (
               <div className="session-details">
                 <div className="session-info">
                   <h3 onClick={() => console.log(sessionInputs)}>2024-05-22_07-35-24</h3>
-                  <input
-                    type="checkbox"
-                    className="styled-checkbox"
-                    checked={isChecked}
-                    onChange={handleCheckboxChange}
+                  <input type="checkbox" className="styled-checkbox" checked={isChecked} onChange={handleCheckboxChange}
                   />
                   <h3 onClick={() => console.log(sessionData)}>2024-06-22_07-35-24</h3>
-                  <input
-                    type="checkbox"
-                    className="styled-checkbox"
-                    checked={isCheckedSession}
-                    onChange={handleSessionCheckboxChange}
+                  <input type="checkbox" className="styled-checkbox" checked={isCheckedSession} onChange={handleSessionCheckboxChange}
                   />
                   <h3 onClick={() => console.log(session2024)}>2024-07-22_07-35-24</h3>
-                  <input
-                    type="checkbox"
-                    className="styled-checkbox"
-                    checked={isCheckedSession2024}
-                    onChange={handleSession2024CheckboxChange}
+                  <input type="checkbox" className="styled-checkbox" checked={isCheckedSession2024} onChange={handleSession2024CheckboxChange}
                   />
                   <div className="session-data">
                     {sessionInputs.map((input, index) => (
                       <div key={index} className="input-container">
-                      </div>
-                    ))}
+                       </div>
+                      ))}
                     </div>
                   </div>
                 </div>
-              )}
-            </div>
-          </div>
-          
-      <img src={loggagreen} alt="logga" className="logga" />
-      {/* <img src={loggaover} alt="logga" className="logo" /> */}
-      {/* <img src={loggavit} alt="logga" className="logga" /> */}
-  </>
-  );
-  };
+               )}
+             </div>
+           </div>   
+          <img src={loggagreen} alt="logga" className="logga" />
+        </>
+      );
+    };
 
 export default Landing;
