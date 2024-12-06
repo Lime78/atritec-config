@@ -33,67 +33,86 @@ const Landing = ({ trackData }) => {
     if (!trackData) {
       const annotationParamsData = Object.entries(annotationApi[0].params).map(([key, value]) => ({
         name: `params.${key}`,
-        text:  key,
+        text: key,
         type: typeof value === "object" && value.type ? value.type : typeof value,
-        value: typeof value === "object" && value.default ? value.default : value || "",
+        value: value,
       }));
   
-      const pointcloudsData = Object.entries(annotationApi[0].pointclouds).flatMap(([packageKey, packageValue]) => 
-        Object.entries(packageValue).map(([key, value]) => ({
-          name: `${packageKey}.${key}`,
-          text: value.desc || key,
-          type: typeof value === "object" && value.type ? value.type : typeof value,
-          value: typeof value === "object" && value.default ? value.default : value || "",
+      const splitInformationData = Object.entries(annotationApi[0].split_information).map(([key, value]) => ({
+        name: `split_information.${key}`,
+        text: key,
+        type: typeof value,
+        value: value,
+      }));
+
+      const pointcloudsData = Object.entries(annotationApi[0].pointclouds).flatMap(([category, values]) =>
+        Object.entries(values).map(([key, value]) => ({
+          name: `pointclouds.${category}.${key}`,
+          text: `${category} - ${key}`,
+          type: typeof value,
+          value: value,
         }))
       );
-        
-      const imageSettingsParamsData = Object.entries(annotationApi[0].image_360.params).map(([key, value]) => ({
-        name: key,
-        text: value.desc || key,
-        type: typeof value === "object" && value.type ? value.type : typeof value,
-        value: typeof value === "object" && value.default ? value.default : value || "",
+  
+      const image360ParamsData = Object.entries(annotationApi[0].image_360.params).map(([key, value]) => ({
+        name: `image_360.params.${key}`,
+        text: key,
+        type: typeof value,
+        value: value,
       }));
-      
+
       const imageProjectionData = Object.entries(annotationApi[0].image_360.packages.image_projection.choices).map(([key, value]) => ({
-        name: `image_params.${key}`,
-        text: value.desc,
+        name: `image_360.packages.image_projection.${key}`,
+        text: key,
         type: value.type,
-        value: value.default || "",
+        value: value.default,
       }));
   
-      const annotationData = [...annotationParamsData, ...pointcloudsData, ...imageSettingsParamsData, ...imageProjectionData];
+      const annotationData = [...annotationParamsData, ...splitInformationData,...image360ParamsData,...imageProjectionData, ...pointcloudsData  ];
       setAnnotationInputs(annotationData);
     }
   }, [trackData]);
   
-useEffect(() => {
+  useEffect(() => {
   if (!trackData) {
-    const webParamsData = Object.entries(webApi[0].params).map(([key, params]) => ({
-      name: key,
-      text: params.desc || key,
-      type: typeof params === "object" && params.type ? params.type : typeof params,
-      value: typeof params === "object" && params.default ? params.default : params || "",
+    const webParamsData = Object.entries(webApi[0].params).map(([key, value]) => ({
+      name: `params.${key}`,
+      text: key,
+      type: typeof value === "object" && value.type ? value.type : typeof value,
+      value: value,
     }));
 
-    const pointcloudPackagesData = Object.entries(webApi[0].pointclouds).flatMap(([packageKey, packageValue]) =>
-      Object.entries(packageValue).map(([key, params]) => ({
-        name: `${packageKey}.${key}`,
-        text: params.desc || key,
-        type: typeof params === "object" && params.type ? params.type : typeof params,
-        value: typeof params === "object" && params.default ? params.default : params || "",
+    const splitInformationData = Object.entries(webApi[0].split_information).map(([key, value]) => ({
+      name: `split_information.${key}`,
+      text: key,
+      type: typeof value,
+      value: value,
+    }));
+
+    const pointcloudPackagesData = Object.entries(webApi[0].pointclouds).flatMap(([category, value]) =>
+      Object.entries(value).map(([key, value]) => ({
+        name: `pointclouds.${category}.${key}`,
+        text: `${category} - ${key}`,
+        type: typeof value,
+        value: value,
       }))
     );
 
-    const imagePackagesData = Object.entries(webApi[0].image_360.packages).flatMap(([packageKey, packageValue]) =>
-      Object.entries(packageValue.choices || {}).map(([key, params]) => ({
-        name: `${packageKey}.${key}`,
-        text: params.desc || "",
-        type: typeof params === "object" && params.type ? params.type : typeof params,
-        value: typeof params === "object" && params.default ? params.default : params || "",
-      }))
-    );
+    const image360ParamsData = Object.entries(webApi[0].image_360.params).map(([key, value]) => ({
+      name: `image_360.params.${key}`,
+      text: key,
+      type: typeof value,
+      value: value,
+    }));
 
-    const webData = [...webParamsData, ...pointcloudPackagesData, ...imagePackagesData];
+    const imageProjectionData = Object.entries(webApi[0].image_360.packages.image_projection.choices).map(([key, value]) => ({
+      name: `image_360.packages.image_projection.${key}`,
+      text: key,
+      type: value.type,
+      value: value.default,
+    }));
+
+    const webData = [...webParamsData, ...pointcloudPackagesData, ...imageProjectionData, ...splitInformationData, ...image360ParamsData ];
     setWebInputs(webData);
   }
 }, [trackData]);
@@ -122,7 +141,13 @@ useEffect(() => {
           value: value,
         }))
       );
-  
+        const imageProjectionData = Object.entries(cirrusApi[0].image_360.packages.image_projection.choices).map(([key, value]) => ({
+        name: `image_360.packages.image_projection.${key}`,
+        text: key,
+        type: value.type,
+        value: value.default,
+      }));
+
       const image360ParamsData = Object.entries(cirrusApi[0].image_360.params).map(([key, value]) => ({
         name: `image_360.params.${key}`,
         text: key,
@@ -130,20 +155,7 @@ useEffect(() => {
         value: value,
       }));
 
-      const imageProjectionData = Object.entries(cirrusApi[0].image_360.packages.image_projection.choices).map(([key, value]) => ({
-        name: `image_360.packages.image_projection.${key}`,
-        text: key,
-        type: value.type,
-        value: value.default,
-      }));
-  
-      const cirrusData = [
-        ...paramsData,
-        ...splitInformationData,
-        ...pointcloudsData,
-        ...image360ParamsData,
-        ...imageProjectionData,
-      ];
+      const cirrusData = [ ...paramsData, ...splitInformationData, ...pointcloudsData, ...image360ParamsData, ...imageProjectionData ];
         setCirrusInputs(cirrusData);
     }
   }, [trackData]);
@@ -197,94 +209,6 @@ useEffect(() => {
 
   const saveToAnnotation = () => {
     const annotationData = annotationInputs.reduce((acc, input) => {
-      const [category, key] = input.name.split('.');
-      if (key) {
-        if (!acc.packages[category]) {
-          acc.packages[category] = {};
-        }
-        acc.packages[category][key] = input.value;
-      } else {
-        acc.params[input.name] = input.value;
-      }
-      return acc;
-    }, { params: {}, packages: {} });
-  
-    const imageSettingsData = annotationInputs.reduce((acc, input) => {
-      const [category, key] = input.name.split('.');
-      if (category === 'image_projection') {
-        if (!acc.packages.image_projection) {
-          acc.packages.image_projection = {};
-        }
-        acc.packages.image_projection[key] = input.value;
-      } else if (annotationApi[0].image_360.params[input.name]) {
-        acc.params[input.name] = input.value;
-      }
-      return acc;
-    }, { params: {}, packages: {} });
-  
-    annotationData.image_360 = imageSettingsData;
-  
-    if (isChecked) {
-      annotationData.session = sessionInputs;
-    }
-    if (isCheckedSession) {
-      annotationData.session = sessionData;
-    }
-    if (isCheckedSession2024) {
-      annotationData.session = session2024;
-    }
-  
-    const data = { annotation: annotationData };
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-    saveAs(blob, 'AnnotationForm.json');
-  };
-
-  const saveToWeb = () => {
-    const webData = webInputs.reduce(
-      (acc, input) => {
-        const [category, key] = input.name.split('.');
-  
-        if (key) {
-          // Assign to appropriate category
-          if (acc.pointclouds[category]) {
-            if (!acc.pointclouds[category]) {
-              acc.pointclouds[category] = {};
-            }
-            acc.pointclouds[category][key] = input.value;
-          } else if (acc.image_360[category]) {
-            if (!acc.image_360[category]) {
-              acc.image_360[category] = {};
-            }
-            acc.image_360[category][key] = input.value;
-          }
-        } else {
-          acc.params[input.name] = input.value;
-        }
-  
-        return acc;
-      },
-      { params: {}, pointclouds: {}, image_360: {} } // Initialize with categories
-    );
-  
-    // Handle session data based on isChecked flags
-    if (isChecked) {
-      webData.session = sessionInputs;
-    }
-    if (isCheckedSession) {
-      webData.session = sessionData;
-    }
-    if (isCheckedSession2024) {
-      webData.session = session2024;
-    }
-  
-    // Save as JSON file
-    const blob = new Blob([JSON.stringify(webData, null, 2)], { type: 'application/json' });
-    saveAs(blob, 'WebForm.json');
-  };
-  
-
-  const saveToCirrus = () => {
-    const cirrusData = cirrusInputs.reduce((acc, input) => {
       const path = input.name.split('.');
       let current = acc;
   
@@ -301,7 +225,93 @@ useEffect(() => {
   
       return acc;
     }, {});
+  
+    if (isChecked) {
+      annotationData.session = sessionInputs;
+    }
+    if (isCheckedSession) {
+      annotationData.session = sessionData;
+    }
+    if (isCheckedSession2024) {
+      annotationData.session = session2024;
+    }
 
+      const annotationInfo = {
+      project_name: annotationApi[0].project_name,
+      vehicle: annotationApi[0].vehicle,
+      session_name: annotationApi[0].session_name,
+      path_nas: annotationApi[0].path_nas,
+      comment: annotationApi[0].comment,
+      template: annotationApi[0].template,
+    };
+  
+    const data = { annotation: { ...annotationInfo, ...annotationData } };
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    saveAs(blob, 'AnnotationForm.json');
+  };
+
+  const saveToWeb = () => {
+    const webData = webInputs.reduce((acc, input) => {
+      const path = input.name.split('.');
+      let current = acc;
+  
+      path.forEach((key, index) => {
+        if (index === path.length - 1) {
+          current[key] = input.value;
+        } else {
+          if (!current[key]) {
+            current[key] = {};
+          }
+          current = current[key];
+        }
+      });
+  
+      return acc;
+    }, {});
+  
+    if (isChecked) {
+      webData.session = sessionInputs;
+    }
+    if (isCheckedSession) {
+      webData.session = sessionData;
+    }
+    if (isCheckedSession2024) {
+      webData.session = session2024;
+    }
+  
+    const web360Info = {
+      project_name: webApi[0].project_name,
+      vehicle: webApi[0].vehicle,
+      session_name: webApi[0].session_name,
+      path_nas: webApi[0].path_nas,
+      comment: webApi[0].comment,
+      template: webApi[0].template,
+    };
+    
+    const data = { web: { ...web360Info, ...webData } };
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    saveAs(blob, 'WebForm.json');
+  };
+
+  const saveToCirrus = () => {
+    const cirrusData = cirrusInputs.reduce((acc, input) => {
+      const path = input.name.split('.');
+      let current = acc;
+    
+      path.forEach((key, index) => {
+        if (index === path.length - 1) {
+          current[key] = input.value;
+        } else {
+          if (!current[key]) {
+            current[key] = {};
+          }
+          current = current[key];
+        }
+      });
+    
+      return acc;
+    }, {});
+  
     if (isChecked) {
       cirrusData.session = sessionInputs;
     }
@@ -312,12 +322,20 @@ useEffect(() => {
       cirrusData.session = session2024;
     }
   
-    const data = { cirrus: cirrusData };
+    const cirrusInfo = {
+      project_name: cirrusApi[0].project_name,
+      vehicle: cirrusApi[0].vehicle,
+      session_name: cirrusApi[0].session_name,
+      path_nas: cirrusApi[0].path_nas,
+      comment: cirrusApi[0].comment,
+      template: cirrusApi[0].template,
+    };
+  
+    const data = { cirrus: { ...cirrusInfo, ...cirrusData } };
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     saveAs(blob, 'CirrusForm.json');
   };
   
-
   const toggleSectionsSession = () => {
     setShowSessionDetails(!showSessionDetails);
     if (!showSessionDetails) {
