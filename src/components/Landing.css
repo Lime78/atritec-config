@@ -149,8 +149,16 @@
     z-index: 1000; 
   }
 
+  .folder {
+    width: 5em;
+    height: auto;
+    position: absolute;
+    left: 25.5em;
+    top: 15em;
+  }
+
   .box {
-    width: 85rem;
+    width: 55em;
     height: 240em;
     z-index: 1000;
     background-color: rgb(1, 23, 29);
@@ -164,6 +172,15 @@
   }
 
   .box h2 {
+    margin-left: 20px;
+    margin-top: 20px;
+    font-size: 34px;
+  }
+
+  .box h3 {
+    font-size: 34px;
+    height: 50px;
+    width: 130px;
     margin-left: 20px;
     margin-top: 20px;
   }

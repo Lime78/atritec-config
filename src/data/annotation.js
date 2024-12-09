@@ -22,7 +22,7 @@ export const annotationApi = [
           "type": "bool",
           "default": false,
         },
-        "Splits": {}
+        "Splits": []
       },
       "pointclouds": {
         "generate": {
@@ -54,11 +54,11 @@ export const annotationApi = [
       "image_360": {
         "params": {
           "Trigger_distance": 5,
-          "Image_resolution": "Width x Height",
-          "Blurring_objects": false,
-          "Objects_to_blur": ["Car", "People"],
-          "Stitching_radius": 2,
-          "Cameras_to_stitch (front back both):": {
+          "Image_resolution": "Width x Height", 
+          "Blurring_objects": false, 
+          "Objects_to_blur": ["Car", "People"], 
+          "Stitching_radius": 2, 
+          "Cameras_to_stitch (front back both):": { 
             "type": "bool",
             "front": true,
             "back": true,
@@ -69,12 +69,15 @@ export const annotationApi = [
             "default": true,
           },
           "Export_camera_level_images": {
-            "type": "bool",
-            "default": false,
+           "type": "bool",
+            "default": {
+              "type": "bool",
+              "default": false,
+            }
           },
           "Camera_ids_for_export": [0, 1, 2, 3, 4, 5],
           "Rotation_for_image": "both",
-          "Output_directory": "/project/output",
+          "Output_directory": "/Project/Output",
           "Move_to_nas": {
             "type": "bool",
             "default": true,

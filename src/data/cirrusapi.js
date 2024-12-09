@@ -11,11 +11,17 @@ export const cirrusApi = [
       "params": {
         "Ins_freq": 200,
         "Epsg_process": 5845,
-        "Move_to_nas": true,
+        "Move_to_nas":{
+          "type": "bool",
+          "default": true,
+        },
         "Clip_input_data": []
       },
       "split_information": {
-        "Load_from_nas": false,
+        "Load_from_nas": {
+          "type": "bool",
+          "default": false,
+        },
         "Splits": []
       },
       "pointclouds": {

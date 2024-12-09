@@ -22,7 +22,7 @@ export const webApi = [
             "type": "bool",
             "default": false,
           },
-        "Splits": {}
+        "Splits": []
       },
       "pointclouds": {
         "Generate": {
