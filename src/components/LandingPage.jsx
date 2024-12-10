@@ -7,9 +7,14 @@ import { sessionInputs } from '../data/2024-05-22_07-35-24.js';
 import { session as sessionData } from '../data/2024-06-22_07-35-24.js';
 import { session2024 } from '../data/2024-07-22_07-35-24.js';
 import loggagreen from '../assets/loggagreen.png';
+import logga3 from '../assets/logga3.png';
+import mini from '../assets/mini.png';
+import logga15 from '../assets/logga15.png';
 import folder from '../assets/folder.svg';
 import deployed from '../assets/deployed.svg';
 import train from '../assets/train.svg';
+import pattern from '../assets/pattern.png';
+import calendar from '../assets/calendar.svg';
 import './Landing.css';
 import { saveAs } from 'file-saver';
 
@@ -531,13 +536,13 @@ const Landing = ({ trackData }) => {
 
   return (
     <> 
-        <div className="template-container">
+       <div className="template-container">
       <div className="Annotation">
         <h2 onClick={toggleSectionsVisibility}>{isVisible ? 'Annotation' : 'Annotation'}</h2>
       </div>
       <div className="Web360">
         <h2 onClick={toggleSectionsVissa}>{isVissa ? 'Web360' : 'Web360'}</h2>
-      </div>
+       </div>
       <div className="Cirrus">
         <h2 onClick={toggleSectionsSynlig}>{isSynlig ? 'Cirrus' : 'Cirrus'}</h2>
       </div>
@@ -546,8 +551,8 @@ const Landing = ({ trackData }) => {
     <div className="bottom-container">
     <div className="box">
       <h3>Activity</h3>
-      {showFolder && (
-        <img src={train} alt="folder" className="folder" />
+      {!(isVisible || isVissa || isSynlig) && (
+        <img src={folder} alt="folder" className="folder" />
       )}
 
     {annotationInfo && (
@@ -577,7 +582,7 @@ const Landing = ({ trackData }) => {
             <button className="button-add" onClick={() => addInput('annotation')}> + </button>
             <button className="button-remove" onClick={() => removeInput('annotation')}> - </button>
             <button className="save-button" onClick={saveToAnnotation}> Save </button>
-            <NavLink to="/advance" className="Advance-button"> Advance </NavLink>
+            {/* <NavLink to="/advance" className="Advance-button"> Advance </NavLink> */}
           </div>
         </div>
       </div>
@@ -610,7 +615,7 @@ const Landing = ({ trackData }) => {
             <button className="button-add" onClick={() => addInput('web')}>+</button>
             <button className="button-remove" onClick={() => removeInput('web')}>-</button>
             <button className="save-button" onClick={saveToWeb}>Save</button>
-            <NavLink to="advanceWeb" className="AdvanceWeb-button">Advance</NavLink>
+            {/* <NavLink to="advanceWeb" className="AdvanceWeb-button">Advance</NavLink> */}
           </div>
         </div>
       </div>
@@ -643,7 +648,7 @@ const Landing = ({ trackData }) => {
               <button className="button-add" onClick={() => addInput('cirrus')}>+</button>
               <button className="button-remove" onClick={() => removeInput('cirrus')}>-</button>
               <button className="save-button" onClick={saveToCirrus}>Save</button>
-              <NavLink to="/advanceCirrus" className="AdvanceCirrus-button">Advance</NavLink>
+              {/* <NavLink to="/advanceCirrus" className="AdvanceCirrus-button">Advance</NavLink> */}
             </div>
           </div>
         </div>
@@ -651,10 +656,11 @@ const Landing = ({ trackData }) => {
       </div>
     </div>
         <div className="sidebar-session">
-          <div className="session-class">
-            <h1 onClick={toggleSectionsSession}>
-              {showSessionDetails ? "Session" : "Session"}
-            </h1>
+        <div className="session-class">
+        <img src={calendar} alt="calendar" className="calendar" />
+        <h1 onClick={toggleSectionsSession}>
+          {showSessionDetails ? "Session" : "Session"}
+        </h1>
             {showSessionDetails && (
               <div className="session-details">
                 <div className="session-info">
@@ -680,6 +686,10 @@ const Landing = ({ trackData }) => {
            </div>  
          
           <img src={loggagreen} alt="logga" className="logga" />
+          {/* <img src={logga3} alt="logga" className="logga3" /> */}
+          {/* <img src={mini} alt="logga" className="mini" /> */}
+          {/* <img src={logga15} alt="logga" className="logga15" /> */}
+
         </>
       );
     };
