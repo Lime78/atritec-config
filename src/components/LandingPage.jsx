@@ -7,9 +7,7 @@ import { sessionInputs } from '../data/2024-05-22_07-35-24.js';
 import { session as sessionData } from '../data/2024-06-22_07-35-24.js';
 import { session2024 } from '../data/2024-07-22_07-35-24.js';
 import loggagreen from '../assets/loggagreen.png';
-import logga3 from '../assets/logga3.png';
-import mini from '../assets/mini.png';
-import logga15 from '../assets/logga15.png';
+import loggavit from '../assets/loggavit.png';
 import folder from '../assets/folder.svg';
 import deployed from '../assets/deployed.svg';
 import train from '../assets/train.svg';
@@ -554,7 +552,6 @@ const Landing = ({ trackData }) => {
       {!(isVisible || isVissa || isSynlig) && (
         <img src={folder} alt="folder" className="folder" />
       )}
-
     {annotationInfo && (
       <div className="annotation-info">
         <h2>{annotationInfo}</h2>
@@ -657,22 +654,19 @@ const Landing = ({ trackData }) => {
     </div>
         <div className="sidebar-session">
         <div className="session-class">
-        <img src={calendar} alt="calendar" className="calendar" />
+        <img onClick={toggleSectionsSession} src={calendar} alt="calendar" className="calendar" />
         <h1 onClick={toggleSectionsSession}>
           {showSessionDetails ? "Session" : "Session"}
         </h1>
             {showSessionDetails && (
               <div className="session-details">
                 <div className="session-info">
-                  <h3 onClick={() => console.log(sessionInputs)}>2024-05-22_07-35-24</h3>
-                  <input type="checkbox" className="styled-checkbox" checked={isChecked} onChange={handleCheckboxChange}
-                  />
-                  <h3 onClick={() => console.log(sessionData)}>2024-06-22_07-35-25</h3>
-                  <input type="checkbox" className="styled-checkbox" checked={isCheckedSession} onChange={handleSessionCheckboxChange}
-                  />
-                  <h3 onClick={() => console.log(session2024)}>2024-07-22_07-35-26</h3>
-                  <input type="checkbox" className="styled-checkbox" checked={isCheckedSession2024} onChange={handleSession2024CheckboxChange}
-                  />
+                  <h3>2024-05-22_07-35-24</h3>
+                  <input type="checkbox" className="styled-checkbox" checked={isChecked} onChange={handleCheckboxChange} />
+                  <h3>2024-06-22_07-35-25</h3>
+                  <input type="checkbox" className="styled-checkbox" checked={isCheckedSession} onChange={handleSessionCheckboxChange} />
+                  <h3>2024-07-22_07-35-26</h3>
+                  <input type="checkbox" className="styled-checkbox" checked={isCheckedSession2024} onChange={handleSession2024CheckboxChange} />
                   <div className="session-data">
                     {sessionInputs.map((input, index) => (
                       <div key={index} className="input-container">
@@ -683,13 +677,10 @@ const Landing = ({ trackData }) => {
                 </div>
                )}
              </div>
-           </div>  
+           </div>
          
-          <img src={loggagreen} alt="logga" className="logga" />
-          {/* <img src={logga3} alt="logga" className="logga3" /> */}
-          {/* <img src={mini} alt="logga" className="mini" /> */}
-          {/* <img src={logga15} alt="logga" className="logga15" /> */}
-
+          {/* <img src={loggavit} alt="logga" className="vitlogga" /> */}
+          <img src={loggagreen} alt="logga" className="logga"/>
         </>
       );
     };
