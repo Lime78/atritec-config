@@ -7,11 +7,9 @@ import { sessionInputs } from '../data/2024-05-22_07-35-24.js';
 import { session as sessionData } from '../data/2024-06-22_07-35-24.js';
 import { session2024 } from '../data/2024-07-22_07-35-24.js';
 import loggagreen from '../assets/loggagreen.png';
-import loggavit from '../assets/loggavit.png';
+import atriteclogo from '../assets/atriteclogo.png';
 import folder from '../assets/folder.svg';
 import deployed from '../assets/deployed.svg';
-import train from '../assets/train.svg';
-import pattern from '../assets/pattern.png';
 import calendar from '../assets/calendar.svg';
 import './Landing.css';
 import { saveAs } from 'file-saver';
@@ -513,7 +511,7 @@ const Landing = ({ trackData }) => {
     }
     console.log(sessionInputs);
   };
-  
+
   const handleSessionCheckboxChange = () => {
     setIsCheckedSession(!isCheckedSession);
     if (!isCheckedSession) {
@@ -678,9 +676,9 @@ const Landing = ({ trackData }) => {
                )}
              </div>
            </div>
-         
-          {/* <img src={loggavit} alt="logga" className="vitlogga" /> */}
-          <img src={loggagreen} alt="logga" className="logga"/>
+           
+          <img src={atriteclogo} alt="logga" className="vitlogga" />
+          {/* <img src={loggagreen} alt="logga" className="logga"/> */}
         </>
       );
     };

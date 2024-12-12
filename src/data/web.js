@@ -55,7 +55,10 @@ export const webApi = [
         "params": {
           "Trigger_distance": 5,
           "Image_resolution": "Width x Height",
-          "Blurring_objects": false,
+          "Blurring_objects":{
+            "type": "bool",
+            "default": false,
+          }, 
           "Objects_to_blur": ["Car", "People"],
           "Stitching_radius": 2,
           "Cameras_to_stitch": {
@@ -63,14 +66,29 @@ export const webApi = [
             "back": true,
             "both": true
           },
-          "Export_360_images": true,
-          "Export_camera_level_images": false,
+          "Export_360_images":{
+            "type": "bool",
+            "default": true,
+          },
+          "Export_camera_level_images": {
+           "type": "bool",
+            "default": {
+              "type": "bool",
+              "default": false,
+            }
+          },
           "Camera_ids_for_export": [0, 1, 2, 3, 4, 5],
           "Rotation_for_image": "both",
           "Output_directory": "/project/output",
-          "Move_to_nas": true,
+          "Move_to_nas": {
+            "type": "bool",
+            "default": true,
+          },
           "Image_list_format": "json",
-          "Export_forward_facing_camera": true,
+          "Export_forward_facing_camera": {
+            "type": "bool",
+            "default": true,
+          },
           "Image_frequency": 1.0,
           "Image_dimensions": "1920x1080",
           "Rotation_for_images": "none"

@@ -25,7 +25,7 @@ export const annotationApi = [
         "Splits": []
       },
       "pointclouds": {
-        "generate": {
+        "Generate": {
           "Colorize_scan":{
             "type": "bool",
             "default": false,
@@ -35,7 +35,7 @@ export const annotationApi = [
             "default": false,
           }, 
         },
-        "basic": {
+        "Basic": {
           "Merge_scanners": {
             "type": "bool",
             "default": true,
@@ -55,7 +55,10 @@ export const annotationApi = [
         "params": {
           "Trigger_distance": 5,
           "Image_resolution": "Width x Height", 
-          "Blurring_objects": false, 
+          "Blurring_objects":{
+            "type": "bool",
+            "default": false,
+          }, 
           "Objects_to_blur": ["Car", "People"], 
           "Stitching_radius": 2, 
           "Cameras_to_stitch (front back both):": { 
