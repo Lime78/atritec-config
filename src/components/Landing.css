@@ -231,10 +231,10 @@
     border-radius: 10px;
   }
   
-  .button-group{
-    display: flex;
-    gap: 20px;
-  }
+  .button-group{ 
+    display: flex; 
+    gap: 20px; 
+  } 
   
   .button-add, .button-remove {
     width: 26px;
@@ -277,7 +277,8 @@
   }
 
   .save-button:hover {
-    transform: scale(1.2);
+    transform: scale(1.4);
+    color: #198B74;
   }
 
   /* .Advance-button {
@@ -357,6 +358,60 @@
     cursor: pointer;
     accent-color: #2cbe31;
   }
+
+  @media (max-width: 1600px) {
+    .box {
+      width: 54em;
+      height: 270em;
+      font-size: 22px;
+      position: absolute;
+      left: 320px;
+    }
+    .box h3{
+      display: none;
+    }
+    .template-container {
+      display: flex;
+      position: relative;
+      left: 24em;
+      margin-bottom: 83vh;
+      gap: 4em;
+    }
+  
+    .template-container .Annotation,
+    .template-container .Cirrus,
+    .template-container .Web360 {
+      display: flex;
+      justify-content: center;
+      width: 300px;
+      height: 100px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      background-color: #050C2B;
+      color: white;
+      transition: transform 0.5s ease;
+    }
+
+    .template-container h2 {
+      font-size: 35px;
+      margin: 25px;
+    }
+
+    .Bdl-split {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 15px 0;
+    }
+ 
+    .folder {
+      width: 5em;
+      height: auto;
+      position: absolute;
+      left: 24em;
+      top: 15em;
+    }
+  }
   
   @media (max-width: 1380px) {
     .box {
@@ -392,8 +447,8 @@
       font-size: 15px;
     }
     .Bdl-split input[type="text"],
-    .Bdl-split input[type="checkbox"],
-    input[type="text"] {
+    .Bdl-split input[type="checkbox"]
+    {
       width: 10em;
     }
     .input-container {
@@ -441,11 +496,11 @@
 
   @media (max-width: 1180px) {
     .box {
-      width: 30em;
+      width: 36em;
       height: 270em;
       font-size: 22px;
       position: absolute;
-      left: 270px;
+      left: 290px;
     }
     .box h3{
       display: none;
