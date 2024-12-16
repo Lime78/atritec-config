@@ -8,9 +8,9 @@ import { session as sessionData } from '../data/2024-06-22_07-35-24.js';
 import { session2024 } from '../data/2024-07-22_07-35-24.js';
 import loggagreen from '../assets/loggagreen.png';
 import atriteclogo from '../assets/atriteclogo.png';
+import Atritec_logga from '../assets/Atritec_logga.png';
 import folder from '../assets/folder.svg';
 import deployed from '../assets/deployed.svg';
-import calendar from '../assets/calendar.svg';
 import './Landing.css';
 import { saveAs } from 'file-saver';
 
@@ -400,7 +400,6 @@ const Landing = ({ trackData }) => {
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     saveAs(blob, 'AnnotationForm.json');
   
-    // Reinitialize the annotation inputs
     initializeAnnotationInputs();
   };
 
@@ -491,7 +490,6 @@ const Landing = ({ trackData }) => {
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     saveAs(blob, 'CirrusForm.json');
   
-    // Reinitialize the cirrus inputs
     initializeCirrusInputs();
   };
   
@@ -499,7 +497,6 @@ const Landing = ({ trackData }) => {
     setShowSessionDetails(!showSessionDetails);
     if (!showSessionDetails) {
       const sessionInfo = sessionInputs[0].session;
-      console.log(sessionInfo);
     }
   };
   
@@ -509,7 +506,6 @@ const Landing = ({ trackData }) => {
       setIsCheckedSession(false);
       setIsCheckedSession2024(false);
     }
-    console.log(sessionInputs);
   };
 
   const handleSessionCheckboxChange = () => {
@@ -518,7 +514,6 @@ const Landing = ({ trackData }) => {
       setIsChecked(false);
       setIsCheckedSession2024(false);
     }
-    console.log(sessionData);
   };
   
   const handleSession2024CheckboxChange = () => {
@@ -527,7 +522,6 @@ const Landing = ({ trackData }) => {
       setIsChecked(false);
       setIsCheckedSession(false);
     }
-    console.log(session2024);
   };
 
   return (
@@ -549,6 +543,7 @@ const Landing = ({ trackData }) => {
       <h3>Activity</h3>
       {!(isVisible || isVissa || isSynlig) && (
         <img src={folder} alt="folder" className="folder" />
+        // <img src={Atritec_logga} alt="folder" className="folder" />
       )}
     {annotationInfo && (
       <div className="annotation-info">
@@ -562,7 +557,7 @@ const Landing = ({ trackData }) => {
                 value={input.type === 'bool' ? undefined : input.value || ""}
                 checked={input.type === 'bool' ? Boolean(input.value) : undefined}
                 onChange={(e) => {
-                  const newInputs = [...annotationInputs];
+                 const newInputs = [...annotationInputs];
                   if (input.type === 'bool') {
                     newInputs[index].value = e.target.checked;
                   } else {
@@ -577,7 +572,6 @@ const Landing = ({ trackData }) => {
             <button className="button-add" onClick={() => addInput('annotation')}> + </button>
             <button className="button-remove" onClick={() => removeInput('annotation')}> - </button>
             <button className="save-button" onClick={saveToAnnotation}> Save </button>
-            {/* <NavLink to="/advance" className="Advance-button"> Advance </NavLink> */}
           </div>
         </div>
       </div>
@@ -651,30 +645,26 @@ const Landing = ({ trackData }) => {
       </div>
     </div>
         <div className="sidebar-session">
-        <div className="session-class">
-        <img onClick={toggleSectionsSession} src={calendar} alt="calendar" className="calendar" />
-        <h1 onClick={toggleSectionsSession}>
-          {showSessionDetails ? "Session" : "Session"}
-        </h1>
+          <div className="session-class">
+            <h1 onClick={toggleSectionsSession}>
+              {showSessionDetails ? "Session" : "Session"}
+                </h1>
             {showSessionDetails && (
               <div className="session-details">
                 <div className="session-info">
-                  <h3>2024-05-22_07-35-24</h3>
-                  <input type="checkbox" className="styled-checkbox" checked={isChecked} onChange={handleCheckboxChange} />
-                  <h3>2024-06-22_07-35-25</h3>
-                  <input type="checkbox" className="styled-checkbox" checked={isCheckedSession} onChange={handleSessionCheckboxChange} />
-                  <h3>2024-07-22_07-35-26</h3>
-                  <input type="checkbox" className="styled-checkbox" checked={isCheckedSession2024} onChange={handleSession2024CheckboxChange} />
+                  <h3 onClick={handleCheckboxChange}>2024-05-22_07-35-24</h3>
+                  <h3 onClick={handleSessionCheckboxChange}>2024-06-22_07-35-25</h3>
+                  <h3 onClick={handleSession2024CheckboxChange}>2024-07-22_07-35-26</h3>
                   <div className="session-data">
                     {sessionInputs.map((input, index) => (
                       <div key={index} className="input-container">
-                       </div>
-                      ))}
-                    </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
-               )}
-             </div>
+              </div>
+              )}
+            </div>
            </div>
            
           <img src={atriteclogo} alt="logga" className="vitlogga" />
