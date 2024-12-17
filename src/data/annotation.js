@@ -61,12 +61,7 @@ export const annotationApi = [
           }, 
           "Objects_to_blur": ["Car", "People"], 
           "Stitching_radius": 2, 
-          "Cameras_to_stitch (front back both):": { 
-            "type": "bool",
-            "front": true,
-            "back": true,
-            "both": true
-          },
+          "Cameras_to_stitch (front back both)":["Front", " Back", " Both"],
           "Export_360_images":{
             "type": "bool",
             "default": true,

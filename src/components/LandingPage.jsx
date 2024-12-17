@@ -27,11 +27,30 @@ const Landing = ({ trackData }) => {
   const [isChecked, setIsChecked] = useState(false);
   const [isCheckedSession, setIsCheckedSession] = useState(false);
   const [isCheckedSession2024, setIsCheckedSession2024] = useState(false);
+  const [activeSession, setActiveSession] = useState(null);
 
-  const [annotationInfo, setAnnotationInfo] = useState('');
+  const [annotationInfo, setAnnotationInfo] = useState('')
   const [webInfo, setWebInfo] = useState('');
   const [cirrusInfo, setCirrusInfo] = useState('');
 
+  const [showAnnotationInfo, setShowAnnotationInfo] = useState(false);
+  const [showParams, setShowParams] = useState(false);
+  const [showSplitInformation, setShowSplitInformation] = useState(false);
+  const [showPointclouds, setShowPointclouds] = useState(false);
+  const [showImage360, setShowImage360] = useState(false);
+
+  const [showWebInfo, setShowWebInfo] = useState(false);
+  const [showWebParams, setShowWebParams] = useState(false);
+  const [showWebSplitInformation, setShowWebSplitInformation] = useState(false);
+  const [showWebPointclouds, setShowWebPointclouds] = useState(false);
+  const [showWebImage360, setShowWebImage360] = useState(false);
+
+  const [showCirrusInfo, setShowCirrusInfo] = useState(false);
+  const [showCirrusParams, setShowCirrusParams] = useState(false);
+  const [showCirrusSplitInformation, setShowCirrusSplitInformation] = useState(false);
+  const [showCirrusPointclouds, setShowCirrusPointclouds] = useState(false);
+  const [showCirrusImage360, setShowCirrusImage360] = useState(false);
+  
   const initializeAnnotationInputs = () => {
     const annotationInfo = Object.entries(annotationApi[0].annotationInfo).map(([key, value]) => ({
       name: `annotationInfo.${key}`,
@@ -502,14 +521,16 @@ const Landing = ({ trackData }) => {
   
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
+    setActiveSession('session1');
     if (!isChecked) {
       setIsCheckedSession(false);
       setIsCheckedSession2024(false);
     }
   };
-
+  
   const handleSessionCheckboxChange = () => {
     setIsCheckedSession(!isCheckedSession);
+    setActiveSession('session2');
     if (!isCheckedSession) {
       setIsChecked(false);
       setIsCheckedSession2024(false);
@@ -518,6 +539,7 @@ const Landing = ({ trackData }) => {
   
   const handleSession2024CheckboxChange = () => {
     setIsCheckedSession2024(!isCheckedSession2024);
+    setActiveSession('session3');
     if (!isCheckedSession2024) {
       setIsChecked(false);
       setIsCheckedSession(false);
@@ -537,135 +559,489 @@ const Landing = ({ trackData }) => {
         <h2 onClick={toggleSectionsSynlig}>{isSynlig ? 'Cirrus' : 'Cirrus'}</h2>
       </div>
     </div>
-
-    <div className="bottom-container">
+    
     <div className="box">
-      <h3>Activity</h3>
       {!(isVisible || isVissa || isSynlig) && (
         <img src={folder} alt="folder" className="folder" />
         // <img src={Atritec_logga} alt="folder" className="folder" />
       )}
-    {annotationInfo && (
-      <div className="annotation-info">
-        <h2>{annotationInfo}</h2>
-        <div className="Bdl-split">
-          {annotationInputs.map((input, index) => (
-            <div key={index} className="input-container">
-              {input.text && <div className="input-description">{input.text}</div>}
-              <input
-                type={input.type === 'bool' ? 'checkbox' : 'text'}
-                value={input.type === 'bool' ? undefined : input.value || ""}
-                checked={input.type === 'bool' ? Boolean(input.value) : undefined}
-                onChange={(e) => {
-                 const newInputs = [...annotationInputs];
-                  if (input.type === 'bool') {
-                    newInputs[index].value = e.target.checked;
-                  } else {
-                    newInputs[index].value = e.target.value;
-                  }
-                  setAnnotationInputs(newInputs);
-                }}
-              />
-            </div>
-          ))}
-          <div className="button-group">
-            <button className="button-add" onClick={() => addInput('annotation')}> + </button>
-            <button className="button-remove" onClick={() => removeInput('annotation')}> - </button>
-            <button className="save-button" onClick={saveToAnnotation}> Save </button>
-          </div>
-        </div>
-      </div>
-    )}
+      <div className="bottom-container">
 
-    {webInfo && (
-      <div className="web-info">
-        <h2>{webInfo}</h2>
-        <div className="Bdl-split">
-          {webInputs.map((input, index) => (
-            <div key={index} className="input-container">
-              {input.text && <div className="input-description">{input.text}</div>}
-              <input
-                type={input.type === 'bool' ? 'checkbox' : 'text'}
-                value={input.type === 'bool' ? undefined : input.value || ""}
-                checked={input.type === 'bool' ? Boolean(input.value) : undefined}
-                onChange={(e) => {
-                  const updatedInputs = [...webInputs];
-                  if (input.type === 'bool') {
-                    updatedInputs[index].value = e.target.checked;
-                  } else {
-                    updatedInputs[index].value = e.target.value;
-                  }
-                  setWebInputs(updatedInputs);
-                }}
-              />
+    {/* jag tror att problemet är annotationInputs den gör så att det blandas i inputsen */}
+      
+      {annotationInfo && (
+     <div className="annotation-info">
+      <h2>{annotationInfo}</h2> 
+       <div className="Bdl-split"> 
+        <div className="accordion"> 
+         <h3 onClick={() => setShowAnnotationInfo(!showAnnotationInfo)}>Annotation Info</h3>
+          {showAnnotationInfo && (
+            <div className="accordion-content">
+              {annotationInputs.filter(input => input.name.startsWith('annotationInfo.')).map((input, index) => (
+                <div key={index} className="input-container">
+                  {input.text && <div className="input-description">{input.text}</div>}
+                  <input
+                    type={input.type === 'bool' ? 'checkbox' : 'text'}
+                    value={input.type === 'bool' ? undefined : input.value || ""}
+                    checked={input.type === 'bool' ? Boolean(input.value) : undefined}
+                    onChange={(e) => {
+                      const newInputs = [...annotationInputs];
+                      if (input.type === 'bool') {
+                        newInputs[index].value = e.target.checked;
+                      } else {
+                        newInputs[index].value = e.target.value;
+                      }
+                      setAnnotationInputs(newInputs);
+                    }}
+                  />
+                </div>
+              ))}
             </div>
-          ))}
-          <div className="button-group">
-            <button className="button-add" onClick={() => addInput('web')}>+</button>
-            <button className="button-remove" onClick={() => removeInput('web')}>-</button>
-            <button className="save-button" onClick={saveToWeb}>Save</button>
-            {/* <NavLink to="advanceWeb" className="AdvanceWeb-button">Advance</NavLink> */}
-          </div>
+          )}
         </div>
-      </div>
-    )}
-
-    {cirrusInfo && (
-      <div className="cirrus-info">
-        <h2>{cirrusInfo}</h2>
-        <div className="Bdl-split">
-          {cirrusInputs.map((input, index) => (
-            <div key={index} className="input-container">
-              {input.text && <div className="input-description">{input.text}</div>}
-              <input
-                type={input.type === 'bool' ? 'checkbox' : 'text'}
-                value={input.type === 'bool' ? undefined : input.value || ""}
-                checked={input.type === 'bool' ? Boolean(input.value) : undefined}
-                onChange={(e) => {
-                  const newInputs = [...cirrusInputs];
-                  if (input.type === 'bool') {
-                    newInputs[index].value = e.target.checked;
-                  } else {
-                    newInputs[index].value = e.target.value;
-                  }
-                  setCirrusInputs(newInputs);
-                }}
-              />
+        
+        <div className="accordion">
+        <h3 onClick={() => setShowParams(!showParams)}>Params</h3>
+        {showParams && (
+          <div className="accordion-content">
+            {annotationInputs.filter(input => input.name.startsWith('params.')).map((input, index) => (
+              <div key={index} className="input-container">
+                {input.text && <div className="input-description">{input.text}</div>}
+                <input
+                  type={input.type === 'bool' ? 'checkbox' : 'text'}
+                  value={input.type === 'bool' ? undefined : input.value || ""}
+                  checked={input.type === 'bool' ? Boolean(input.value) : undefined}
+                  onChange={(e) => {
+                    const newInputs = [...annotationInputs];
+                    if (input.type === 'bool') {
+                      newInputs[index].value = e.target.checked;
+                    } else {
+                      newInputs[index].value = e.target.value;
+                    }
+                    setAnnotationInputs(newInputs);
+                  }}
+                  />
+                </div>
+              ))}
             </div>
-          ))}
+          )}
+          </div>
+  
+        <div className="accordion">
+          <h3 onClick={() => setShowSplitInformation(!showSplitInformation)}>Split Information</h3>
+          {showSplitInformation && (
+            <div className="accordion-content">
+              {annotationInputs.filter(input => input.name.startsWith('split_information.')).map((input, index) => (
+                <div key={index} className="input-container">
+                  {input.text && <div className="input-description">{input.text}</div>}
+                  <input
+                    type={input.type === 'bool' ? 'checkbox' : 'text'}
+                    value={input.type === 'bool' ? undefined : input.value || ""}
+                    checked={input.type === 'bool' ? Boolean(input.value) : undefined}
+                    onChange={(e) => {
+                      const newInputs = [...annotationInputs];
+                      if (input.type === 'bool') {
+                        newInputs[index].value = e.target.checked;
+                      } else {
+                        newInputs[index].value = e.target.value;
+                      }
+                      setAnnotationInputs(newInputs);
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div className="accordion">
+          <h3 onClick={() => setShowPointclouds(!showPointclouds)}>Pointclouds</h3>
+          {showPointclouds && (
+            <div className="accordion-content">
+              {annotationInputs.filter(input => input.name.startsWith('pointclouds.')).map((input, index) => (
+                <div key={index} className="input-container">
+                  {input.text && <div className="input-description">{input.text}</div>}
+                  <input
+                    type={input.type === 'bool' ? 'checkbox' : 'text'}
+                    value={input.type === 'bool' ? undefined : input.value || ""}
+                    checked={input.type === 'bool' ? Boolean(input.value) : undefined}
+                    onChange={(e) => {
+                      const newInputs = [...annotationInputs];
+                      if (input.type === 'bool') {
+                        newInputs[index].value = e.target.checked;
+                      } else {
+                        newInputs[index].value = e.target.value;
+                      }
+                      setAnnotationInputs(newInputs);
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div className="accordion">
+          <h3 onClick={() => setShowImage360(!showImage360)}>Image 360</h3>
+          {showImage360 && (
+            <div className="accordion-content">
+              {annotationInputs.filter(input => input.name.startsWith('image_360.')).map((input, index) => (
+                <div key={index} className="input-container">
+                  {input.text && <div className="input-description">{input.text}</div>}
+                  <input
+                    type={input.type === 'bool' ? 'checkbox' : 'text'}
+                    value={input.type === 'bool' ? undefined : input.value || ""}
+                    checked={input.type === 'bool' ? Boolean(input.value) : undefined}
+                    onChange={(e) => {
+                      const newInputs = [...annotationInputs];
+                      if (input.type === 'bool') {
+                        newInputs[index].value = e.target.checked;
+                      } else {
+                        newInputs[index].value = e.target.value;
+                      }
+                      setAnnotationInputs(newInputs);
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+            </div>
             <div className="button-group">
-              <button className="button-add" onClick={() => addInput('cirrus')}>+</button>
-              <button className="button-remove" onClick={() => removeInput('cirrus')}>-</button>
-              <button className="save-button" onClick={saveToCirrus}>Save</button>
-              {/* <NavLink to="/advanceCirrus" className="AdvanceCirrus-button">Advance</NavLink> */}
+              <button className="button-add" onClick={() => addInput('annotation')}> + </button>
+              <button className="button-remove" onClick={() => removeInput('annotation')}> - </button>
+              <button className="save-button" onClick={saveToAnnotation}> Save </button>
             </div>
           </div>
         </div>
-        )}
-      </div>
-    </div>
-        <div className="sidebar-session">
-          <div className="session-class">
-            <h1 onClick={toggleSectionsSession}>
-              {showSessionDetails ? "Session" : "Session"}
-                </h1>
-            {showSessionDetails && (
-              <div className="session-details">
-                <div className="session-info">
-                  <h3 onClick={handleCheckboxChange}>2024-05-22_07-35-24</h3>
-                  <h3 onClick={handleSessionCheckboxChange}>2024-06-22_07-35-25</h3>
-                  <h3 onClick={handleSession2024CheckboxChange}>2024-07-22_07-35-26</h3>
-                  <div className="session-data">
-                    {sessionInputs.map((input, index) => (
+    )}
+
+      {webInfo && (
+          <div className="web-info">
+          <h2>{webInfo}</h2>
+          <div className="Bdl-split">
+            <div className="accordion">
+              <h3 onClick={() => setShowWebInfo(!showWebInfo)}>Web360 Info</h3>
+              {showWebInfo && (
+                <div className="accordion-content">
+                  {webInputs.filter(input => input.name.startsWith('webInfo.')).map((input, index) => (
+                    <div key={index} className="input-container">
+                      {input.text && <div className="input-description">{input.text}</div>}
+                      <input
+                        type={input.type === 'bool' ? 'checkbox' : 'text'}
+                        value={input.type === 'bool' ? undefined : input.value || ""}
+                        checked={input.type === 'bool' ? Boolean(input.value) : undefined}
+                        onChange={(e) => {
+                          const newInputs = [...webInputs];
+                          if (input.type === 'bool') {
+                            newInputs[index].value = e.target.checked;
+                          } else {
+                            newInputs[index].value = e.target.value;
+                          }
+                          setShowWebInfo(newInputs);
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+              <div className="accordion">
+                <h3 onClick={() => setShowWebParams(!showWebParams)}>Params</h3>
+                {showWebParams && (
+                  <div className="accordion-content">
+                    {webInputs.filter(input => input.name.startsWith('params.')).map((input, index) => (
                       <div key={index} className="input-container">
+                        {input.text && <div className="input-description">{input.text}</div>}
+                        <input
+                          type={input.type === 'bool' ? 'checkbox' : 'text'}
+                          value={input.type === 'bool' ? undefined : input.value || ""}
+                          checked={input.type === 'bool' ? Boolean(input.value) : undefined}
+                          onChange={(e) => {
+                            const updatedInputs = [...webInputs];
+                            if (input.type === 'bool') {
+                              updatedInputs[index].value = e.target.checked;
+                            } else {
+                              updatedInputs[index].value = e.target.value;
+                            }
+                            setWebInputs(updatedInputs);
+                          }}
+                        />
                       </div>
                     ))}
                   </div>
-                </div>
+                )}
               </div>
+
+              <div className="accordion">
+                <h3 onClick={() => setShowWebSplitInformation(!showWebSplitInformation)}>Split Information</h3>
+                {showWebSplitInformation && (
+                  <div className="accordion-content">
+                    {webInputs.filter(input => input.name.startsWith('split_information.')).map((input, index) => (
+                      <div key={index} className="input-container">
+                        {input.text && <div className="input-description">{input.text}</div>}
+                        <input
+                          type={input.type === 'bool' ? 'checkbox' : 'text'}
+                          value={input.type === 'bool' ? undefined : input.value || ""}
+                          checked={input.type === 'bool' ? Boolean(input.value) : undefined}
+                          onChange={(e) => {
+                            const updatedInputs = [...webInputs];
+                            if (input.type === 'bool') {
+                              updatedInputs[index].value = e.target.checked;
+                            } else {
+                              updatedInputs[index].value = e.target.value;
+                            }
+                            setWebInputs(updatedInputs);
+                          }}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <div className="accordion">
+                <h3 onClick={() => setShowWebPointclouds(!showWebPointclouds)}>Pointclouds</h3>
+                {showWebPointclouds && (
+                  <div className="accordion-content">
+                    {webInputs.filter(input => input.name.startsWith('pointclouds.')).map((input, index) => (
+                      <div key={index} className="input-container">
+                        {input.text && <div className="input-description">{input.text}</div>}
+                        <input
+                          type={input.type === 'bool' ? 'checkbox' : 'text'}
+                          value={input.type === 'bool' ? undefined : input.value || ""}
+                          checked={input.type === 'bool' ? Boolean(input.value) : undefined}
+                          onChange={(e) => {
+                            const updatedInputs = [...webInputs];
+                            if (input.type === 'bool') {
+                              updatedInputs[index].value = e.target.checked;
+                            } else {
+                              updatedInputs[index].value = e.target.value;
+                            }
+                            setWebInputs(updatedInputs);
+                          }}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <div className="accordion">
+                <h3 onClick={() => setShowWebImage360(!showWebImage360)}>Image 360</h3>
+                {showWebImage360 && (
+                  <div className="accordion-content">
+                    {webInputs.filter(input => input.name.startsWith('image_360.')).map((input, index) => (
+                      <div key={index} className="input-container">
+                        {input.text && <div className="input-description">{input.text}</div>}
+                        <input
+                          type={input.type === 'bool' ? 'checkbox' : 'text'}
+                          value={input.type === 'bool' ? undefined : input.value || ""}
+                          checked={input.type === 'bool' ? Boolean(input.value) : undefined}
+                          onChange={(e) => {
+                            const updatedInputs = [...webInputs];
+                            if (input.type === 'bool') {
+                              updatedInputs[index].value = e.target.checked;
+                            } else {
+                              updatedInputs[index].value = e.target.value;
+                            }
+                            setWebInputs(updatedInputs);
+                          }}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <div className="button-group">
+                <button className="button-add" onClick={() => addInput('web')}>+</button>
+                <button className="button-remove" onClick={() => removeInput('web')}>-</button>
+                <button className="save-button" onClick={saveToWeb}>Save</button>
+              </div>
+            </div>
+          </div>
+    )}
+
+      {cirrusInfo && (
+          <div className="cirrus-info">
+          <h2>{cirrusInfo}</h2>
+          <div className="Bdl-split">
+            <div className="accordion">
+              <h3 onClick={() => setShowCirrusInfo(!showCirrusInfo)}>Cirrus Info</h3>
+              {showCirrusInfo && (
+                <div className="accordion-content">
+                  {cirrusInputs.filter(input => input.name.startsWith('cirrusInfo.')).map((input, index) => (
+                    <div key={index} className="input-container">
+                      {input.text && <div className="input-description">{input.text}</div>}
+                      <input
+                        type={input.type === 'bool' ? 'checkbox' : 'text'}
+                        value={input.type === 'bool' ? undefined : input.value || ""}
+                        checked={input.type === 'bool' ? Boolean(input.value) : undefined}
+                        onChange={(e) => {
+                          const newInputs = [...webInputs];
+                          if (input.type === 'bool') {
+                            newInputs[index].value = e.target.checked;
+                          } else {
+                            newInputs[index].value = e.target.value;
+                          }
+                          setShowCirrusInfo(newInputs);
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+              <div className="accordion">
+                <h3 onClick={() => setShowCirrusParams(!showCirrusParams)}>Params</h3>
+                {showCirrusParams && (
+                  <div className="accordion-content">
+                    {webInputs.filter(input => input.name.startsWith('params.')).map((input, index) => (
+                      <div key={index} className="input-container">
+                        {input.text && <div className="input-description">{input.text}</div>}
+                        <input
+                          type={input.type === 'bool' ? 'checkbox' : 'text'}
+                          value={input.type === 'bool' ? undefined : input.value || ""}
+                          checked={input.type === 'bool' ? Boolean(input.value) : undefined}
+                          onChange={(e) => {
+                            const updatedInputs = [...cirrusInputs];
+                            if (input.type === 'bool') {
+                              updatedInputs[index].value = e.target.checked;
+                            } else {
+                              updatedInputs[index].value = e.target.value;
+                            }
+                            setCirrusInputs(updatedInputs);
+                          }}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <div className="accordion">
+                <h3 onClick={() => setShowCirrusSplitInformation(!showCirrusSplitInformation)}>Split Information</h3>
+                {showCirrusSplitInformation && (
+                  <div className="accordion-content">
+                    {cirrusInputs.filter(input => input.name.startsWith('split_information.')).map((input, index) => (
+                      <div key={index} className="input-container">
+                        {input.text && <div className="input-description">{input.text}</div>}
+                        <input
+                          type={input.type === 'bool' ? 'checkbox' : 'text'}
+                          value={input.type === 'bool' ? undefined : input.value || ""}
+                          checked={input.type === 'bool' ? Boolean(input.value) : undefined}
+                          onChange={(e) => {
+                            const updatedInputs = [...cirrusInputs];
+                            if (input.type === 'bool') {
+                              updatedInputs[index].value = e.target.checked;
+                            } else {
+                              updatedInputs[index].value = e.target.value;
+                            }
+                            setCirrusInputs(updatedInputs);
+                          }}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <div className="accordion">
+                <h3 onClick={() => setShowCirrusPointclouds(!showCirrusPointclouds)}>Pointclouds</h3>
+                {showCirrusPointclouds && (
+                  <div className="accordion-content">
+                    {cirrusInputs.filter(input => input.name.startsWith('pointclouds.')).map((input, index) => (
+                      <div key={index} className="input-container">
+                        {input.text && <div className="input-description">{input.text}</div>}
+                        <input
+                          type={input.type === 'bool' ? 'checkbox' : 'text'}
+                          value={input.type === 'bool' ? undefined : input.value || ""}
+                          checked={input.type === 'bool' ? Boolean(input.value) : undefined}
+                          onChange={(e) => {
+                            const updatedInputs = [...cirrusInputs];
+                            if (input.type === 'bool') {
+                              updatedInputs[index].value = e.target.checked;
+                            } else {
+                              updatedInputs[index].value = e.target.value;
+                            }
+                            setCirrusInputs(updatedInputs);
+                          }}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <div className="accordion">
+                <h3 onClick={() => setShowCirrusImage360(!showCirrusImage360)}>Image 360</h3>
+                {showCirrusImage360 && (
+                  <div className="accordion-content">
+                    {cirrusInputs.filter(input => input.name.startsWith('image_360.')).map((input, index) => (
+                      <div key={index} className="input-container">
+                        {input.text && <div className="input-description">{input.text}</div>}
+                        <input
+                          type={input.type === 'bool' ? 'checkbox' : 'text'}
+                          value={input.type === 'bool' ? undefined : input.value || ""}
+                          checked={input.type === 'bool' ? Boolean(input.value) : undefined}
+                          onChange={(e) => {
+                            const updatedInputs = [...cirrusInputs];
+                            if (input.type === 'bool') {
+                              updatedInputs[index].value = e.target.checked;
+                            } else {
+                              updatedInputs[index].value = e.target.value;
+                            }
+                            setCirrusInputs(updatedInputs);
+                          }}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <div className="button-group">
+                <button className="button-add" onClick={() => addInput('cirrus')}>+</button>
+                <button className="button-remove" onClick={() => removeInput('cirrus')}>-</button>
+                <button className="save-button" onClick={saveToCirrus}>Save</button>
+              </div>
+            </div>
+          </div>
+    )} 
+      </div>
+    </div> 
+
+        <div className="sidebar-session">
+          <div className="session-class">
+            <h1 onClick={toggleSectionsSession}>
+              {showSessionDetails ? "Session" : "Session"} </h1>
+              {showSessionDetails && (
+                <div className="session-details">
+                  <div className="session-info">
+                    <h3 onClick={handleCheckboxChange}
+                      className={activeSession === 'session1' ? 'active' : ''}> 2024-05-22_07-35-24</h3>
+
+                    <h3 onClick={handleSessionCheckboxChange}
+                      className={activeSession === 'session2' ? 'active' : ''}> 2024-06-22_07-35-25</h3>
+
+                    <h3 onClick={handleSession2024CheckboxChange}
+                      className={activeSession === 'session3' ? 'active' : ''}> 2024-07-22_07-35-26</h3>
+
+                    <div className="session-data">
+                      {sessionInputs.map((input, index) => (
+                        <div key={index} className="input-container">
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               )}
             </div>
            </div>
+              
            
           <img src={atriteclogo} alt="logga" className="vitlogga" />
           {/* <img src={loggagreen} alt="logga" className="logga"/> */}
