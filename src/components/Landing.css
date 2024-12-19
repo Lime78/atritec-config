@@ -41,19 +41,12 @@
     cursor: pointer;
   }
 
-  .annotation-info,
-  .cirrus-info,
-  .web-info {
-    color: #ffffff;
-    padding: 20px;
-  }
-
   .sidebar-session {
     width: 12em; 
-    padding: 40px;
-    position: fixed;
-    background-color: rgb(22, 25, 29);
-    top: 0;
+    padding: 40px; 
+    position: fixed; 
+    background-color: rgb(22, 25, 29); 
+    top: 0; 
     left: 0;
     height: 100%; 
   }
@@ -156,7 +149,7 @@
   }
 
   .box h3 {
-    font-size: 34px;
+    font-size: 36px;
     height: 50px;
     width: 130px;
     margin-left: 20px;
@@ -169,10 +162,10 @@
     gap: 10px;
     margin: 15px 0;
     font-size: 20px;
-    font-family: "Noto Serif", serif;
+    /* font-family: "Noto Serif", serif; */
+    /* font-style: italic; */
+    font-family: "Kanit";
     font-style: italic;
-    /* font-family: "Kanit";
-    font-style: italic; */
   }
   
   .Bdl-split input[type="text"] {
@@ -218,7 +211,11 @@
   .accordion-container{
     display: flex;
     margin-top: 0;
-    gap: 8px;
+    gap: 5px;
+  }
+  
+  .accordion-section :hover{
+    cursor: pointer;
   }
 
   .accordion-section,
@@ -231,18 +228,16 @@
     overflow: hidden;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
-  
+
   .accordion-section h3,
   .webaccordion-section h3,
-  .cirrusaccordion-section h3
-   {
-    /* display: flex;
-    justify-content: center; */
+  .cirrusaccordion-section h3{
     width: 450px;
     cursor: pointer;
     padding: 10px;
     margin: 0;
     font-size: 25px;
+    font-weight: 400;
     border-bottom: 1px solid #ccc;
   }
 
@@ -261,7 +256,7 @@
   }
 
   .save-button:hover {
-    background-color: #198B74;
+    background-color: rgb(92, 125, 204);
   }
   
   .input-container {
@@ -283,15 +278,13 @@
 
   @media (max-width: 1600px) {
     .box {
-      width: 54em;
-      height: 270em;
+      width: 50em;
+      height: 130em;
       font-size: 22px;
       position: absolute;
       left: 320px;
     }
-    .box h3{
-      display: none;
-    }
+
     .template-container {
       display: flex;
       position: relative;
@@ -317,13 +310,6 @@
       font-size: 30px;
       margin: 20px;
     }
-
-    .Bdl-split {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin: 15px 0;
-    }
  
     .folder {
       width: 5em;
@@ -332,37 +318,50 @@
       left: 24em;
       top: 15em;
     }
-    .accordion h3 {
+    .accordion-container{
+      display: flex;
+      margin-top: 0;
+      gap: 8px;
+    }
+
+    .accordion-section,
+    .webaccordion-section,
+    .cirrusaccordion-section{
+      width: 350px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      /* overflow: hidden; */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .accordion-section h3,
+    .webaccordion-section h3,
+    .cirrusaccordion-section h3
+    {
+      width: 350px;
       cursor: pointer;
       padding: 10px;
-      border: 1px solid #ccc;
       margin: 0;
-      font-size: 15px;
-    }
-    
-    .accordion-content {
-      padding: 5px;
-      border: 1px solid #ccc;
-      border-top: none;
+      font-size: 25px;
+      border-bottom: 1px solid #ccc;
     }
 
   }
   
-  @media (max-width: 1380px) {
+  @media (max-width: 1480px) {
     .box {
-      width: 35em;
-      height: 270em;
+      width: 35.3em;
+      height: 140em;
       font-size: 22px;
       position: absolute;
-      left: 270px;
+      left: 380px;
     }
-    .box h3{
-      display: none;
-    }
+
     .template-container {
       display: flex;
       position: relative;
-      left: 18em;
+      left: 25.5em;
       margin-bottom: 83vh;
       gap: 3em;
     }
@@ -377,15 +376,19 @@
       height: 50px;
       margin: 15px;
     }
-    .annotation-info,
-    .cirrus-info,
-    .web-info{
+
+    .input-description {
+      font-size: 15px; 
+      margin-bottom: 5px;
+    }
+    .Bdl-split{
       font-size: 15px;
     }
+
     .Bdl-split input[type="text"],
     .Bdl-split input[type="checkbox"]
     {
-      width: 10em;
+      width: 9em;
     }
     .input-container {
       width: 50px;
@@ -407,43 +410,54 @@
       height: 100%; 
     }
     .session-class h1{
-      font-size: 30px;
+      font-size: 25px;
+    }
+    .session-class h3{
+      font-size: 12px;
     }
     .calendar{
       display: none;
     }
-    .logga{
-      position: fixed;
-      top: 30px;
-      left: 1em;
-      width: 10em;
-      height: auto;
-      z-index: 1000; 
-    }
+
     .vitlogga{
       position: fixed;
       top: 30px;
       left: 1em;
-      width: 10em;
+      width: 9em;
       height: auto;
       z-index: 1000; 
     }
-    .accordion h3 {
+    .accordion-container{
+      display: flex;
+      margin-top: 0;
+      gap: 8px;
+    }
+
+    .accordion-section,
+    .webaccordion-section,
+    .cirrusaccordion-section{
+      width: 250px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .accordion-section h3,
+    .webaccordion-section h3,
+    .cirrusaccordion-section h3
+    {
+      width: 350px;
       cursor: pointer;
       padding: 10px;
-      border: 1px solid #ccc;
       margin: 0;
-      font-size: 15px;
-    }
-    
-    .accordion-content {
-      padding: 5px;
-      border: 1px solid #ccc;
-      border-top: none;
+      font-size: 20px;
+      border-bottom: 1px solid #ccc;
     }
   }
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1080px) {
     .box {
       width: 34em;
       height: 270em;
@@ -451,9 +465,7 @@
       position: absolute;
       left: 240px;
     }
-    .box h3{
-      display: none;
-    }
+
     .template-container {
       display: flex;
       position: relative;
@@ -476,11 +488,7 @@
     .template-container .Web360 h2{
       font-size: 22px;
     }
-    .annotation-info,
-    .cirrus-info,
-    .web-info{
-      font-size: 15px;
-    }
+
     .Bdl-split input[type="text"],
     .input[type="text"] {
       width: 10em;
@@ -502,17 +510,6 @@
     .session-class h1{
       font-size: 30px;
     }
-    .calendar{
-      display: none;
-    }
-    .logga{
-      position: fixed;
-      top: 30px;
-      left: 1em;
-      width: 10em;
-      height: auto;
-      z-index: 1000; 
-    }
     .vitlogga{
       position: fixed;
       top: 30px;
@@ -521,59 +518,63 @@
       height: auto;
       z-index: 1000; 
     }
-    .accordion h3 {
+
+    .accordion-container{
+      display: flex;
+      margin-top: 0;
+      gap: 8px;
+    }
+
+    .accordion-section,
+    .webaccordion-section,
+    .cirrusaccordion-section{
+      width: 240px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      /* overflow: hidden; */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .accordion-section h3,
+    .webaccordion-section h3,
+    .cirrusaccordion-section h3
+    {
+      width: 200px;
       cursor: pointer;
       padding: 10px;
-      border: 1px solid #ccc;
       margin: 0;
-      font-size: 15px;
-    }
-    
-    .accordion-content {
-      padding: 5px;
-      border: 1px solid #ccc;
-      border-top: none;
+      font-size: 20px;
+      border-bottom: 1px solid #ccc;
     }
   }
 
   @media (max-width: 820px) {
     .box {
-      width: 34em;
+      width: 22em;
       height: 270em;
       font-size: 22px;
       position: absolute;
-      left: 220px;
+      left: 270px;
     }
-    .box h3{
-      display: none;
-    }
+
     .template-container {
       display: flex;
       position: relative;
       left: 18em;
-      margin-bottom: 78vh;
-      gap: 3em;
-    }
-    .template-container h2 {
-      font-size: 20px;
-      margin: 15px;
+      margin-bottom: 70vh;
+      gap: 10px;
     }
     .template-container .Annotation,
     .template-container .Cirrus,
     .template-container .Web360 {
-      width: 160px;
-      height: 60px;
+      width: 100px;
+      height: 40px;
     }
 
     .template-container .Annotation h2,
     .template-container .Cirrus h2,
     .template-container .Web360 h2{
-      font-size: 22px;
-    }
-
-    .annotation-info,
-    .cirrus-info,
-    .web-info{
       font-size: 15px;
     }
 
@@ -602,22 +603,11 @@
       width: 4em;
       height: auto;
       position: absolute;
-      left: 14em;
+      left: 12em;
       top: 15em;
     }
     .session-class h1{
       font-size: 25px;
-    }
-    .calendar{
-      display: none;
-    }
-    .logga{
-      position: fixed;
-      top: 30px;
-      left: 1em;
-      width: 10em;
-      height: auto;
-      z-index: 1000; 
     }
     .vitlogga{
       position: fixed;
@@ -627,17 +617,34 @@
       height: auto;
       z-index: 1000; 
     }
-    .accordion h3 {
+
+    .accordion-container{
+      display: flex;
+      margin-top: 0;
+      gap: 8px;
+    }
+
+    .accordion-section,
+    .webaccordion-section,
+    .cirrusaccordion-section{
+      width: 150px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      /* overflow: hidden; */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .accordion-section h3,
+    .webaccordion-section h3,
+    .cirrusaccordion-section h3
+    {
+      width: 150px;
       cursor: pointer;
       padding: 10px;
-      border: 1px solid #ccc;
       margin: 0;
-      font-size: 15px;
+      font-size: 20px;
+      border-bottom: 1px solid #ccc;
     }
-    
-    .accordion-content {
-      padding: 5px;
-      border: 1px solid #ccc;
-      border-top: none;
-    }
+
   }

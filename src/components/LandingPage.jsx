@@ -12,6 +12,7 @@ import Atritec_logga from '../assets/Atritec_logga.png';
 import folder from '../assets/folder.svg';
 import './Landing.css';
 import { saveAs } from 'file-saver';
+import yaml from 'js-yaml';
 
 const Landing = ({ trackData }) => {
   const [annotationInputs, setAnnotationInputs] = useState([]);
@@ -284,27 +285,26 @@ const Landing = ({ trackData }) => {
       initializeCirrusInputs();
     }
   }, [trackData]);
-  
 
-  const addInput = (section) => {
-    if (section === 'annotation') {
-      setAnnotationInputs([...annotationInputs, { value: '', placeholder: '' }]);
-    } else if (section === 'web') {
-      setWebInputs([...webInputs, { value: '', placeholder: '' }]);
-    } else if (section === 'cirrus') {
-      setCirrusInputs([...cirrusInputs, { value: '', placeholder: '' }]);
-    }
-  };
+  // const addInput = (section) => {
+  //   if (section === 'annotation') {
+  //     setAnnotationInputs([...annotationInputs, { value: '', placeholder: '' }]);
+  //   } else if (section === 'web') {
+  //     setWebInputs([...webInputs, { value: '', placeholder: '' }]);
+  //   } else if (section === 'cirrus') {
+  //     setCirrusInputs([...cirrusInputs, { value: '', placeholder: '' }]);
+  //   }
+  // };
 
-  const removeInput = (section) => {
-    if (section === 'annotation' && annotationInputs.length > 1) {
-      setAnnotationInputs(annotationInputs.slice(0, annotationInputs.length - 1));
-    } else if (section === 'web' && webInputs.length > 1) {
-      setWebInputs(webInputs.slice(0, webInputs.length - 1));
-    } else if (section === 'cirrus' && cirrusInputs.length > 1) {
-      setCirrusInputs(cirrusInputs.slice(0, cirrusInputs.length - 1));
-    }
-  };
+  // const removeInput = (section) => {
+  //   if (section === 'annotation' && annotationInputs.length > 1) {
+  //     setAnnotationInputs(annotationInputs.slice(0, annotationInputs.length - 1));
+  //   } else if (section === 'web' && webInputs.length > 1) {
+  //     setWebInputs(webInputs.slice(0, webInputs.length - 1));
+  //   } else if (section === 'cirrus' && cirrusInputs.length > 1) {
+  //     setCirrusInputs(cirrusInputs.slice(0, cirrusInputs.length - 1));
+  //   }
+  // };
 
   const toggleSectionsVisibility = () => {
     setIsVisible(!isVisible);
@@ -566,12 +566,12 @@ const Landing = ({ trackData }) => {
         <h2 onClick={toggleSectionsSynlig}>{isSynlig ? 'Cirrus' : 'Cirrus'}</h2>
       </div>
     </div>
-      
+
     <div className="bottom-container">
     <div className="box">
       {!(isVisible || isVissa || isSynlig) && (
         <img src={folder} alt="folder" className="folder" />
-        // <img src={Atritec_logga} alt="folder" className="folder" />
+        // <img src={Atritec_logga} alt="Atritec_logga" className="folder" />
       )}
      <div className='accordion-container'>
 
@@ -706,23 +706,23 @@ const Landing = ({ trackData }) => {
                         />
                       </div>
                     ))}
-                    <div className="button-group">
-              <button className="button-add" onClick={() => addInput('annotation')}>+</button>
-              <button className="button-remove" onClick={() => removeInput('annotation')}>-</button>
-              <button className="save-button" onClick={saveToAnnotation}>Save</button>
-            </div>
-          </div>
+                  </div>
                 )}
               </div>
+              <div className="button-group">
+                {/* <button className="button-add" onClick={() => addInput('annotation')}>+</button>
+                <button className="button-remove" onClick={() => removeInput('annotation')}>-</button> */}
+                <button className="save-button" onClick={saveToAnnotation}>Save</button>
+              </div>
             </div>
-            </div>
+          </div>
           )}
-
+        
         {webInfo && (
         <div className="Bdl-split">
           <div className="accordion">
             <div className="webaccordion-section">
-              <h3 onClick={() => toggleWebAccordion('webInfo')}>Web Info</h3>
+              <h3 onClick={() => toggleWebAccordion('webInfo')}>Web360 Info</h3>
               {webAccordionOpen.webInfo && (
                 <div className="accordion-content">
                   {webInputs.map((input, index) => (
@@ -845,19 +845,19 @@ const Landing = ({ trackData }) => {
                           }
                           setWebImage360Inputs(updatedInputs);
                         }}
-                      />
-                    </div>
-                  ))}
-                <div className="button-group">
-              <button className="button-add" onClick={() => addInput('web360')}>+</button>
-              <button className="button-remove" onClick={() => removeInput('web360')}>-</button>
-              <button className="save-button" onClick={saveToWeb}>Save</button>
-            </div>
-          </div>
+                        />
+                      </div>
+                    ))}
+                  </div>
                 )}
               </div>
+              <div className="button-group">
+                {/* <button className="button-add" onClick={() => addInput('web')}>+</button>
+                <button className="button-remove" onClick={() => removeInput('web')}>-</button> */}
+                <button className="save-button" onClick={saveToWeb}>Save</button>
+              </div>
             </div>
-            </div>
+          </div>
           )}
 
         {cirrusInfo && (
@@ -987,16 +987,16 @@ const Landing = ({ trackData }) => {
                           }
                           setCirrusImage360Inputs(newInputs);
                         }}
-                      />
-                    </div>
-                  ))};
-                <div className="button-group">
-              <button className="button-add" onClick={() => addInput('cirrus')}>+</button>
-              <button className="button-remove" onClick={() => removeInput('cirrus')}>-</button>
-              <button className="save-button" onClick={saveToCirrus}>Save</button>
-            </div>
-          </div>
+                        />
+                      </div>
+                    ))}
+                  </div>
                 )}
+              </div>
+              <div className="button-group">
+                {/* <button className="button-add" onClick={() => addInput('cirrus')}>+</button>
+                <button className="button-remove" onClick={() => removeInput('cirrus')}>-</button> */}
+                <button className="save-button" onClick={saveToCirrus}>Save</button>
               </div>
             </div>
             </div>
@@ -1014,13 +1014,13 @@ const Landing = ({ trackData }) => {
                   <div className="session-info">
 
                     <h3 onClick={handleCheckboxChange}
-                      className={activeSession === 'session1' ? 'active' : ''}> 2024-05-22_07-35-24</h3>
+                      className={activeSession === 'session1' ? 'active' : ''}> 2024-05-22 07-35-24</h3>
 
                     <h3 onClick={handleSessionCheckboxChange}
-                      className={activeSession === 'session2' ? 'active' : ''}> 2024-06-22_07-35-25</h3>
+                      className={activeSession === 'session2' ? 'active' : ''}> 2024-06-22 07-34-25</h3>
                     
                     <h3 onClick={handleSession2024CheckboxChange}
-                     className={activeSession === 'session3' ? 'active' : ''}> 2024-07-22_07-35-26</h3>
+                     className={activeSession === 'session3' ? 'active' : ''}> 2024-07-22 07-37-26</h3>
                     
                     <div className="session-data">
                       {sessionInputs.map((input, index) => (
