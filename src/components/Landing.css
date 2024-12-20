@@ -1,5 +1,6 @@
   body {
     font-family: "Montserrat", sans-serif;
+    font-style: italic;
     display: flex;
     justify-content: flex-start; 
     align-items: center;
@@ -127,25 +128,24 @@
   }
 
   .folder {
-    width: 5em;
+    width: 8em;
     height: auto;
     position: absolute;
-    left: 25.5em;
-    top: 15em;
+    left: 40em;
+    top: 23em;
   }
 
   .box {
-    width: 55em;
-    height: 100em;
+    width: 85.6em;
+    height: 150em;
     z-index: 1000;
     background-color: rgb(22, 25, 29);
     color: rgb(255, 255, 255);
     display: flex;
-    flex-direction: row;
-    font-size: 25px;
+    /* flex-direction: row; */
     position: absolute;
-    left: 400px;
-    top: 180px;
+    left: 25em;
+    top: 10em;
   }
 
   .box h3 {
@@ -155,7 +155,7 @@
     margin-left: 20px;
     margin-top: 20px;
   }
-
+  
   .Bdl-split {
     display: flex;
     flex-direction: column;
@@ -163,9 +163,9 @@
     margin: 15px 0;
     font-size: 20px;
     /* font-family: "Noto Serif", serif; */
-    /* font-style: italic; */
-    font-family: "Kanit";
-    font-style: italic;
+    font-family: "Montserrat";
+    font-style: initial;
+    /* font-family: "Kanit"; */
   }
   
   .Bdl-split input[type="text"] {
@@ -237,7 +237,7 @@
     padding: 10px;
     margin: 0;
     font-size: 25px;
-    font-weight: 400;
+    font-weight: 500;
     border-bottom: 1px solid #ccc;
   }
 
@@ -288,7 +288,7 @@
     .template-container {
       display: flex;
       position: relative;
-      left: 30em;
+      left: 28em;
       margin-bottom: 83vh;
       gap: 4em;
     }
@@ -459,17 +459,17 @@
 
   @media (max-width: 1080px) {
     .box {
-      width: 34em;
+      width: 30em;
       height: 270em;
       font-size: 22px;
       position: absolute;
-      left: 240px;
+      left: 220px;
     }
 
     .template-container {
       display: flex;
       position: relative;
-      left: 20em;
+      left: 14em;
       margin-bottom: 78vh;
       gap: 3em;
     }
@@ -528,7 +528,7 @@
     .accordion-section,
     .webaccordion-section,
     .cirrusaccordion-section{
-      width: 240px;
+      width: 210px;
       margin-bottom: 10px;
       border: 1px solid #ccc;
       border-radius: 5px;

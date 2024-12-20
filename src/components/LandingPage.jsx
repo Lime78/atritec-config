@@ -227,7 +227,6 @@ const Landing = ({ trackData }) => {
     }
   }, [trackData]);
 
-
   const initializeCirrusInputs = () => {
     const cirrusInfo = Object.entries(cirrusApi[0].cirrusInfo).map(([key, value]) => ({
       name: `cirrusInfo.${key}`,
@@ -350,10 +349,10 @@ const Landing = ({ trackData }) => {
       return inputs.reduce((acc, input) => {
         const path = input.name.split('.');
         let current = acc;
-  
+
         path.forEach((key, index) => {
           if (index === path.length - 1) {
-            current[key] = input.value;
+            current[key] = input.value !== input.originalValue ? `${input.value}*` : input.value;
           } else {
             if (!current[key]) {
               current[key] = {};
@@ -361,11 +360,11 @@ const Landing = ({ trackData }) => {
             current = current[key];
           }
         });
-  
+
         return acc;
       }, {});
     };
-  
+
     const annotationData = {
       ...reduceInputs(annotationInputs),
       params: reduceInputs(paramsInputs),
@@ -373,7 +372,7 @@ const Landing = ({ trackData }) => {
       pointclouds: reduceInputs(pointcloudsInputs),
       image_360: reduceInputs(image360Inputs),
     };
-  
+
     if (isChecked) {
       annotationData.session = sessionInputs;
     }
@@ -383,20 +382,20 @@ const Landing = ({ trackData }) => {
     if (isCheckedSession2024) {
       annotationData.session = session2024;
     }
-  
+
     const annotationInfo = {
-      project_name: annotationApi[0].project_name,
+     project_name: annotationApi[0].project_name,
       vehicle: annotationApi[0].vehicle,
       session_name: annotationApi[0].session_name,
       path_nas: annotationApi[0].path_nas,
       comment: annotationApi[0].comment,
       template: annotationApi[0].template,
     };
-  
+
     const data = { annotation: { ...annotationInfo, ...annotationData } };
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     saveAs(blob, 'AnnotationForm.json');
-  
+
     initializeAnnotationInputs();
   };
 
@@ -568,161 +567,160 @@ const Landing = ({ trackData }) => {
     </div>
 
     <div className="bottom-container">
-    <div className="box">
-      {!(isVisible || isVissa || isSynlig) && (
-        <img src={folder} alt="folder" className="folder" />
-        // <img src={Atritec_logga} alt="Atritec_logga" className="folder" />
-      )}
-     <div className='accordion-container'>
-
+      <div className="box">
+        {!(isVisible || isVissa || isSynlig) && (
+          <img src={folder} alt="folder" className="folder" />
+        )}
+      <div className='accordion-container'>
+      
         {annotationInfo && (
-          <div className="Bdl-split">
-          <div className="accordion">
-            <div className="accordion-section">
-              <h3 onClick={() => toggleAccordion('annotationInfo')}>Annotation Info</h3>
-              {accordionOpen.annotationInfo && (
-                <div className="accordion-content">
-                  {annotationInputs.map((input, index) => (
-                    <div key={index} className="input-container">
-                      {input.text && <div className="input-description">{input.text}</div>}
-                      <input
-                        type={input.type === 'bool' ? 'checkbox' : 'text'}
-                        value={input.type === 'bool' ? undefined : input.value || ""}
-                        checked={input.type === 'bool' ? Boolean(input.value) : undefined}
-                        onChange={(e) => {
-                          const newInputs = [...annotationInputs];
-                          if (input.type === 'bool') {
-                            newInputs[index].value = e.target.checked;
-                          } else {
-                            newInputs[index].value = e.target.value;
-                          }
-                          setAnnotationInputs(newInputs);
-                        }}
-                      />
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-            
-            <div className="accordion-section">
-              <h3 onClick={() => toggleAccordion('params')}>Params</h3>
-              {accordionOpen.params && (
-                <div className="accordion-content">
-                  {paramsInputs.map((input, index) => (
-                    <div key={index} className="input-container">
-                      {input.text && <div className="input-description">{input.text}</div>}
-                      <input
-                        type={input.type === 'bool' ? 'checkbox' : 'text'}
-                        value={input.type === 'bool' ? undefined : input.value || ""}
-                        checked={input.type === 'bool' ? Boolean(input.value) : undefined}
-                        onChange={(e) => {
-                          const newInputs = [...paramsInputs];
-                          if (input.type === 'bool') {
-                            newInputs[index].value = e.target.checked;
-                          } else {
-                            newInputs[index].value = e.target.value;
-                          }
-                          setParamsInputs(newInputs);
-                        }}
-                      />
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-            <div className="accordion-section">
-              <h3 onClick={() => toggleAccordion('splitInformation')}>Split Information</h3>
-              {accordionOpen.splitInformation && (
-                <div className="accordion-content">
-                  {splitInformationInputs.map((input, index) => (
-                    <div key={index} className="input-container">
-                      {input.text && <div className="input-description">{input.text}</div>}
-                      <input
-                        type={input.type === 'bool' ? 'checkbox' : 'text'}
-                        value={input.type === 'bool' ? undefined : input.value || ""}
-                        checked={input.type === 'bool' ? Boolean(input.value) : undefined}
-                        onChange={(e) => {
-                          const newInputs = [...splitInformationInputs];
-                          if (input.type === 'bool') {
-                            newInputs[index].value = e.target.checked;
-                          } else {
-                            newInputs[index].value = e.target.value;
-                          }
-                          setSplitInformationInputs(newInputs);
-                        }}
-                      />
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-            <div className="accordion-section">
-              <h3 onClick={() => toggleAccordion('pointclouds')}>Pointclouds</h3>
-              {accordionOpen.pointclouds && (
-                <div className="accordion-content">
-                  {pointcloudsInputs.map((input, index) => (
-                    <div key={index} className="input-container">
-                      {input.text && <div className="input-description">{input.text}</div>}
-                      <input
-                        type={input.type === 'bool' ? 'checkbox' : 'text'}
-                        value={input.type === 'bool' ? undefined : input.value || ""}
-                        checked={input.type === 'bool' ? Boolean(input.value) : undefined}
-                        onChange={(e) => {
-                          const newInputs = [...pointcloudsInputs];
-                          if (input.type === 'bool') {
-                            newInputs[index].value = e.target.checked;
-                          } else {
-                            newInputs[index].value = e.target.value;
-                          }
-                          setPointcloudsInputs(newInputs);
-                        }}
-                      />
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-            <div className="accordion-section">
-              <h3 onClick={() => toggleAccordion('image360')}>Image 360</h3>
-              {accordionOpen.image360 && (
-                <div className="accordion-content">
-                  {image360Inputs.map((input, index) => (
-                    <div key={index} className="input-container">
-                      {input.text && <div className="input-description">{input.text}</div>}
-                      <input
-                        type={input.type === 'bool' ? 'checkbox' : 'text'}
-                        value={input.type === 'bool' ? undefined : input.value || ""}
-                        checked={input.type === 'bool' ? Boolean(input.value) : undefined}
-                        onChange={(e) => {
-                          const newInputs = [...image360Inputs];
-                          if (input.type === 'bool') {
-                            newInputs[index].value = e.target.checked;
-                          } else {
-                            newInputs[index].value = e.target.value;
-                          }
-                          setImage360Inputs(newInputs);
-                        }}
-                        />
-                      </div>
-                    ))}
+      <div className='Bdl-split'>
+     <div className="accordion">
+          <div className="accordion-section">
+            <h3 onClick={() => toggleAccordion('annotationInfo')}>Annotation Information</h3>
+            {accordionOpen.annotationInfo && (
+              <div className="accordion-content">
+                {annotationInputs.map((input, index) => (
+                  <div key={index} className="input-container">
+                    {input.text && <div className="input-description">{input.text}</div>}
+                    <input
+                      type={input.type === 'bool' ? 'checkbox' : 'text'}
+                      value={input.type === 'bool' ? undefined : input.value || ""}
+                      checked={input.type === 'bool' ? Boolean(input.value) : undefined}
+                      onChange={(e) => {
+                        const newInputs = [...annotationInputs];
+                        if (input.type === 'bool') {
+                          newInputs[index].value = e.target.checked;
+                        } else {
+                          newInputs[index].value = e.target.value;
+                        }
+                        setAnnotationInputs(newInputs);
+                      }}
+                    />
                   </div>
-                )}
+                ))}
               </div>
-              <div className="button-group">
-                {/* <button className="button-add" onClick={() => addInput('annotation')}>+</button>
-                <button className="button-remove" onClick={() => removeInput('annotation')}>-</button> */}
-                <button className="save-button" onClick={saveToAnnotation}>Save</button>
+            )}
+          </div>
+          <div className="accordion-section">
+            <h3 onClick={() => toggleAccordion('params')}>Params</h3>
+            {accordionOpen.params && (
+              <div className="accordion-content">
+                {paramsInputs.map((input, index) => (
+                  <div key={index} className="input-container">
+                    {input.text && <div className="input-description">{input.text}</div>}
+                    <input
+                      type={input.type === 'bool' ? 'checkbox' : 'text'}
+                      value={input.type === 'bool' ? undefined : input.value || ""}
+                      checked={input.type === 'bool' ? Boolean(input.value) : undefined}
+                      onChange={(e) => {
+                        const newInputs = [...paramsInputs];
+                        if (input.type === 'bool') {
+                          newInputs[index].value = e.target.checked;
+                        } else {
+                          newInputs[index].value = e.target.value;
+                        }
+                        setParamsInputs(newInputs);
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+          <div className="accordion-section">
+            <h3 onClick={() => toggleAccordion('splitInformation')}>Split Information</h3>
+            {accordionOpen.splitInformation && (
+              <div className="accordion-content">
+                {splitInformationInputs.map((input, index) => (
+                  <div key={index} className="input-container">
+                    {input.text && <div className="input-description">{input.text}</div>}
+                    <input
+                      type={input.type === 'bool' ? 'checkbox' : 'text'}
+                      value={input.type === 'bool' ? undefined : input.value || ""}
+                      checked={input.type === 'bool' ? Boolean(input.value) : undefined}
+                      onChange={(e) => {
+                        const newInputs = [...splitInformationInputs];
+                        if (input.type === 'bool') {
+                          newInputs[index].value = e.target.checked;
+                        } else {
+                          newInputs[index].value = e.target.value;
+                        }
+                        setSplitInformationInputs(newInputs);
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+          <div className="accordion-section">
+            <h3 onClick={() => toggleAccordion('pointclouds')}>Pointclouds</h3>
+            {accordionOpen.pointclouds && (
+              <div className="accordion-content">
+                {pointcloudsInputs.map((input, index) => (
+                  <div key={index} className="input-container">
+                    {input.text && <div className="input-description">{input.text}</div>}
+                    <input
+                      type={input.type === 'bool' ? 'checkbox' : 'text'}
+                      value={input.type === 'bool' ? undefined : input.value || ""}
+                      checked={input.type === 'bool' ? Boolean(input.value) : undefined}
+                      onChange={(e) => {
+                        const newInputs = [...pointcloudsInputs];
+                        if (input.type === 'bool') {
+                          newInputs[index].value = e.target.checked;
+                        } else {
+                          newInputs[index].value = e.target.value;
+                        }
+                        setPointcloudsInputs(newInputs);
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+          <div className="accordion-section">
+            <h3 onClick={() => toggleAccordion('image360')}>Image 360</h3>
+            {accordionOpen.image360 && (
+              <div className="accordion-content">
+                {image360Inputs.map((input, index) => (
+                  <div key={index} className="input-container">
+                    {input.text && <div className="input-description">{input.text}</div>}
+                    <input
+                      type={input.type === 'bool' ? 'checkbox' : 'text'}
+                      value={input.type === 'bool' ? undefined : input.value || ""}
+                      checked={input.type === 'bool' ? Boolean(input.value) : undefined}
+                      onChange={(e) => {
+                        const newInputs = [...image360Inputs];
+                        if (input.type === 'bool') {
+                          newInputs[index].value = e.target.checked;
+                        } else {
+                          newInputs[index].value = e.target.value;
+                        }
+                        setImage360Inputs(newInputs);
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+                )}
+                </div>
+                <div className="button-group">
+                  {/* <button className="button-add" onClick={() => addInput('annotation')}>+</button>
+                  <button className="button-remove" onClick={() => removeInput('annotation')}>-</button> */}
+                  <button className="save-button" onClick={saveToAnnotation}>Save</button>
+                </div>
               </div>
             </div>
-          </div>
+          
           )}
-        
+
         {webInfo && (
         <div className="Bdl-split">
           <div className="accordion">
             <div className="webaccordion-section">
-              <h3 onClick={() => toggleWebAccordion('webInfo')}>Web360 Info</h3>
+              <h3 onClick={() => toggleWebAccordion('webInfo')}>Web360 Information</h3>
               {webAccordionOpen.webInfo && (
                 <div className="accordion-content">
                   {webInputs.map((input, index) => (
@@ -864,7 +862,7 @@ const Landing = ({ trackData }) => {
           <div className="Bdl-split">
           <div className="accordion">
             <div className="cirrusaccordion-section">
-              <h3 onClick={() => toggleCirrusAccordion('cirrusInfo')}>Cirrus Info</h3>
+              <h3 onClick={() => toggleCirrusAccordion('cirrusInfo')}>Cirrus Information</h3>
               {cirrusAccordionOpen.cirrusInfo && (
                 <div className="accordion-content">
                   {cirrusInputs.map((input, index) => (
@@ -1030,12 +1028,12 @@ const Landing = ({ trackData }) => {
                     </div>
                   </div>
                 </div>
-              )}
-            </div>
+                )}
+            </div> 
            </div>
 
-          <img src={atriteclogo} alt="logga" className="vitlogga" />
-          {/* <img src={loggagreen} alt="logga" className="logga"/> */}
+          {/* <img src={atriteclogo} alt="logga" className="vitlogga" /> */}
+          <img src={loggagreen} alt="logga" className="logga"/>
         </>
       );
     };
